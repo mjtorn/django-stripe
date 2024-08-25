@@ -15,9 +15,9 @@ Following are the supported webhook events:
     * Update customer: `CustomerUpdatedWebhook` will process the `customer.updated` webhook event.
     * Delete customer: `CustomerDeletedWebhook` will process the `customer.deleted` webhook event.
 * **Card:** `django_stripe.webhooks.sources` contains all the card related webhook event
-    * Create card: `CustomerSourceCreatedWebhook` will process the `customer.source.created` webhook event.
-    * Update card: `CustomerSourceUpdatedWebhook` will process the `customer.source.updated` webhook event.
-    * Delete card: `CustomerSourceDeletedWebhook` will process the `customer.source.deleted` webhook event.
+    * Create card: `CustomerCardCreatedWebhook` will process the `customer.source.created` webhook event.
+    * Update card: `CustomerCardUpdatedWebhook` will process the `customer.source.updated` webhook event.
+    * Delete card: `CustomerCardDeletedWebhook` will process the `customer.source.deleted` webhook event.
 * **Subscription:** `django_stripe.webhooks.subscriptions` contains all the subscriptions related webhook event
     * Create subscription: `CustomerSubscriptionCreatedWebhook` will process the `customer.subscription.created"` webhook event.
     * Update subscription: `CustomerSubscriptionUpdatedWebhook` will process the `customer.subscription.updated"` webhook event.

@@ -1,6 +1,6 @@
 # Third Party Stuff
 import stripe
-from django.contrib.postgres.fields import ArrayField, CIEmailField
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 # Django Stripe Stuff
@@ -42,9 +42,12 @@ class StripeBaseCustomer(StripeObject):
     description = models.TextField(
         max_length=255,
         blank=True,
-        help_text="An arbitrary string attached to the object. Often useful for displaying to users.",
+        help_text=(
+            "An arbitrary string attached to the object. "
+            "Often useful for displaying to users."
+        ),
     )
-    email = CIEmailField(blank=True, db_index=True)
+    email = models.EmailField(blank=True, db_index=True)
     address = models.JSONField(
         null=True, blank=True, help_text="The customer's address"
     )
@@ -69,11 +72,17 @@ class StripeBaseCustomer(StripeObject):
         choices=CURRENCY_CHOICES,
         default=DEFAULT_CURRENCY,
         max_length=3,
-        help_text="The currency the customer can be charged in for recurring billing purposes",
+        help_text=(
+            "The currency the customer can be charged "
+            "in for recurring billing purposes"
+        ),
     )
     delinquent = models.BooleanField(
         default=False,
-        help_text="Whether or not the latest charge for the customer's latest invoice has failed",
+        help_text=(
+            "Whether or not the latest charge for the "
+            "customer's latest invoice has failed"
+        ),
     )
     default_source = models.TextField(blank=True)
     shipping = models.JSONField(
@@ -90,7 +99,7 @@ class StripeBaseCustomer(StripeObject):
     )
     preferred_locales = ArrayField(
         models.CharField(default="", blank=True, max_length=255),
-        default=[],
+        default=list,
         help_text=(
             "The customer's preferred locales (languages), ordered by preference"
         ),
@@ -115,14 +124,15 @@ class StripeBaseCustomer(StripeObject):
     def stripe_customer(self):
         return stripe.Customer.retrieve(self.stripe_id, expand=["subscriptions"])
 
-    class Meta:
-        abstract = True
+    class Meta(StripeObject.Meta):
+        pass
 
 
 class StripeBaseCard(StripeObject):
     """
     We can store multiple cards on a customer in order to charge the customer later.
-    We can also store multiple debit cards on a recipient in order to transfer to those cards later.
+    We can also store multiple debit cards
+    on a recipient in order to transfer to those cards later.
     Stripe documentation: https://stripe.com/docs/api/cards
     """
 
@@ -152,8 +162,8 @@ class StripeBaseCard(StripeObject):
             getattr(self, "customer", None),
         )
 
-    class Meta:
-        abstract = True
+    class Meta(StripeObject.Meta):
+        pass
 
 
 class StripeBaseSubscription(StripeObject):
@@ -171,14 +181,17 @@ class StripeBaseSubscription(StripeObject):
 
     TRIALING = "trialing"
     ACTIVE = "active"
-    PAST_DUE = "past_due"  # it becomes past_due when payment to renew it fails
+    # It becomes past_due when payment to renew it fails
+    PAST_DUE = "past_due"
 
-    # 1. it becomes canceled when failed payment is not paid after all retries / by the due date
-    # 2. Can be cancelled manually
-    #  (Its a terminal status)
+    # 1. It becomes canceled when failed payment is not paid
+    #    after all retries / by the due date
+    # 2. Can be cancelled manually (its a terminal status)
     CANCELED = "canceled"
 
-    UNPAID = "unpaid"  # 1. it becomes unpaid When failed payment is not paid after all retries / by the due date
+    # It becomes unpaid when failed payment
+    # is not paid after all retries / by the due date
+    UNPAID = "unpaid"
 
     STATUS_CURRENT = [TRIALING, ACTIVE]
     STATUS_CANCELLED = [CANCELED, UNPAID]
@@ -203,9 +216,11 @@ class StripeBaseSubscription(StripeObject):
         max_digits=5,
         null=True,
         blank=True,
-        help_text="A positive decimal that represents the fee percentage of the "
-        "subscription invoice amount that will be transferred to the application "
-        "owner's Stripe account each billing period.",
+        help_text=(
+            "A positive decimal that represents the fee percentage of the "
+            "subscription invoice amount that will be transferred to the application "
+            "owner's Stripe account each billing period."
+        ),
     )
     automatic_tax = models.JSONField(
         null=True,
@@ -225,31 +240,41 @@ class StripeBaseSubscription(StripeObject):
         null=True,
         blank=True,
         help_text=(
-            "Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period"
+            "Define thresholds at which an invoice will be sent, "
+            "and the subscription advanced to a new billing period"
         ),
     )
     cancel_at = models.DateTimeField(
         null=True,
         blank=True,
-        help_text="A date in the future at which the subscription will automatically "
-        "get canceled",
+        help_text=(
+            "A date in the future at which the subscription will automatically "
+            "get canceled"
+        ),
     )
     cancel_at_period_end = models.BooleanField(
         default=False,
-        help_text="If the subscription has been canceled with the ``at_period_end`` "
-        "flag set to true, ``cancel_at_period_end`` on the subscription will be true. "
-        "We can use this attribute to determine whether a subscription that has a "
-        "status of active is scheduled to be canceled at the end of the "
-        "current period",
+        help_text=(
+            "If the subscription has been canceled with the ``at_period_end`` "
+            "flag set to true, ``cancel_at_period_end`` "
+            "on the subscription will be true. "
+            "We can use this attribute to determine whether a subscription that has a "
+            "status of active is scheduled to be canceled at the end of the "
+            "current period"
+        ),
     )
     canceled_at = models.DateTimeField(
         null=True,
         blank=True,
-        help_text="If the subscription has been canceled, the date of that "
-        "cancellation. If the subscription was canceled with ``cancel_at_period_end``, "
-        "canceled_at will still reflect the date of the initial cancellation request, "
-        "not the end of the subscription period when the subscription is automatically "
-        "moved to a canceled state",
+        help_text=(
+            "If the subscription has been canceled, the date of that cancellation. "
+            "If the subscription was canceled with ``cancel_at_period_end``, "
+            "canceled_at will still reflect the date "
+            "of the initial cancellation request, "
+            "not the end of the subscription period "
+            "when the subscription is automatically "
+            "moved to a canceled state"
+        ),
     )
     cancellation_details = models.JSONField(
         null=True,
@@ -259,26 +284,34 @@ class StripeBaseSubscription(StripeObject):
     collection_method = models.CharField(
         choices=INVOICE_COLLECTION_METHOD_TYPES,
         max_length=32,
-        help_text="Either `charge_automatically`, or `send_invoice`. When charging "
-        "automatically, Stripe will attempt to pay this subscription at the end of the "
-        "cycle using the default source attached to the customer. "
-        "When sending an invoice, Stripe will email us customer an invoice with "
-        "payment instructions",
+        help_text=(
+            "Either `charge_automatically`, or `send_invoice`. "
+            "When charging automatically, "
+            "Stripe will attempt to pay this subscription "
+            "at the end of the cycle using "
+            "the default source attached to the customer. "
+            "When sending an invoice, Stripe will email us customer an invoice with "
+            "payment instructions"
+        ),
     )
     current_period_end = models.DateTimeField(
         help_text="End of the current period for which the subscription has been "
         "invoiced. At the end of this period, a new invoice will be created"
     )
     current_period_start = models.DateTimeField(
-        help_text="Start of the current period for which the subscription has "
-        "been invoiced"
+        help_text=(
+            "Start of the current period for which the subscription has "
+            "been invoiced"
+        )
     )
     days_until_due = models.IntegerField(
         null=True,
         blank=True,
-        help_text="Number of days a customer has to pay invoices generated by this "
-        "subscription. This value will be `null` for subscriptions where "
-        "`billing=charge_automatically`",
+        help_text=(
+            "Number of days a customer has to pay invoices generated by this "
+            "subscription. This value will be `null` for subscriptions where "
+            "`billing=charge_automatically`"
+        ),
     )
     default_payment_method = models.TextField(blank=True)
     default_source = models.TextField(blank=True)
@@ -288,47 +321,61 @@ class StripeBaseSubscription(StripeObject):
     ended_at = models.DateTimeField(
         null=True,
         blank=True,
-        help_text="If the subscription has ended (either because it was canceled or "
-        "because the customer was switched to a subscription to a new plan), "
-        "the date the subscription ended",
+        help_text=(
+            "If the subscription has ended (either because it was canceled or "
+            "because the customer was switched to a subscription to a new plan), "
+            "the date the subscription ended"
+        ),
     )
     next_pending_invoice_item_invoice = models.DateTimeField(
         null=True,
         blank=True,
-        help_text="Specifies the approximate timestamp on which any pending "
-        "invoice items will be billed according to the schedule provided at "
-        "pending_invoice_item_interval",
+        help_text=(
+            "Specifies the approximate timestamp on which any pending "
+            "invoice items will be billed according to the schedule provided at "
+            "pending_invoice_item_interval"
+        ),
     )
     pause_collection = models.JSONField(
         null=True,
         blank=True,
-        help_text="If specified, payment collection for this subscription will be paused.",
+        help_text=(
+            "If specified, payment collection for this subscription will be paused."
+        ),
     )
     pending_invoice_item_interval = models.JSONField(
         null=True,
         blank=True,
-        help_text="Specifies an interval for how often to bill for any "
-        "pending invoice items. It is analogous to calling Create an invoice "
-        "for the given subscription at the specified interval",
+        help_text=(
+            "Specifies an interval for how often to bill for any "
+            "pending invoice items. It is analogous to calling Create an invoice "
+            "for the given subscription at the specified interval"
+        ),
     )
     pending_setup_intent = models.TextField(blank=True)
     pending_update = models.JSONField(
         null=True,
         blank=True,
-        help_text="If specified, pending updates that will be applied to the "
-        "subscription once the latest_invoice has been paid",
+        help_text=(
+            "If specified, pending updates that will be applied to the "
+            "subscription once the latest_invoice has been paid"
+        ),
     )
     quantity = models.IntegerField(
         null=True,
         blank=True,
-        help_text="The quantity applied to this subscription. This value will be "
-        "`null` for multi-plan subscriptions",
+        help_text=(
+            "The quantity applied to this subscription. This value will be "
+            "`null` for multi-plan subscriptions"
+        ),
     )
     start_date = models.DateTimeField(
         null=True,
         blank=True,
-        help_text="Date when the subscription was first created. The date "
-        "might differ from the created date due to backdating",
+        help_text=(
+            "Date when the subscription was first created. The date "
+            "might differ from the created date due to backdating"
+        ),
     )
     status = models.CharField(
         choices=SUBSCRIPTION_STATUS_TYPES,
@@ -362,8 +409,8 @@ class StripeBaseSubscription(StripeObject):
     def stripe_subscription(self):
         return stripe.Subscription.retrieve(self.stripe_id)
 
-    class Meta:
-        abstract = True
+    class Meta(StripeObject.Meta):
+        pass
 
 
 class StripeBaseEvent(StripeObject):
@@ -374,14 +421,19 @@ class StripeBaseEvent(StripeObject):
     processed = models.BooleanField(default=False)
     request = models.JSONField(
         null=True,
-        help_text="Information on the API request that instigated the event, If null, the event was automatic"
-        " (e.g., Stripe’s automatic subscription handling)",
+        help_text=(
+            "Information on the API request that instigated the event, "
+            "If null, the event was automatic"
+            " (e.g., Stripe’s automatic subscription handling)"
+        ),
     )
     pending_webhooks = models.PositiveIntegerField(
         default=0,
-        help_text="Number of webhooks that have yet to be successfully "
-        "delivered (i.e., to return a 20x response) "
-        "to the URLs we’ve specified",
+        help_text=(
+            "Number of webhooks that have yet to be successfully "
+            "delivered (i.e., to return a 20x response) "
+            "to the URLs we’ve specified"
+        ),
     )
     api_version = models.CharField(max_length=128, blank=True)
 
@@ -392,14 +444,18 @@ class StripeBaseEvent(StripeObject):
     def __str__(self):
         return "{} - {}".format(self.kind, self.stripe_id)
 
-    class Meta:
-        abstract = True
+    class Meta(StripeObject.Meta):
+        pass
 
 
 class StripeBaseCoupon(StripeObject):
     """
-    A coupon contains information about a percent-off or amount-off discount we might want to apply to a customer.
-    Coupons may be applied to invoices or orders. Coupons do not work with conventional one-off charges.
+    A coupon contains information about a percent-off or
+    amount-off discount we might want to apply to a customer.
+
+    Coupons may be applied to invoices or orders.
+    Coupons do not work with conventional one-off charges.
+
     Stripe documentation: https://stripe.com/docs/api/coupons
     """
 
@@ -416,42 +472,58 @@ class StripeBaseCoupon(StripeObject):
     name = models.CharField(
         max_length=64,
         blank=True,
-        help_text="Name of the coupon displayed to customers on for instance invoices or receipts",
+        help_text=(
+            "Name of the coupon displayed to customers "
+            "on for instance invoices or receipts"
+        ),
     )
     applies_to = models.JSONField(
         null=True,
         blank=True,
-        help_text="Contains information about what product this coupon applies to. This field is not included by default. "
-        "To include it in the response, expand the applies_to field",
+        help_text=(
+            "Contains information about what product this coupon applies to. "
+            "This field is not included by default. "
+            "To include it in the response, expand the applies_to field"
+        ),
     )
     amount_off = models.DecimalField(
         decimal_places=2,
         max_digits=9,
         null=True,
         blank=True,
-        help_text="Amount (in the currency specified) "
-        "that will be taken off the subtotal "
-        "of any invoices for this customer",
+        help_text=(
+            "Amount (in the currency specified) "
+            "that will be taken off the subtotal "
+            "of any invoices for this customer"
+        ),
     )
     currency = models.CharField(
         choices=CURRENCY_CHOICES,
         default=DEFAULT_CURRENCY,
         max_length=3,
-        help_text="If amount_off has been set, the three-letter ISO code for the currency of the amount to take off",
+        help_text=(
+            "If amount_off has been set, the three-letter ISO code "
+            "for the currency of the amount to take off"
+        ),
     )
     duration = models.CharField(
         choices=STRIPE_COUPON_DURATION_TYPES,
         max_length=16,
         default="once",
-        help_text="One of forever, once, and repeating. "
-        "Describes how long a customer who applies this coupon "
-        "will get the discount",
+        help_text=(
+            "One of forever, once, and repeating. "
+            "Describes how long a customer who applies this coupon "
+            "will get the discount"
+        ),
     )
     duration_in_months = models.PositiveIntegerField(
         null=True,
         blank=True,
-        help_text="Required only if duration is repeating, in which case it must be a positive integer that "
-        "specifies the number of months the discount will be in effect",
+        help_text=(
+            "Required only if duration is repeating, "
+            "in which case it must be a positive integer that "
+            "specifies the number of months the discount will be in effect"
+        ),
     )
     max_redemptions = models.PositiveIntegerField(
         null=True,
@@ -493,15 +565,17 @@ class StripeBaseCoupon(StripeObject):
 
         return "Coupon for {}, {}".format(description, self.duration)
 
-    class Meta:
-        abstract = True
+    class Meta(StripeObject.Meta):
+        pass
 
 
 class StripeBaseProduct(StripeObject):
     """
     Products describe the specific goods or services you offer to your customers.
-    For example, you might offer a Standard and Premium version of your goods or service;
-    each version would be a separate Product. They can be used in conjunction with Prices
+    For example, you might offer a Standard and
+    Premium version of your goods or service;
+    each version would be a separate Product.
+    They can be used in conjunction with Prices
     to configure pricing in Payment Links, Checkout, and Subscriptions.
     Stripe documentation: https://stripe.com/docs/api/products
     """
@@ -511,18 +585,28 @@ class StripeBaseProduct(StripeObject):
     )
     description = models.TextField(
         null=True,
-        help_text="The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.",
+        help_text=(
+            "The product’s description, meant to be displayable to the customer. "
+            "Use this field to optionally store a long form explanation "
+            "of the product being sold for your own rendering purposes."
+        ),
     )
     name = models.CharField(
         max_length=255,
-        help_text="The product’s name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.",
+        help_text=(
+            "The product’s name, meant to be displayable to the customer. "
+            "Whenever this product is sold via a subscription, "
+            "name will show up on associated invoice line item descriptions."
+        ),
     )
 
     statement_descriptor = models.TextField(
         null=True,
         help_text=(
-            "Extra information about a product which will appear on your customer’s credit card statement."
-            "In the case that multiple products are billed at once, the first statement descriptor will be used."
+            "Extra information about a product which will appear "
+            "on your customer’s credit card statement."
+            "In the case that multiple products are billed at once, "
+            "the first statement descriptor will be used."
         ),
     )
     tax_code = models.CharField(max_length=255, null=True, help_text="A tax code ID.")
@@ -530,8 +614,10 @@ class StripeBaseProduct(StripeObject):
         max_length=255,
         null=True,
         help_text=(
-            "A label that represents units of this product in Stripe and on customers’ receipts and invoices."
-            "When set, this will be included in associated invoice line item descriptions."
+            "A label that represents units of this product in Stripe"
+            " and on customers’ receipts and invoices."
+            "When set, this will be included in associated "
+            "invoice line item descriptions."
         ),
     )
     images = ArrayField(
@@ -539,7 +625,8 @@ class StripeBaseProduct(StripeObject):
         size=8,
         default=list,
         help_text=(
-            "A list of up to 8 URLs of images for this product, meant to be displayable to the customer."
+            "A list of up to 8 URLs of images for this product, "
+            "meant to be displayable to the customer."
         ),
     )
     shippable = models.BooleanField(
@@ -555,17 +642,23 @@ class StripeBaseProduct(StripeObject):
         help_text="A URL of a publicly-accessible webpage for this product.",
     )
     created = models.BigIntegerField(
-        help_text="Time at which the object was created. Measured in seconds since the Unix epoch"
+        help_text=(
+            "Time at which the object was created. "
+            "Measured in seconds since the Unix epoch"
+        )
     )
     updated = models.BigIntegerField(
-        help_text="Time at which the object was last updated. Measured in seconds since the Unix epoch"
+        help_text=(
+            "Time at which the object was last updated. "
+            "Measured in seconds since the Unix epoch"
+        )
     )
 
     # Soft delete product in DB on deletion from stripe
     date_purged = models.DateTimeField(null=True, editable=False)
 
-    class Meta:
-        abstract = True
+    class Meta(StripeObject.Meta):
+        pass
 
 
 class StripeBasePrice(StripeObject):
@@ -577,7 +670,9 @@ class StripeBasePrice(StripeObject):
     should be represented by prices. This approach lets you change prices without
     having to change your provisioning scheme.
 
-    For example, you might have a single "gold" product that has prices for $10/month, $100/year, and €9 once.
+    For example,
+    you might have a single "gold" product that has
+    prices for $10/month, $100/year, and €9 once.
     Stripe documentation: https://stripe.com/docs/api/prices
     """
 
@@ -613,7 +708,10 @@ class StripeBasePrice(StripeObject):
     currency = models.CharField(
         choices=CURRENCY_CHOICES,
         max_length=3,
-        help_text="Three-letter ISO currency code, in lowercase. Must be a supported currency.",
+        help_text=(
+            "Three-letter ISO currency code, in lowercase. "
+            "Must be a supported currency."
+        ),
     )
     nickname = models.CharField(
         max_length=255,
@@ -622,7 +720,9 @@ class StripeBasePrice(StripeObject):
     )
     recurring = models.JSONField(
         null=True,
-        help_text="The recurring components of a price such as interval and usage_type.",
+        help_text=(
+            "The recurring components of a price " "such as interval and usage_type."
+        ),
     )
 
     type = models.CharField(
@@ -661,10 +761,14 @@ class StripeBasePrice(StripeObject):
         max_length=16,
         help_text=(
             "Describes how to compute the price per period. Either per_unit or tiered."
-            "per_unit indicates that the fixed amount (specified in unit_amount or unit_amount_decimal)"
-            "will be charged per unit in quantity (for prices with usage_type=licensed),"
-            "or per unit of total usage (for prices with usage_type=metered). tiered indicates that the unit"
-            "pricing will be computed using a tiering strategy as defined using the tiers and tiers_mode attributes."
+            "per_unit indicates that the fixed amount "
+            "(specified in unit_amount or unit_amount_decimal)"
+            "will be charged per unit in quantity "
+            "(for prices with usage_type=licensed),"
+            "or per unit of total usage (for prices with usage_type=metered). "
+            "Tiered indicates that the unit"
+            "pricing will be computed using a tiering strategy "
+            "as defined using the tiers and tiers_mode attributes."
         ),
     )
 
@@ -672,15 +776,19 @@ class StripeBasePrice(StripeObject):
         choices=TAX_BEHAVIOR_TYPES,
         max_length=16,
         help_text=(
-            "Specifies whether the price is considered inclusive of taxes or exclusive of taxes."
-            "One of inclusive, exclusive, or unspecified. Once specified as either inclusive or exclusive, it cannot be changed."
+            "Specifies whether the price is considered "
+            "inclusive of taxes or exclusive of taxes."
+            "One of inclusive, exclusive, or unspecified. "
+            "Once specified as either inclusive or exclusive, it cannot be changed."
         ),
     )
     tiers = models.JSONField(
         null=True,
         help_text=(
-            "Each element represents a pricing tier. This parameter requires billing_scheme to be set to tiered."
-            "See also the documentation for billing_scheme. This field is not included by default."
+            "Each element represents a pricing tier. "
+            "This parameter requires billing_scheme to be set to tiered."
+            "See also the documentation for billing_scheme. "
+            "This field is not included by default."
             "To include it in the response, expand the tiers field."
         ),
     )
@@ -689,27 +797,36 @@ class StripeBasePrice(StripeObject):
         max_length=32,
         help_text=(
             "Defines if the tiering price should be graduated or volume based."
-            "In volume-based tiering, the maximum quantity within a period determines the per unit price."
+            "In volume-based tiering, the maximum quantity "
+            "within a period determines the per unit price."
             "In graduated tiering, pricing can change as the quantity grows."
         ),
     )
     transform_quantity = models.JSONField(
         null=True,
         help_text=(
-            "Apply a transformation to the reported usage or set quantity before computing the amount billed. Cannot be combined with tiers."
+            "Apply a transformation to the reported usage or "
+            "set quantity before computing the amount billed. "
+            "Cannot be combined with tiers."
         ),
     )
     lookup_key = models.CharField(
         null=True,
         max_length=255,
-        help_text="A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.",
+        help_text=(
+            "A lookup key used to retrieve prices dynamically from a static string. "
+            "This may be up to 200 characters."
+        ),
     )
     created = models.BigIntegerField(
-        help_text="Time at which the object was created. Measured in seconds since the Unix epoch"
+        help_text=(
+            "Time at which the object was created."
+            "Measured in seconds since the Unix epoch"
+        )
     )
 
     # Soft delete price in DB on deletion from stripe
     date_purged = models.DateTimeField(null=True, editable=False)
 
-    class Meta:
-        abstract = True
+    class Meta(StripeObject.Meta):
+        pass

@@ -124,7 +124,7 @@ class StripeCustomer:
         customer = cls.sync_from_stripe_data(customer, stripe_customer)
 
         # Django Stripe Stuff
-        from django_stripe.actions.sources import StripeCard
+        from django_stripe.actions.cards import StripeCard
         from django_stripe.actions.subscriptions import StripeSubscription
 
         # Sync customer card details
