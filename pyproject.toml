@@ -1,0 +1,49 @@
+# Poetry Ref: https://python-poetry.org/docs/pyproject/
+[tool.poetry]
+name = "django-stripe"
+version = "0.0.1"
+description = "Django + Stripe made easy"
+authors = ["Purnendu Kar < purnendu.kar8@gmail.com >"]
+maintainers = [
+    "Purnendu Kar < purnendu.kar8@gmail.com >",
+]
+license = "MIT"
+
+readme = "README.md"
+packages = [
+    { include = "django_stripe", from = "src" }
+]
+
+homepage = "https://purnendukar.github.io/django-stripe"
+repository = "https://github.com/purnendukar/django-stripe"
+documentation = "https://purnendukar.github.io/django-stripe"
+
+keywords = ["django-stripe"]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.9",
+    "Operating System :: OS Independent"
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "^3.2.18"
+stripe = "5.2.0"
+
+[tool.poetry.dev-dependencies]
+bump2version = "^1.0.1"
+pre-commit = "^2.19.0"
+flake8 = "^5.0.4"
+pytest = "^7.1.2"
+pytest-cov = "^3.0.0"
+mkdocs = "^1.3.0"
+mkdocs-material = "^8.3.8"
+mkdocs-material-extensions = "^1.0.3"
+
+[build-system]
+requires = ["poetry-core>=1.4.0"]
+build-backend = "poetry.core.masonry.api"
