@@ -40,67 +40,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-3. Create models to manage Stripe data using the abstract base classes provided in `django_stripe.models`. For example:
-
-```python
-from django_stripe.models import StripeBaseCustomer, StripeBaseCard, StripeBaseSubscription, StripeBaseProduct,
-    StripeBasePrice, StripeBaseCoupon, StripeBaseEvent
-from users.models import User
-
-
-class Customer(StripeBaseCustomer):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="stripe_customers",
-    )
-    # Add custom fields as per project requirement
-
-
-class Card(StripeBaseCard):
-    customer = models.ForeignKey(
-        Customer,
-        on_delete=models.CASCADE,
-        related_name="cards",
-    )
-    # Add custom fields as per project requirement
-
-
-class Subscription(StripeBaseSubscription):
-    customer = models.ForeignKey(
-        Customer,
-        on_delete=models.CASCADE,
-        related_name="subscriptions",
-        help_text="The customer associated with this subscription",
-    )
-    # Add custom fields as per project requirement
-
-
-class Product(StripeBaseProduct):
-    # Add custom fields as per project requirement
-    pass
-
-
-class Price(StripeBaseProduct):
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-        related_name="prices",
-    )
-    # Add custom fields as per project requirement
-
-
-class Coupon(StripeBaseCoupon):
-    # Add custom fields as per project requirement
-    pass
-
-
-class Event(StripeBaseEvent):
-    # Add custom fields as per project requirement
-    pass
-```
-
-4. Database migration
+3. Database migration
 
 After implementing the models, create a migration file using the following command:
 
@@ -114,25 +54,16 @@ Once the migration file has been created, apply the migrations to the database u
 python manage.py migrate
 ```
 
-5. In your settings, update the model paths in `STRIPE_CONFIG`:
+4. In your settings, update the model paths in `STRIPE_CONFIG`:
 
 ```python
 STRIPE_CONFIG = {
     "API_VERSION": "2022-11-15", # Stripe API Version
     "API_KEY": "api_key", # Stripe Secret Key
-    "CUSTOMER_MODEL": "project_name.app.models.Customer",
-    "CARD_MODEL": "project_name.app.models.Card",
-    "PRODUCT_MODEL": "project_name.app.models.Product",
-    "PRICE_MODEL": "project_name.app.models.Price",
-    "COUPON_MODEL": "project_name.app.models.Coupon",
-    "EVENT_MODEL": "project_name.app.models.Event",
-    "SUBSCRIPTION_MODEL": "project_name.app.models.Subscription",
-    "CUSTOMER_FIELD_NAME": "customer", # Field name used to have foreign key relation with `Customer` model
-    "USER_FIELD_NAME": "user", # Field name that is used by `Customer` model to have foreign relation to `User` model
 }
 ```
 
-6. Implement APIs
+5. Implement APIs
 
 You can use the appropriate actions to build payment APIs. Here are some examples:
 
