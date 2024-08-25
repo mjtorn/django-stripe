@@ -28,7 +28,7 @@ class TimeStampedUUIDModel(UUIDModel):
         abstract = True
 
 
-class StripeObject(TimeStampedUUIDModel):
+class StripeBaseModel(TimeStampedUUIDModel):
     """
     An abstract base class model that provides stripe_id field
     with UUID as primary_key along with self-updating
@@ -53,6 +53,9 @@ class StripeObject(TimeStampedUUIDModel):
             "about the object in a structured format."
         ),
     )
+
+    # Soft delete product in DB on deletion from stripe
+    date_purged = models.DateTimeField(null=True, editable=False)
 
     class Meta:
         abstract = True
