@@ -4,7 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.utils import timezone
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe import utils
 from django_stripe.settings import stripe_settings
 
@@ -123,8 +123,8 @@ class StripeCustomer:
         # Sync customer details
         customer = cls.sync_from_stripe_data(customer, stripe_customer)
 
-        # Django Stripe Integrations Stuff
-        from django_stripe.actions.sources import StripeCard
+        # Django Stripe Stuff
+        from django_stripe.actions.cards import StripeCard
         from django_stripe.actions.subscriptions import StripeSubscription
 
         # Sync customer card details

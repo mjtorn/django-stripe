@@ -2,7 +2,7 @@
 from django.apps import apps
 from django.conf import settings
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions import StripeCustomer
 from django_stripe.settings import stripe_settings
 from django_stripe.webhooks.base import BaseWebhook

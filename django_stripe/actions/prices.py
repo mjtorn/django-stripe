@@ -2,7 +2,7 @@
 import stripe
 from django.utils import timezone
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions.products import StripeProduct
 from django_stripe.settings import stripe_settings
 

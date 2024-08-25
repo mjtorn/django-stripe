@@ -1,22 +1,25 @@
 # Third Party Stuff
 import stripe
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions.customers import StripeCustomer
 from django_stripe.settings import stripe_settings
 
 
 class StripeCard:
     @classmethod
-    def set_default_card(cls, customer, card_token):
+    def set_default_source(cls, customer, card_token):
         """
         Create a new source object, make it the new customer default source,
         and delete the old customer default if one exists
         Args:
             customer: the customer to update the source for
             card_token: the token created from Stripe.js
-        Update Customer default sourceDocs: https://stripe.com/docs/api/customers/update?lang=python
-        Retrieve Card Docs: https://stripe.com/docs/api/cards/retrieve?lang=python
+        Docs:
+            Update Customer default source:
+            https://stripe.com/docs/api/customers/update?lang=python
+
+            Retrieve Card: https://stripe.com/docs/api/cards/retrieve?lang=python
         """
         stripe_customer = stripe.Customer.modify(customer.stripe_id, source=card_token)
 
@@ -29,7 +32,7 @@ class StripeCard:
         return cls.sync_from_stripe_data(customer, source)
 
     @classmethod
-    def delete_card(cls, customer, source_stripe_id):
+    def delete_source(cls, customer, source_stripe_id):
         """
         Deletes a card from a customer
         Args:
@@ -53,8 +56,7 @@ class StripeCard:
             customer: the customer to create or update a Bitcoin receiver for
             source: data representing the payment source from the Stripe API
         """
-        if source["object"] == "card":
-            return cls.sync(customer, source)
+        return cls.sync(customer, source)
 
     @classmethod
     def sync(cls, customer, source=None):

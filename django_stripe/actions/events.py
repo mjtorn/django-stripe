@@ -1,4 +1,4 @@
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.settings import stripe_settings
 
 
@@ -34,7 +34,7 @@ class StripeEvent:
             pending_webhooks=pending_webhooks,
         )
 
-        # Django Stripe Integrations Stuff
+        # Django Stripe Stuff
         from django_stripe.webhooks.base import registry
 
         WebhookClass = registry.get(kind)

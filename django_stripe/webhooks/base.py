@@ -5,7 +5,7 @@ import json
 import stripe
 from six import with_metaclass
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions import StripeCustomer
 from django_stripe.base.webhooks import WebhookRegistry
 

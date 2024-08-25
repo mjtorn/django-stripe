@@ -4,28 +4,15 @@ from django.test.signals import setting_changed
 from django.utils.module_loading import import_string
 
 DEFAULTS = {
-    "CUSTOMER_MODEL": "",
-    "CARD_MODEL": "",
-    "PRODUCT_MODEL": "",
-    "PRICE_MODEL": "",
-    "COUPON_MODEL": "",
-    "EVENT_MODEL": "",
-    "SUBSCRIPTION_MODEL": "",
-    "CUSTOMER_FIELD_NAME": "customer",
-    "USER_FIELD_NAME": "user",
+    "ALLOWED_MODELS": ["__all__"],
+    "ALLOWED_ADMIN_MODELS": ["__all__"],
+    "STRIPE_ROUTER": "django_stripe.routers.StripeRouter",
+    "STRIPE_SITE": "django_stripe.sites.StripeAdminSite",
     "API_VERSION": "",
     "API_KEY": "",
 }
 
-IMPORT_STRINGS = [
-    "CUSTOMER_MODEL",
-    "CARD_MODEL",
-    "PRODUCT_MODEL",
-    "PRICE_MODEL",
-    "COUPON_MODEL",
-    "EVENT_MODEL",
-    "SUBSCRIPTION_MODEL",
-]
+IMPORT_STRINGS = []
 
 
 def perform_import(val, setting_name):
@@ -98,6 +85,7 @@ def reload_stripe_settings(*args, **kwargs):
     setting = kwargs["setting"]
     if setting == "STRIPE_CONFIG":
         stripe_settings.reload()
+        settings.DATABASE_ROUTERS.append(stripe_settings.STRIPE_ROUTER)
 
 
 setting_changed.connect(reload_stripe_settings)

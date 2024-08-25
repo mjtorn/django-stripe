@@ -5,7 +5,7 @@ import logging
 import stripe
 from django.core.management import BaseCommand
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions import StripeCoupon
 
 logger = logging.getLogger(__name__)
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     """
-    Sync (UPDATE_OR_CREATE in local DB) soupons from stripe
+    Sync (UPDATE_OR_CREATE in local DB) coupons from stripe
 
     command: python manage.py sync_stripe_coupons
     """
