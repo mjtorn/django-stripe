@@ -5,7 +5,7 @@ import logging
 import stripe
 from django.core.management import BaseCommand
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions import StripeCoupon
 
 logger = logging.getLogger(__name__)

@@ -1,7 +1,7 @@
 # Third Party Stuff
 import stripe
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions.customers import StripeCustomer
 from django_stripe.settings import stripe_settings
 
@@ -15,8 +15,9 @@ class StripeCard:
         Args:
             customer: the customer to update the source for
             card_token: the token created from Stripe.js
-        Update Customer default sourceDocs: https://stripe.com/docs/api/customers/update?lang=python
-        Retrieve Card Docs: https://stripe.com/docs/api/cards/retrieve?lang=python
+        Docs:
+            Update Customer default source: https://stripe.com/docs/api/customers/update?lang=python
+            Retrieve Card: https://stripe.com/docs/api/cards/retrieve?lang=python
         """
         stripe_customer = stripe.Customer.modify(customer.stripe_id, source=card_token)
 

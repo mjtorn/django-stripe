@@ -6,7 +6,7 @@ import stripe
 from django.utils.encoding import smart_str
 from stripe.error import InvalidRequestError
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions.events import StripeEvent
 from django_stripe.settings import stripe_settings
 

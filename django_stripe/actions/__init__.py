@@ -1,4 +1,4 @@
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions.coupons import StripeCoupon
 from django_stripe.actions.customers import StripeCustomer
 from django_stripe.actions.events import StripeEvent

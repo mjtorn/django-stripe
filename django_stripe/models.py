@@ -3,7 +3,7 @@ import stripe
 from django.contrib.postgres.fields import ArrayField, CIEmailField
 from django.db import models
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.base.models import StripeObject
 from django_stripe.utils import CURRENCY_SYMBOLS
 

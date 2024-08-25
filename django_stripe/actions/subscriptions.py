@@ -3,7 +3,7 @@ import stripe
 from django.db.models import Q
 from django.utils import timezone
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe import utils
 from django_stripe.actions.customers import StripeCustomer
 from django_stripe.settings import stripe_settings

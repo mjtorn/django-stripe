@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.management import BaseCommand
 from stripe.error import InvalidRequestError
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions import StripeCustomer
 
 logger = logging.getLogger(__name__)

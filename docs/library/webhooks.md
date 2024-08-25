@@ -88,7 +88,7 @@ As an example, let's say you want to create a webhook event for the product.crea
 
 !!! Example
     ```
-    # Django Stripe Integrations Stuff
+    # Django Stripe Stuff
     from django_stripe.actions import StripeProduct
     from django_stripe.webhooks.base import BaseWebhook
 

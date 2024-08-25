@@ -2,11 +2,11 @@
 import stripe
 from django.apps import AppConfig
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.settings import stripe_settings
 
 
-class StripeIntegrationsConfig(AppConfig):
+class DjangoStripeConfig(AppConfig):
     name = "django_stripe"
 
     def ready(self):

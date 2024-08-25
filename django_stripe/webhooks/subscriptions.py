@@ -1,4 +1,4 @@
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe.actions import StripeCustomer, StripeSubscription
 from django_stripe.webhooks.base import BaseWebhook
 

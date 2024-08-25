@@ -2,7 +2,7 @@
 import stripe
 from django.utils import timezone
 
-# Django Stripe Integrations Stuff
+# Django Stripe Stuff
 from django_stripe import utils
 from django_stripe.settings import stripe_settings
 
@@ -36,9 +36,11 @@ class StripeCoupon:
             name=stripe_coupon["name"],
             applies_to=stripe_coupon.get("applies_to", None),
             percent_off=stripe_coupon["percent_off"],
-            redeem_by=utils.convert_tstamp(stripe_coupon["redeem_by"])
-            if stripe_coupon["redeem_by"]
-            else None,
+            redeem_by=(
+                utils.convert_tstamp(stripe_coupon["redeem_by"])
+                if stripe_coupon["redeem_by"]
+                else None
+            ),
             times_redeemed=stripe_coupon["times_redeemed"],
             valid=stripe_coupon["valid"],
             livemode=stripe_coupon["livemode"],
