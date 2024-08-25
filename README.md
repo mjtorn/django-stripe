@@ -43,7 +43,8 @@ INSTALLED_APPS = [
 3. Create models to manage Stripe data using the abstract base classes provided in `django_stripe.models`. For example:
 
 ```python
-from django_stripe.models import StripeBaseCustomer, StripeBaseCard, StripeBaseSubscription, StripeBaseProduct, StripeBasePrice, StripeBaseCoupon, StripeBaseEvent
+from django_stripe.models import StripeBaseCustomer, StripeBaseCard, StripeBaseSubscription, StripeBaseProduct,
+    StripeBasePrice, StripeBaseCoupon, StripeBaseEvent
 from users.models import User
 
 
