@@ -10,5 +10,6 @@ class DjangoStripeConfig(AppConfig):
     name = "django_stripe"
 
     def ready(self):
-        stripe.api_version = stripe_settings.API_VERSION
+        if stripe_settings.API_VERSION:
+            stripe.api_version = stripe_settings.API_VERSION
         stripe.api_key = stripe_settings.API_KEY

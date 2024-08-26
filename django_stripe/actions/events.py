@@ -1,8 +1,8 @@
 # Django Stripe Stuff
-from django_stripe.settings import stripe_settings
+from django_stripe.models import StripeEvent
 
 
-class StripeEvent:
+class StripeEventAction:
     @classmethod
     def add(
         cls,
@@ -24,7 +24,7 @@ class StripeEvent:
             request_id: the id of the request that initiated the webhook
             pending_webhooks: the number of pending webhooks
         """
-        event = stripe_settings.EVENT_MODEL.objects.create(
+        event = StripeEvent.objects.create(
             stripe_id=stripe_id,
             kind=kind,
             livemode=livemode,

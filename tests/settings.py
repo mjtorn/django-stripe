@@ -128,6 +128,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STRIPE_CONFIG = {
-    "API_VERSION": "2022-11-15",  # Stripe API Version
     "API_KEY": os.getenv("STRIPE_API_KEY"),  # Stripe Secret Key
 }

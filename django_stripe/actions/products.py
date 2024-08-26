@@ -1,68 +1,42 @@
 # Third Party Stuff
 import stripe
-from django.utils import timezone
 
-# Django Stripe Stuff
-from django_stripe.settings import stripe_settings
+from django_stripe.actions.mixins import (
+    StripeSoftDeleteActionMixin,
+    StripeSyncActionMixin,
+)
+from django_stripe.models import StripeCoupon, StripePrice, StripeProduct
 
 
-class StripeProduct:
-    @classmethod
-    def sync_all(cls):
+class StripeProductAction(StripeSyncActionMixin, StripeSoftDeleteActionMixin):
+    model_class = StripeProduct
+    stripe_object_class = stripe.Product
+
+
+class StripePriceAction(StripeSyncActionMixin, StripeSoftDeleteActionMixin):
+    product_model_class = StripeProduct
+    stripe_product_class = stripe.Product
+    model_class = StripePrice
+    stripe_object_class = stripe.Product
+
+    def pre_set_defualt(self, stripe_data: dict):
         """
-        Synchronizes all products from the Stripe API
-        """
-        products = stripe.Product.auto_paging_iter()
-        synced_product_ids = []
-        for product in products:
-            product_obj, _ = cls.sync(product)
-            synced_product_ids.append(product_obj.id)
-
-        # sync deleted products
-        stripe_settings.PRODUCT_MODEL.objects.exclude(id__in=synced_product_ids).update(
-            date_purged=timezone.now()
-        )
-
-    @classmethod
-    def sync(cls, product):
-        """
-        Synchronizes a product from the Stripe API
+        Sync product if not exist.
+        Update product field with product object
         Args:
-            product: data from Stripe API representing a product
+            stripe_data: data from Stripe API representing a price
         """
-        defaults = {
-            "active": product["active"],
-            "description": product["description"],
-            "metadata": product["metadata"],
-            "name": product["name"],
-            "statement_descriptor": product["statement_descriptor"],
-            "tax_code": product["tax_code"],
-            "unit_label": product["unit_label"],
-            "images": product["images"],
-            "shippable": product["shippable"],
-            "package_dimensions": product["package_dimensions"],
-            "url": product["url"],
-            "livemode": product["livemode"],
-            "created": product["created"],
-            "updated": product["updated"],
-        }
+        product = self.product_model_class.objects.filter(
+            stripe_id=stripe_data["product"]
+        ).first()
 
-        product, is_created = stripe_settings.PRODUCT_MODEL.objects.update_or_create(
-            stripe_id=product["id"], defaults=defaults
-        )
-        return product, is_created
+        if not product:
+            stripe_product = self.stripe_product_class.retrieve(stripe_data["product"])
+            product, _ = StripeProductAction.sync(stripe_product)
 
-    @classmethod
-    def soft_delete(cls, stripe_id):
-        """
-        Soft delete the local product object (Product)
-        Args:
-            stripe_id: the Stripe ID of the product
-        """
-        if stripe_id.startswith("prod_"):
-            product = stripe_settings.PRODUCT_MODEL.objects.filter(
-                stripe_id=stripe_id
-            ).first()
-            if product:
-                product.date_purged = timezone.now()
-                product.save()
+        stripe_data["product"] = product
+
+
+class StripeCouponAction(StripeSoftDeleteActionMixin, StripeSyncActionMixin):
+    model_class = StripeCoupon
+    stripe_object_class = stripe.Coupon

@@ -150,7 +150,7 @@ You can use the appropriate actions to build payment APIs. Here are some example
 - Creating a customer
 
 ```python
-from django_stripe.actions.customers import StripeCustomer
+from django_stripe.actions.core import StripeCustomer
 
 # Pass user model instance and email as argument
 customer = StripeCustomer.create(user, billing_email)

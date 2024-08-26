@@ -1,6 +1,8 @@
 # Third Party Stuff
 from django.db import models
 
+from django_stripe.models.base import StripeBaseCoupon
+
 # Django Stripe Stuff
 from django_stripe.models.base.products import StripeBasePrice, StripeBaseProduct
 
@@ -16,3 +18,7 @@ class StripePrice(StripeBasePrice):
         on_delete=models.CASCADE,
         null=True,
     )
+
+
+class StripeCoupon(StripeBaseCoupon):
+    pass

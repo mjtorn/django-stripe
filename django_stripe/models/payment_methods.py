@@ -2,7 +2,7 @@
 from django.db import models
 
 # Django Stripe Stuff
-from django_stripe.models.base.issuing import StripeBaseCard
+from django_stripe.models.base.payment_methods import StripeBaseCard
 
 
 class StripeCard(StripeBaseCard):

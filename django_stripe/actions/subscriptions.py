@@ -5,11 +5,11 @@ from django.utils import timezone
 
 # Django Stripe Stuff
 from django_stripe import utils
-from django_stripe.actions.customers import StripeCustomer
+from django_stripe.actions.core import StripeCustomer
 from django_stripe.settings import stripe_settings
 
 
-class StripeSubscription:
+class StripeSubscriptionAction:
     @classmethod
     def create(cls, customer, prices, coupon=None, trial_from_plan=True):
         """
