@@ -13,7 +13,7 @@ class StripeProduct(StripeBaseProduct):
 
 class StripePrice(StripeBasePrice):
     price = models.ForeignKey(
-        "django_tripe.StripeProduct",
+        "django_stripe.StripeProduct",
         to_field="stripe_id",
         on_delete=models.CASCADE,
         null=True,
