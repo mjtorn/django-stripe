@@ -42,7 +42,6 @@ class StripeSyncActionMixin:
         model_fields = set(
             [field.name for field in self.model_class._meta.get_fields()]
         )
-        print("model_fields", model_fields)
         return {key: value for key, value in stripe_data.items() if key in model_fields}
 
     def sync(self, stripe_data: dict):
@@ -55,7 +54,6 @@ class StripeSyncActionMixin:
         self.pre_set_defualt(stripe_data)
         stripe_id = stripe_data.pop("id")
         defaults = self.set_default(stripe_data)
-        print(defaults)
 
         model_obj, _ = self.model_class.objects.update_or_create(
             stripe_id=stripe_id, defaults=defaults
@@ -104,9 +102,6 @@ class StripeSyncActionMixin:
 
         for stripe_id, data in stripe_id_obj_map.items():
             self.pre_set_defualt(data)
-
-            data.pop("id")
-            self.pre_set_defualt(data)
             defaults = self.set_default(data)
             defaults["stripe_id"] = stripe_id
 
@@ -145,6 +140,8 @@ class StripeSyncActionMixin:
             if (i + 1) % self.batch_size == 0:
                 self.sync_batch(batch)
                 batch = []
+
+        self.sync_batch(batch)
 
         # sync deleted objects
         self.model_class.objects.exclude(stripe_id__in=stripe_ids).update(
