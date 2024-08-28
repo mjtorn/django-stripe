@@ -10,11 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-import os
 from pathlib import Path
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Initialize environment variables
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / ".env")  # Reads from a .env file if present
 
 
 # Quick-start development settings - unsuitable for production
@@ -78,7 +83,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "django_stripe",  # Replace with your database name
-        "USER": "root",  # Replace with your database user
+        "USER": "djangostripe",  # Replace with your database user
         "PASSWORD": "password",  # Replace with your database password
         "HOST": "localhost",  # Or your database host (e.g., an IP address or domain)
         "PORT": "5432",  # Default PostgreSQL port
@@ -91,7 +96,10 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "UserAttributeSimilarityValidator"
+        ),
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -128,5 +136,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STRIPE_CONFIG = {
-    "API_KEY": os.getenv("STRIPE_API_KEY"),  # Stripe Secret Key
+    "API_KEY": env(
+        "STRIPE_API_KEY", default="sk_test_dummyapikey"
+    ),  # Stripe Secret Key
 }
