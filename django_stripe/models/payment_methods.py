@@ -2,12 +2,12 @@
 from django.db import models
 
 # Django Stripe Stuff
-from django_stripe.models.base.issuing import StripeBaseCard
+from django_stripe.models.base.payment_methods import AbstactStripeCard
 
 
-class StripeCard(StripeBaseCard):
+class StripeCard(AbstactStripeCard):
     customer = models.ForeignKey(
-        "django_tripe.StripeCustomer",
+        "django_stripe.StripeCustomer",
         to_field="stripe_id",
         on_delete=models.CASCADE,
         null=True,

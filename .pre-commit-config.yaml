@@ -17,8 +17,8 @@ repos:
     - id: check-json
     - id: pretty-format-json
     - id: check-added-large-files
-    - id: name-tests-test
-      args: ['--pytest-test-first']
+#    - id: name-tests-test
+#      args: ['--pytest-test-first']
 
 # Ref: https://flake8.pycqa.org/en/latest/user/using-hooks.html?highlight=pre-commit#usage-with-the-pre-commit-git-hooks-framework
 # Ref: https://black.readthedocs.io/en/stable/guides/using_black_with_other_tools.html#configuration

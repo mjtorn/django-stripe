@@ -1,9 +1,22 @@
 # Django Stripe Stuff
-from django_stripe.actions.cards import StripeCard
-from django_stripe.actions.coupons import StripeCoupon
-from django_stripe.actions.customers import StripeCustomer
-from django_stripe.actions.events import StripeEvent
-from django_stripe.actions.prices import StripePrice
-from django_stripe.actions.products import StripeProduct
-from django_stripe.actions.subscriptions import StripeSubscription
+from django_stripe.actions.core import StripeCustomerAction
+from django_stripe.actions.events import StripeEventAction
+from django_stripe.actions.payment_methods import StripeCardAction
+from django_stripe.actions.products import (
+    StripeCouponAction,
+    StripePriceAction,
+    StripeProductAction,
+)
+from django_stripe.actions.subscriptions import StripeSubscriptionAction
 from django_stripe.actions.webhooks import StripeWebhook
+
+__all__ = [
+    "StripeCustomerAction",
+    "StripeEventAction",
+    "StripeCardAction",
+    "StripeCouponAction",
+    "StripePriceAction",
+    "StripeProductAction",
+    "StripeSubscriptionAction",
+    "StripeWebhook",
+]

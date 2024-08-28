@@ -22,13 +22,13 @@ class TimeStampedUUIDModel(UUIDModel):
     """
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    modified_at = models.DateTimeField(auto_now=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
         abstract = True
 
 
-class StripeBaseModel(TimeStampedUUIDModel):
+class AbstactStripeModel(TimeStampedUUIDModel):
     """
     An abstract base class model that provides stripe_id field
     with UUID as primary_key along with self-updating

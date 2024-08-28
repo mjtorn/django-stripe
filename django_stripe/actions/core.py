@@ -2,28 +2,34 @@
 import stripe
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
-from django.utils import timezone
 
 # Django Stripe Stuff
 from django_stripe import utils
-from django_stripe.settings import stripe_settings
+from django_stripe.actions.mixins import StripeSoftDeleteActionMixin
+from django_stripe.models import StripeCustomer
 
 
-class StripeCustomer:
-    @classmethod
-    def create(cls, user, billing_email, metadata=None, **kwargs):
+class StripeCustomerAction(StripeSoftDeleteActionMixin):
+    model_class = StripeCustomer
+
+    def __init__(self, user):
+        self.user = user
+
+    def create(self, billing_email, metadata=None, **kwargs):
         """
         Creates a Stripe customer.
         If a customer already exists, the existing customer will be returned.
         Args:
-            user: a user object
+            billing_email: email address to bind the customer to
+            metadata: dict of metadata to attach to the customer
+            kwargs: additional kwargs to pass to stripe.Customer.create
         Returns:
             a customer object that was created
         """
         if not metadata:
             metadata = {}
 
-        customer = cls.get(user)
+        customer = self.get()
         if customer:
             try:
                 stripe.Customer.retrieve(customer.stripe_id)
@@ -38,39 +44,36 @@ class StripeCustomer:
         )
 
         data = {
-            stripe_settings.USER_FIELD_NAME: user,
+            "user": self.user,
             "is_active": True,
             "livemode": stripe_customer["livemode"],
-            "defaults": {"stripe_id": stripe_customer["id"], "email": billing_email},
+            "defaults": {
+                "stripe_id": stripe_customer["id"],
+                "email": billing_email,
+            },
         }
 
-        customer, created = stripe_settings.CUSTOMER_MODEL.objects.get_or_create(**data)
+        customer, created = self.model_class.objects.get_or_create(**data)
 
         if not created:
             customer.stripe_id = stripe_customer["id"]  # sync will call customer.save()
 
-        customer = cls.sync_from_stripe_data(customer, stripe_customer)
+        customer = self.sync_from_stripe_data(customer, stripe_customer)
 
         return customer
 
-    @classmethod
-    def get(cls, user):
+    def get(self):
         """
         Get a customer object for a given user
-        Args:
-                user: a user object
         Returns:
-            a customer object(local customer)
+            a django_stripe.StripeCustomer object
         """
-        if not hasattr(user, stripe_settings.CUSTOMER_FIELD_NAME):
-            data = {stripe_settings.USER_FIELD_NAME: user, "is_active": True}
-            customer = stripe_settings.CUSTOMER_MODEL.objects.filter(**data).first()
-            setattr(user, stripe_settings.CUSTOMER_FIELD_NAME, customer)
+        data = {"user": self.user, "is_active": True}
+        customer = self.model_class.objects.filter(**data).first()
 
-        return getattr(user, stripe_settings.CUSTOMER_FIELD_NAME)
+        return customer
 
-    @classmethod
-    def sync_from_stripe_data(cls, customer, stripe_customer):
+    def sync_from_stripe_data(self, customer, stripe_customer):
         """
         Synchronizes a local Customer object with details from the Stripe API
         Args:
@@ -78,7 +81,7 @@ class StripeCustomer:
             stripe_customer: optionally,
             data from the Stripe API representing the customer
         Returns:
-            a customer object(local customer)
+            a django_stripe.StripeCustomer object
         """
         customer.balance = utils.convert_amount_for_db(
             stripe_customer["balance"], stripe_customer["currency"]
@@ -99,8 +102,7 @@ class StripeCustomer:
 
         return customer
 
-    @classmethod
-    def sync(cls, customer, stripe_customer=None):
+    def sync(self, customer, stripe_customer=None):
         """
         Synchronizes a local Customer object with details from the Stripe API
         Args:
@@ -108,7 +110,7 @@ class StripeCustomer:
             stripe_customer: optionally,
             data from the Stripe API representing the customer
         Returns:
-            a customer object(local customer)
+            a django_stripe.StripeCustomer object
         """
         if not customer.is_active:
             return
@@ -117,15 +119,14 @@ class StripeCustomer:
             stripe_customer = stripe.Customer.retrieve(customer.stripe_id)
 
         if stripe_customer.get("deleted", False):
-            cls.soft_delete(customer)
+            self.soft_delete(customer)
             return
 
         # Sync customer details
-        customer = cls.sync_from_stripe_data(customer, stripe_customer)
+        customer = self.sync_from_stripe_data(customer, stripe_customer)
 
         # Django Stripe Stuff
-        from django_stripe.actions.cards import StripeCard
-        from django_stripe.actions.subscriptions import StripeSubscription
+        from django_stripe.actions.payment_methods import StripeCard
 
         # Sync customer card details
         if customer.default_source:
@@ -134,20 +135,9 @@ class StripeCustomer:
             )
             StripeCard.sync_from_stripe_data(customer, source=stripe_source)
 
-        # Sync subscription details
-        subscriptions = stripe.Subscription.auto_paging_iter(
-            customer=customer.stripe_id
-        )
-        for subscription in subscriptions:
-            StripeSubscription.sync_from_stripe_data(
-                customer=customer,
-                stripe_subscription=subscription,
-            )
-
         return customer
 
-    @classmethod
-    def link_customer(cls, event):
+    def link_customer(self, event):
         """
         Links a customer referenced in a webhook event message to the event object
         Args:
@@ -169,9 +159,7 @@ class StripeCustomer:
 
         if stripe_customer_id is not None:
             try:
-                customer = stripe_settings.CUSTOMER_MODEL.objects.get(
-                    stripe_id=stripe_customer_id
-                )
+                customer = self.model_class.objects.get(stripe_id=stripe_customer_id)
             except ObjectDoesNotExist:
                 raise Http404(
                     f"Stripe customer does not exist for event={event.stripe_id}"
@@ -181,14 +169,3 @@ class StripeCustomer:
             event.save()
 
         return event
-
-    @classmethod
-    def soft_delete(cls, customer):
-        """
-        Soft deletes the local customer object (Customer)
-        Args:
-            customer: Customer object
-        """
-        customer.is_active = False
-        customer.date_purged = timezone.now()
-        customer.save()

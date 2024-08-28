@@ -4,14 +4,14 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 # Django Stripe Stuff
-from django_stripe.models.base.mixins import StripeBaseModel
+from django_stripe.models.base.mixins import AbstactStripeModel
 
 USD = "usd"
 CURRENCY_CHOICES = ((USD, "USD"),)
 DEFAULT_CURRENCY = USD
 
 
-class StripeBaseCustomer(StripeBaseModel):
+class AbstactStripeCustomer(AbstactStripeModel):
     """
     Customer objects allow us to perform recurring charges and track multiple
     charges that are associated with the same customer
@@ -117,7 +117,7 @@ class StripeBaseCustomer(StripeBaseModel):
         abstract = True
 
 
-class StripeBaseEvent(StripeBaseModel):
+class AbstactStripeEvent(AbstactStripeModel):
     kind = models.CharField(max_length=255)
     webhook_message = models.JSONField()
     validated_message = models.JSONField(null=True, blank=True)

@@ -1,6 +1,6 @@
 # Django Stripe Stuff
-from django_stripe.models.base.billing import StripeBaseSubscription
+from django_stripe.models.base.billing import AbstactStripeSubscription
 
 
-class StripeSubscription(StripeBaseSubscription):
+class StripeSubscription(AbstactStripeSubscription):
     pass

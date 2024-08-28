@@ -24,12 +24,12 @@ INSTALLED_APPS = [
 Create models to manage Stripe data using the abstract base classes provided in `django_stripe.models`. For example:
 
 ```python
-from django_stripe.models import StripeBaseCustomer, StripeBaseCard, StripeBaseSubscription, StripeBaseProduct,
-    StripeBasePrice, StripeBaseCoupon, StripeBaseEvent
+from django_stripe.models import AbstactStripeCustomer, AbstactStripeCard, AbstactStripeSubscription, AbstactStripeProduct,
+    AbstactStripePrice, AbstactStripeCoupon, AbstactStripeEvent
 from users.models import User
 
 
-class Customer(StripeBaseCustomer):
+class Customer(AbstactStripeCustomer):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -38,7 +38,7 @@ class Customer(StripeBaseCustomer):
     # Add custom fields as per project requirement
 
 
-class Card(StripeBaseCard):
+class Card(AbstactStripeCard):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
@@ -47,7 +47,7 @@ class Card(StripeBaseCard):
     # Add custom fields as per project requirement
 
 
-class Subscription(StripeBaseSubscription):
+class Subscription(AbstactStripeSubscription):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
@@ -57,12 +57,12 @@ class Subscription(StripeBaseSubscription):
     # Add custom fields as per project requirement
 
 
-class Product(StripeBaseProduct):
+class Product(AbstactStripeProduct):
     # Add custom fields as per project requirement
     pass
 
 
-class Price(StripeBaseProduct):
+class Price(AbstactStripeProduct):
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
@@ -71,12 +71,12 @@ class Price(StripeBaseProduct):
     # Add custom fields as per project requirement
 
 
-class Coupon(StripeBaseCoupon):
+class Coupon(AbstactStripeCoupon):
     # Add custom fields as per project requirement
     pass
 
 
-class Event(StripeBaseEvent):
+class Event(AbstactStripeEvent):
     # Add custom fields as per project requirement
     pass
 ```
@@ -150,7 +150,7 @@ You can use the appropriate actions to build payment APIs. Here are some example
 - Creating a customer
 
 ```python
-from django_stripe.actions.customers import StripeCustomer
+from django_stripe.actions.core import StripeCustomer
 
 # Pass user model instance and email as argument
 customer = StripeCustomer.create(user, billing_email)

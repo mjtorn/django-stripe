@@ -16,7 +16,9 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     """
-    Sync (ONLY UPDATE, it doesn't create customers if not exist in local DB) customers from stripe
+    Sync
+    (ONLY UPDATE, it doesn't create customers if not exist in local DB)
+    customers from stripe
 
     command: python manage.py sync_stripe_customers
     """
@@ -28,8 +30,8 @@ class Command(BaseCommand):
             logger.info("Stripe API key not set")
             return
 
-        User = apps.get_model(settings.AUTH_USER_MODEL)
-        users = User.objects.all()
+        user_model_class = apps.get_model(settings.AUTH_USER_MODEL)
+        users = user_model_class.objects.all()
         total = users.count()
         count = 0
 

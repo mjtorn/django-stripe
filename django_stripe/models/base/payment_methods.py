@@ -2,10 +2,10 @@
 from django.db import models
 
 # Django Stripe Stuff
-from django_stripe.models.base.mixins import StripeBaseModel
+from django_stripe.models.base.mixins import AbstactStripeModel
 
 
-class StripeBaseCard(StripeBaseModel):
+class AbstactStripeCard(AbstactStripeModel):
     """
     We can store multiple cards on a customer in order to charge the customer later.
     We can also store multiple debit cards

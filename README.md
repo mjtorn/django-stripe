@@ -70,19 +70,19 @@ You can use the appropriate actions to build payment APIs. Here are some example
 - Creating a customer
 
 ```python
-from django_stripe.actions.customers import StripeCustomer
+from django_stripe.actions.core import StripeCustomerAction
 
 # Pass user model instance and email as argument
-customer = StripeCustomer.create(user, billing_email)
+customer = StripeCustomerAction(user).create(billing_email)
 ```
 
 - Creating a subscription
 
 ```python
-from django_stripe.actions.subscriptions import StripeSubscription
+from django_stripe.actions.subscriptions import StripeSubscriptionAction
 
 # Pass customer model instance and prices(List of stripe price ids) to subscribe as argument
-subscription = StripeSubscription.create(customer, prices)
+subscription = StripeSubscriptionAction.create(customer, prices)
 ```
 
 ## Code of Conduct

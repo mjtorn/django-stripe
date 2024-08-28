@@ -41,7 +41,8 @@ class StripeWebhook:
             except InvalidRequestError as e:
                 event_id = event_data["id"]
                 logger.info(
-                    f"Error occurred while processing stripe webhook, event_id={event_id}, error={smart_str(e)}"
+                    "Error occurred while processing stripe webhook, "
+                    f"event_id={event_id}, error={smart_str(e)}"
                 )
             return
 

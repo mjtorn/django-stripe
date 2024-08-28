@@ -5,11 +5,11 @@ from django.utils import timezone
 
 # Django Stripe Stuff
 from django_stripe import utils
-from django_stripe.actions.customers import StripeCustomer
+from django_stripe.actions.core import StripeCustomer
 from django_stripe.settings import stripe_settings
 
 
-class StripeSubscription:
+class StripeSubscriptionAction:
     @classmethod
     def create(cls, customer, prices, coupon=None, trial_from_plan=True):
         """
@@ -27,7 +27,8 @@ class StripeSubscription:
         subscription_params["items"] = list(map(lambda price: {"price": price}, prices))
 
         # Indicates if a price’s trial_period_days should be applied to the subscription
-        # Ref: https://stripe.com/docs/api/subscriptions/create#create_subscription-trial_from_plan
+        # Ref:
+        # https://stripe.com/docs/api/subscriptions/create#create_subscription-trial_from_plan
         options = {
             "trial_from_plan": trial_from_plan,
         }
