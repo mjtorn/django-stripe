@@ -15,9 +15,9 @@ def convert_tstamp(response):
 
 
 def convert_amount_for_db(amount, currency="usd"):
-    if (
-        currency is None
-    ):  # @@@ not sure if this is right; find out what we should do when API returns null for currency
+    # @@@ not sure if this is right;
+    # find out what we should do when API returns null for currency
+    if currency is None:
         currency = "usd"
     return (
         (amount / decimal.Decimal("100"))

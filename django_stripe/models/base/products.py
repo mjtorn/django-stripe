@@ -3,7 +3,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 # Django Stripe Stuff
-from django_stripe.models.base.mixins import StripeBaseModel
+from django_stripe.models.base.mixins import AbstactStripeModel
 from django_stripe.utils import CURRENCY_SYMBOLS
 
 USD = "usd"
@@ -11,7 +11,7 @@ CURRENCY_CHOICES = ((USD, "USD"),)
 DEFAULT_CURRENCY = USD
 
 
-class StripeBaseProduct(StripeBaseModel):
+class AbstactStripeProduct(AbstactStripeModel):
     """
     Products describe the specific goods or services you offer to your customers.
     For example, you might offer a Standard and
@@ -100,7 +100,7 @@ class StripeBaseProduct(StripeBaseModel):
         abstract = True
 
 
-class StripeBasePrice(StripeBaseModel):
+class AbstactStripePrice(AbstactStripeModel):
     """
     Prices define the unit cost, currency, and (optional) billing cycle for both
     recurring and one-time purchases of products. Products help you track inventory
@@ -268,7 +268,7 @@ class StripeBasePrice(StripeBaseModel):
         abstract = True
 
 
-class StripeBaseCoupon(StripeBaseModel):
+class AbstactStripeCoupon(AbstactStripeModel):
     """
     A coupon contains information about a percent-off or
     amount-off discount we might want to apply to a customer.

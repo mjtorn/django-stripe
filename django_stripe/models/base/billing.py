@@ -3,7 +3,7 @@ import stripe
 from django.db import models
 
 # Django Stripe Stuff
-from django_stripe.models.base.mixins import StripeBaseModel
+from django_stripe.models.base.mixins import AbstactStripeModel
 
 CHARGE_AUTOMATICALLY = "charge_automatically"
 SEND_INVOICE = "send_invoice"
@@ -14,7 +14,7 @@ INVOICE_COLLECTION_METHOD_TYPES = (
 )
 
 
-class StripeBaseSubscription(StripeBaseModel):
+class AbstactStripeSubscription(AbstactStripeModel):
     """
     Subscriptions allow us to charge a customer on a recurring basis.
     Stripe documentation: https://stripe.com/docs/api/subscriptions

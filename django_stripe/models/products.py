@@ -1,17 +1,19 @@
 # Third Party Stuff
 from django.db import models
 
-from django_stripe.models.base import StripeBaseCoupon
-
 # Django Stripe Stuff
-from django_stripe.models.base.products import StripeBasePrice, StripeBaseProduct
+from django_stripe.models.base import (
+    AbstactStripeCoupon,
+    AbstactStripePrice,
+    AbstactStripeProduct,
+)
 
 
-class StripeProduct(StripeBaseProduct):
+class StripeProduct(AbstactStripeProduct):
     pass
 
 
-class StripePrice(StripeBasePrice):
+class StripePrice(AbstactStripePrice):
     price = models.ForeignKey(
         "django_stripe.StripeProduct",
         to_field="stripe_id",
@@ -20,5 +22,5 @@ class StripePrice(StripeBasePrice):
     )
 
 
-class StripeCoupon(StripeBaseCoupon):
+class StripeCoupon(AbstactStripeCoupon):
     pass
