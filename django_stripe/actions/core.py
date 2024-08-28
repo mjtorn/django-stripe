@@ -10,6 +10,8 @@ from django_stripe.models import StripeCustomer
 
 
 class StripeCustomerAction(StripeSoftDeleteActionMixin):
+    model_class = StripeCustomer
+
     def __init__(self, user):
         self.user = user
 
@@ -45,10 +47,13 @@ class StripeCustomerAction(StripeSoftDeleteActionMixin):
             "user": self.user,
             "is_active": True,
             "livemode": stripe_customer["livemode"],
-            "defaults": {"stripe_id": stripe_customer["id"], "email": billing_email},
+            "defaults": {
+                "stripe_id": stripe_customer["id"],
+                "email": billing_email,
+            },
         }
 
-        customer, created = StripeCustomer.objects.get_or_create(**data)
+        customer, created = self.model_class.objects.get_or_create(**data)
 
         if not created:
             customer.stripe_id = stripe_customer["id"]  # sync will call customer.save()
@@ -64,7 +69,7 @@ class StripeCustomerAction(StripeSoftDeleteActionMixin):
             a django_stripe.StripeCustomer object
         """
         data = {"user": self.user, "is_active": True}
-        customer = StripeCustomer.objects.filter(**data).first()
+        customer = self.model_class.objects.filter(**data).first()
 
         return customer
 
@@ -122,7 +127,6 @@ class StripeCustomerAction(StripeSoftDeleteActionMixin):
 
         # Django Stripe Stuff
         from django_stripe.actions.payment_methods import StripeCard
-        from django_stripe.actions.subscriptions import StripeSubscriptionAction
 
         # Sync customer card details
         if customer.default_source:
@@ -130,16 +134,6 @@ class StripeCustomerAction(StripeSoftDeleteActionMixin):
                 customer.stripe_id, customer.default_source
             )
             StripeCard.sync_from_stripe_data(customer, source=stripe_source)
-
-        # Sync subscription details
-        subscriptions = stripe.Subscription.auto_paging_iter(
-            customer=customer.stripe_id
-        )
-        for subscription in subscriptions:
-            StripeSubscriptionAction.sync_from_stripe_data(
-                customer=customer,
-                stripe_subscription=subscription,
-            )
 
         return customer
 
@@ -165,7 +159,7 @@ class StripeCustomerAction(StripeSoftDeleteActionMixin):
 
         if stripe_customer_id is not None:
             try:
-                customer = StripeCustomer.objects.get(stripe_id=stripe_customer_id)
+                customer = self.model_class.objects.get(stripe_id=stripe_customer_id)
             except ObjectDoesNotExist:
                 raise Http404(
                     f"Stripe customer does not exist for event={event.stripe_id}"

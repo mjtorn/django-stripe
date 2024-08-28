@@ -3,6 +3,8 @@ from django.utils import timezone
 
 
 class StripeSoftDeleteActionMixin:
+    model_class = None
+
     def soft_delete(self, stripe_id: str):
         """
         Deletes the local stripe object
@@ -37,7 +39,10 @@ class StripeSyncActionMixin:
         pass
 
     def set_default(self, stripe_data: dict):
-        model_fields = set(self.model_class._meta.fields)
+        model_fields = set(
+            [field.name for field in self.model_class._meta.get_fields()]
+        )
+        print("model_fields", model_fields)
         return {key: value for key, value in stripe_data.items() if key in model_fields}
 
     def sync(self, stripe_data: dict):
@@ -50,6 +55,7 @@ class StripeSyncActionMixin:
         self.pre_set_defualt(stripe_data)
         stripe_id = stripe_data.pop("id")
         defaults = self.set_default(stripe_data)
+        print(defaults)
 
         model_obj, _ = self.model_class.objects.update_or_create(
             stripe_id=stripe_id, defaults=defaults
