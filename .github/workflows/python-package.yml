@@ -46,7 +46,7 @@ jobs:
         python -m pip install flake8 pytest pytest-cov
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Set DJANGO_SETTINGS_MODULE
-      run: echo "DJANGO_SETTINGS_MODULE=your_project.settings" >> $GITHUB_ENV
+      run: echo "DJANGO_SETTINGS_MODULE=tests.settings" >> $GITHUB_ENV
     - name: Apply database migrations
       run: |
         python manage.py migrate
@@ -57,4 +57,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest and coverage
       run: |
-        pytest --cov=your_project --cov-report=xml
+        pytest --cov=tests --cov-report=xml
