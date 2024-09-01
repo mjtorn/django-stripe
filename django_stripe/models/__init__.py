@@ -1,4 +1,4 @@
-from django_stripe.models.billing import StripeSubscription
+from django_stripe.models.billings import StripeSubscription
 from django_stripe.models.core import StripeCustomer, StripeEvent
 from django_stripe.models.payment_methods import StripeCard
 from django_stripe.models.products import StripeCoupon, StripePrice, StripeProduct

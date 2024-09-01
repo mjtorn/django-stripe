@@ -8,7 +8,7 @@ from django_stripe.actions import StripeProductAction
 from django_stripe.models import StripeProduct
 
 
-class StripeProductActionTest(TestCase):
+class StripeProductActionTestCase(TestCase):
     def setUp(self):
         # Initialize StripeProductAction
         self.action = StripeProductAction()
@@ -47,7 +47,7 @@ class StripeProductActionTest(TestCase):
         self.assertEqual(product.name, stripe_product_data["name"])
         self.assertEqual(product.active, stripe_product_data["active"])
         # self.assertIsNone(product.default_price)
-        self.assertIsNone(product.description)
+        self.assertEqual(product.description, "")
 
     @patch("django_stripe.actions.StripeProductAction.stripe_object_class")
     def test_sync_updates_existing_product(self, mock_stripe_object_class):
