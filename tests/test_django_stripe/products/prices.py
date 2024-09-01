@@ -10,7 +10,7 @@ from django_stripe.actions import StripeProductAction
 from django_stripe.models import StripeProduct
 
 
-class StripeProductActionTests(TestCase):
+class StripeProductActionTestCase(TestCase):
     def setUp(self):
         self.action = StripeProductAction()
 

@@ -1,6 +1,8 @@
 # Third Party Stuff
 from django.utils import timezone
 
+from django_stripe.utils import convert_epoch
+
 
 class StripeSoftDeleteActionMixin:
     model_class = None
@@ -39,10 +41,29 @@ class StripeSyncActionMixin:
         pass
 
     def set_default(self, stripe_data: dict):
-        model_fields = set(
-            [field.name for field in self.model_class._meta.get_fields()]
-        )
-        return {key: value for key, value in stripe_data.items() if key in model_fields}
+        defaults = {}
+
+        for field in self.model_class._meta.get_fields():
+            if field.name not in stripe_data:
+                continue
+
+            field_type = field.get_internal_type()
+
+            if field_type == "DateTimeField":
+                if type(stripe_data[field.name]) == str:
+                    print("date string", field.name, stripe_data[field.name])
+
+                defaults[field.name] = (
+                    convert_epoch(stripe_data[field.name])
+                    if stripe_data[field.name]
+                    else None
+                )
+            elif field_type in ["CharField", "TextField"]:
+                defaults[field.name] = stripe_data[field.name] or ""
+            else:
+                defaults[field.name] = stripe_data[field.name]
+
+        return defaults
 
     def sync(self, stripe_data: dict):
         """
@@ -54,6 +75,8 @@ class StripeSyncActionMixin:
         self.pre_set_defualt(stripe_data)
         stripe_id = stripe_data.pop("id")
         defaults = self.set_default(stripe_data)
+
+        print("defaults", defaults)
 
         model_obj, _ = self.model_class.objects.update_or_create(
             stripe_id=stripe_id, defaults=defaults

@@ -4,11 +4,8 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 # Django Stripe Stuff
+from django_stripe.models.base.common import CURRENCY_CHOICES, DEFAULT_CURRENCY
 from django_stripe.models.base.mixins import AbstactStripeModel
-
-USD = "usd"
-CURRENCY_CHOICES = ((USD, "USD"),)
-DEFAULT_CURRENCY = USD
 
 
 class AbstactStripeCustomer(AbstactStripeModel):
