@@ -87,6 +87,7 @@ DATABASES = {
         "PASSWORD": "password",  # Replace with your database password
         "HOST": "localhost",  # Or your database host (e.g., an IP address or domain)
         "PORT": "5432",  # Default PostgreSQL port
+        "DISABLE_SERVER_SIDE_CURSORS": True,
     }
 }
 

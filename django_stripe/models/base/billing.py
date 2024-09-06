@@ -3,6 +3,7 @@ import stripe
 from django.db import models
 
 # Django Stripe Stuff
+from django_stripe.models.base.common import CURRENCY_CHOICES, DEFAULT_CURRENCY
 from django_stripe.models.base.mixins import AbstactStripeModel
 
 CHARGE_AUTOMATICALLY = "charge_automatically"
@@ -251,6 +252,15 @@ class AbstactStripeSubscription(AbstactStripeModel):
         max_length=255,
         blank=True,
         help_text="The most recent invoice this subscription has generated.",
+    )
+    currency = models.CharField(
+        choices=CURRENCY_CHOICES,
+        default=DEFAULT_CURRENCY,
+        max_length=3,
+        help_text=(
+            "The currency the customer can be charged "
+            "in for recurring billing purposes"
+        ),
     )
 
     @property

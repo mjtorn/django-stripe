@@ -2,16 +2,12 @@
 import decimal
 from datetime import datetime
 
-# Third Party Stuff
-from django.conf import settings
-from django.utils import timezone
 
-
-def convert_tstamp(response):
-    tz = timezone.utc if settings.USE_TZ else None
-    if response:
-        return datetime.fromtimestamp(response, tz)
-    return None
+def convert_epoch(epoch):
+    """
+    Convert epoch to datetime
+    """
+    return str(datetime.utcfromtimestamp(epoch))
 
 
 def convert_amount_for_db(amount, currency="usd"):

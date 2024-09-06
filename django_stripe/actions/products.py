@@ -32,7 +32,7 @@ class StripePriceAction(StripeSyncActionMixin, StripeSoftDeleteActionMixin):
 
         if not product:
             stripe_product = self.stripe_product_class.retrieve(stripe_data["product"])
-            product, _ = StripeProductAction.sync(stripe_product)
+            product = StripeProductAction().sync(stripe_product)
 
         stripe_data["product"] = product
 

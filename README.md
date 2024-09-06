@@ -79,7 +79,7 @@ customer = StripeCustomerAction(user).create(billing_email)
 - Creating a subscription
 
 ```python
-from django_stripe.actions.subscriptions import StripeSubscriptionAction
+from django_stripe.actions.billings import StripeSubscriptionAction
 
 # Pass customer model instance and prices(List of stripe price ids) to subscribe as argument
 subscription = StripeSubscriptionAction.create(customer, prices)
