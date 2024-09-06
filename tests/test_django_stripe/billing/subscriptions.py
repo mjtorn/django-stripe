@@ -150,8 +150,82 @@ class StripeSubscriptionActionTestCase(TestCase):
         subscription = StripeSubscription.objects.get(
             stripe_id="sub_1MowQVLkdIwHu7ixeRlqHVzs"
         )
-        self.assertEqual(subscription.currency, "usd")
-        self.assertEqual(subscription.status, "active")
+
+        # Handle None values by using `or ""` or an appropriate default
+        self.assertEqual(subscription.currency, self.subscription_data["currency"])
+        self.assertEqual(subscription.status, self.subscription_data["status"])
+        # self.assertEqual(
+        #     subscription.description, self.subscription_data["description"]
+        # )
+        # self.assertEqual(
+        #     subscription.discount, self.subscription_data["discount"]
+        # )
+        # self.assertEqual(
+        #     subscription.application, self.subscription_data["application"]
+        # )
+        # self.assertEqual(
+        #     subscription.application_fee_percent,
+        #     self.subscription_data["application_fee_percent"],
+        # )
+        self.assertEqual(
+            subscription.billing_thresholds,
+            self.subscription_data["billing_thresholds"],
+        )
+        self.assertEqual(subscription.cancel_at, self.subscription_data["cancel_at"])
+        self.assertEqual(
+            subscription.canceled_at, self.subscription_data["canceled_at"]
+        )
+        self.assertEqual(
+            subscription.default_payment_method,
+            self.subscription_data["default_payment_method"] or "",
+        )
+        self.assertEqual(
+            subscription.default_source, self.subscription_data["default_source"] or ""
+        )
+        # self.assertEqual(
+        #     subscription.discount, self.subscription_data["discount"]
+        # )
+        self.assertEqual(subscription.ended_at, self.subscription_data["ended_at"])
+        self.assertEqual(
+            subscription.days_until_due, self.subscription_data["days_until_due"]
+        )
+        self.assertEqual(
+            subscription.next_pending_invoice_item_invoice,
+            self.subscription_data["next_pending_invoice_item_invoice"],
+        )
+        # self.assertEqual(
+        #     subscription.on_behalf_of, self.subscription_data["on_behalf_of"]
+        # )
+        self.assertEqual(
+            subscription.pause_collection,
+            self.subscription_data["pause_collection"],
+        )
+        self.assertEqual(
+            subscription.pending_invoice_item_interval,
+            self.subscription_data["pending_invoice_item_interval"],
+        )
+        self.assertEqual(
+            subscription.pending_setup_intent,
+            self.subscription_data["pending_setup_intent"] or "",
+        )
+        self.assertEqual(
+            subscription.pending_update, self.subscription_data["pending_update"]
+        )
+        # self.assertEqual(subscription.schedule, self.subscription_data["schedule"])
+        self.assertEqual(subscription.trial_end, self.subscription_data["trial_end"])
+        self.assertEqual(
+            subscription.trial_start, self.subscription_data["trial_start"]
+        )
+        # self.assertEqual(
+        #   subscription.test_clock,
+        #   self.subscription_data["test_clock"]
+        # )
+        # self.assertEqual(
+        #     subscription.transfer_data, self.subscription_data["transfer_data"]
+        # )
+        self.assertEqual(
+            subscription.metadata, self.subscription_data["metadata"] or {}
+        )
 
     @patch("stripe.Subscription.retrieve")
     def test_sync_updates_subscription(self, mock_retrieve):
@@ -188,8 +262,82 @@ class StripeSubscriptionActionTestCase(TestCase):
         subscription = StripeSubscription.objects.get(
             stripe_id="sub_1MowQVLkdIwHu7ixeRlqHVzs"
         )
-        self.assertEqual(subscription.currency, "usd")
-        self.assertEqual(subscription.status, "active")
+
+        # Handle None values by using `or ""` or an appropriate default
+        self.assertEqual(subscription.currency, self.subscription_data["currency"])
+        self.assertEqual(subscription.status, self.subscription_data["status"])
+        # self.assertEqual(
+        #     subscription.description, self.subscription_data["description"]
+        # )
+        # self.assertEqual(
+        #     subscription.discount, self.subscription_data["discount"]
+        # )
+        # self.assertEqual(
+        #     subscription.application, self.subscription_data["application"]
+        # )
+        # self.assertEqual(
+        #     subscription.application_fee_percent,
+        #     self.subscription_data["application_fee_percent"],
+        # )
+        self.assertEqual(
+            subscription.billing_thresholds,
+            self.subscription_data["billing_thresholds"],
+        )
+        self.assertEqual(subscription.cancel_at, self.subscription_data["cancel_at"])
+        self.assertEqual(
+            subscription.canceled_at, self.subscription_data["canceled_at"]
+        )
+        self.assertEqual(
+            subscription.default_payment_method,
+            self.subscription_data["default_payment_method"] or "",
+        )
+        self.assertEqual(
+            subscription.default_source, self.subscription_data["default_source"] or ""
+        )
+        # self.assertEqual(
+        #     subscription.discount, self.subscription_data["discount"]
+        # )
+        self.assertEqual(subscription.ended_at, self.subscription_data["ended_at"])
+        self.assertEqual(
+            subscription.days_until_due, self.subscription_data["days_until_due"]
+        )
+        self.assertEqual(
+            subscription.next_pending_invoice_item_invoice,
+            self.subscription_data["next_pending_invoice_item_invoice"],
+        )
+        # self.assertEqual(
+        #     subscription.on_behalf_of, self.subscription_data["on_behalf_of"]
+        # )
+        self.assertEqual(
+            subscription.pause_collection,
+            self.subscription_data["pause_collection"],
+        )
+        self.assertEqual(
+            subscription.pending_invoice_item_interval,
+            self.subscription_data["pending_invoice_item_interval"],
+        )
+        self.assertEqual(
+            subscription.pending_setup_intent,
+            self.subscription_data["pending_setup_intent"] or "",
+        )
+        self.assertEqual(
+            subscription.pending_update, self.subscription_data["pending_update"]
+        )
+        # self.assertEqual(subscription.schedule, self.subscription_data["schedule"])
+        self.assertEqual(subscription.trial_end, self.subscription_data["trial_end"])
+        self.assertEqual(
+            subscription.trial_start, self.subscription_data["trial_start"]
+        )
+        # self.assertEqual(
+        #   subscription.test_clock,
+        #   self.subscription_data["test_clock"]
+        # )
+        # self.assertEqual(
+        #     subscription.transfer_data, self.subscription_data["transfer_data"]
+        # )
+        self.assertEqual(
+            subscription.metadata, self.subscription_data["metadata"] or {}
+        )
 
     @patch("stripe.Subscription.auto_paging_iter")
     def test_sync_all(self, mock_auto_paging_iter):
@@ -205,5 +353,79 @@ class StripeSubscriptionActionTestCase(TestCase):
         subscription = StripeSubscription.objects.get(
             stripe_id="sub_1MowQVLkdIwHu7ixeRlqHVzs"
         )
-        self.assertEqual(subscription.currency, "usd")
-        self.assertEqual(subscription.status, "active")
+
+        # Handle None values by using `or ""` or an appropriate default
+        self.assertEqual(subscription.currency, self.subscription_data["currency"])
+        self.assertEqual(subscription.status, self.subscription_data["status"])
+        # self.assertEqual(
+        #     subscription.description, self.subscription_data["description"]
+        # )
+        # self.assertEqual(
+        #     subscription.discount, self.subscription_data["discount"]
+        # )
+        # self.assertEqual(
+        #     subscription.application, self.subscription_data["application"]
+        # )
+        # self.assertEqual(
+        #     subscription.application_fee_percent,
+        #     self.subscription_data["application_fee_percent"],
+        # )
+        self.assertEqual(
+            subscription.billing_thresholds,
+            self.subscription_data["billing_thresholds"],
+        )
+        self.assertEqual(subscription.cancel_at, self.subscription_data["cancel_at"])
+        self.assertEqual(
+            subscription.canceled_at, self.subscription_data["canceled_at"]
+        )
+        self.assertEqual(
+            subscription.default_payment_method,
+            self.subscription_data["default_payment_method"] or "",
+        )
+        self.assertEqual(
+            subscription.default_source, self.subscription_data["default_source"] or ""
+        )
+        # self.assertEqual(
+        #     subscription.discount, self.subscription_data["discount"]
+        # )
+        self.assertEqual(subscription.ended_at, self.subscription_data["ended_at"])
+        self.assertEqual(
+            subscription.days_until_due, self.subscription_data["days_until_due"]
+        )
+        self.assertEqual(
+            subscription.next_pending_invoice_item_invoice,
+            self.subscription_data["next_pending_invoice_item_invoice"],
+        )
+        # self.assertEqual(
+        #     subscription.on_behalf_of, self.subscription_data["on_behalf_of"]
+        # )
+        self.assertEqual(
+            subscription.pause_collection,
+            self.subscription_data["pause_collection"],
+        )
+        self.assertEqual(
+            subscription.pending_invoice_item_interval,
+            self.subscription_data["pending_invoice_item_interval"],
+        )
+        self.assertEqual(
+            subscription.pending_setup_intent,
+            self.subscription_data["pending_setup_intent"] or "",
+        )
+        self.assertEqual(
+            subscription.pending_update, self.subscription_data["pending_update"]
+        )
+        # self.assertEqual(subscription.schedule, self.subscription_data["schedule"])
+        self.assertEqual(subscription.trial_end, self.subscription_data["trial_end"])
+        self.assertEqual(
+            subscription.trial_start, self.subscription_data["trial_start"]
+        )
+        # self.assertEqual(
+        #   subscription.test_clock,
+        #   self.subscription_data["test_clock"]
+        # )
+        # self.assertEqual(
+        #     subscription.transfer_data, self.subscription_data["transfer_data"]
+        # )
+        self.assertEqual(
+            subscription.metadata, self.subscription_data["metadata"] or {}
+        )
