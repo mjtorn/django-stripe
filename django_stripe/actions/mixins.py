@@ -1,6 +1,7 @@
 # Third Party Stuff
 from django.utils import timezone
 
+# Django Stripe Stuff
 from django_stripe.utils import convert_epoch
 
 
@@ -50,9 +51,6 @@ class StripeSyncActionMixin:
             field_type = field.get_internal_type()
 
             if field_type == "DateTimeField":
-                if type(stripe_data[field.name]) == str:
-                    print("date string", field.name, stripe_data[field.name])
-
                 defaults[field.name] = (
                     convert_epoch(stripe_data[field.name])
                     if stripe_data[field.name]
@@ -102,11 +100,13 @@ class StripeSyncActionMixin:
             model_objs: list of model objects
             stripe_id_obj_map: dict of stripe id and stripe object data to be updated
         """
+        if not model_objs:
+            return
+
         for model_obj in model_objs:
             stripe_id = model_obj.stripe_id
             data = stripe_id_obj_map[stripe_id]
 
-            data.pop("id")
             self.pre_set_defualt(data)
             defaults = self.set_default(data)
 
@@ -115,12 +115,17 @@ class StripeSyncActionMixin:
 
             del stripe_id_obj_map[stripe_id]
 
+        self.model_class.objects.bulk_update(model_objs, fields=list(defaults.keys()))
+
     def _create_model_objs(self, stripe_id_obj_map: dict[str, dict]):
         """
         Creates model objects
         Args:
             stripe_id_obj_map: dict of stripe id and stripe object data to be created
         """
+        if not stripe_id_obj_map:
+            return
+
         model_objs = []
 
         for stripe_id, data in stripe_id_obj_map.items():
