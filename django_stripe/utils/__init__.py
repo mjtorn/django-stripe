@@ -1,3 +1,4 @@
+from django_stripe.utils.currencies import Currency
 from django_stripe.utils.utils import (
     CURRENCY_SYMBOLS,
     ZERO_DECIMAL_CURRENCIES,
@@ -6,6 +7,7 @@ from django_stripe.utils.utils import (
 )
 
 __all__ = [
+    "Currency",
     "convert_epoch",
     "convert_amount_for_db",
     "ZERO_DECIMAL_CURRENCIES",

@@ -24,12 +24,12 @@ INSTALLED_APPS = [
 Create models to manage Stripe data using the abstract base classes provided in `django_stripe.models`. For example:
 
 ```python
-from django_stripe.models import AbstactStripeCustomer, AbstactStripeCard, AbstactStripeSubscription, AbstactStripeProduct,
-    AbstactStripePrice, AbstactStripeCoupon, AbstactStripeEvent
+from django_stripe.models import AbstractStripeCustomer, AbstractStripeCard, AbstractStripeSubscription, AbstractStripeProduct,
+    AbstractStripePrice, AbstractStripeCoupon, AbstractStripeEvent
 from users.models import User
 
 
-class Customer(AbstactStripeCustomer):
+class Customer(AbstractStripeCustomer):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -38,7 +38,7 @@ class Customer(AbstactStripeCustomer):
     # Add custom fields as per project requirement
 
 
-class Card(AbstactStripeCard):
+class Card(AbstractStripeCard):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
@@ -47,7 +47,7 @@ class Card(AbstactStripeCard):
     # Add custom fields as per project requirement
 
 
-class Subscription(AbstactStripeSubscription):
+class Subscription(AbstractStripeSubscription):
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
@@ -57,12 +57,12 @@ class Subscription(AbstactStripeSubscription):
     # Add custom fields as per project requirement
 
 
-class Product(AbstactStripeProduct):
+class Product(AbstractStripeProduct):
     # Add custom fields as per project requirement
     pass
 
 
-class Price(AbstactStripeProduct):
+class Price(AbstractStripeProduct):
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
@@ -71,12 +71,12 @@ class Price(AbstactStripeProduct):
     # Add custom fields as per project requirement
 
 
-class Coupon(AbstactStripeCoupon):
+class Coupon(AbstractStripeCoupon):
     # Add custom fields as per project requirement
     pass
 
 
-class Event(AbstactStripeEvent):
+class Event(AbstractStripeEvent):
     # Add custom fields as per project requirement
     pass
 ```

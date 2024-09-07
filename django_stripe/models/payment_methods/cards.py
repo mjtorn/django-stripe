@@ -2,10 +2,10 @@
 from django.db import models
 
 # Django Stripe Stuff
-from django_stripe.models.base.payment_methods import AbstactStripeCard
+from django_stripe.models.abstracts.payment_methods import AbstractStripeCard
 
 
-class StripeCard(AbstactStripeCard):
+class StripeCard(AbstractStripeCard):
     customer = models.ForeignKey(
         "django_stripe.StripeCustomer",
         to_field="stripe_id",
