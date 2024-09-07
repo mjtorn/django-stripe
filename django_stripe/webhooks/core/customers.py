@@ -3,22 +3,22 @@ from django.apps import apps
 from django.conf import settings
 
 # Django Stripe Stuff
-from django_stripe.actions import StripeCustomer
-from django_stripe.settings import stripe_settings
-from django_stripe.webhooks.base import BaseWebhook
+from django_stripe.actions import StripeCustomerAction
+from django_stripe.models import StripeCustomer
+from django_stripe.webhooks.register import StripeWebhook
 
 
-class CustomerUpdatedWebhook(BaseWebhook):
+class CustomerUpdatedWebhook(StripeWebhook):
     name = "customer.updated"
     description = "Occurs whenever any property of a customer changes."
 
     def process_webhook(self):
         if self.event.customer:
             stripe_customer = self.event.message["data"]["object"]
-            StripeCustomer.sync(self.event.customer, stripe_customer)
+            StripeCustomerAction().sync(self.event.customer, stripe_customer)
 
 
-class CustomerCreatedWebhook(BaseWebhook):
+class CustomerCreatedWebhook(StripeWebhook):
     name = "customer.created"
     description = "Occurs whenever a new customer is created."
 
@@ -37,20 +37,20 @@ class CustomerCreatedWebhook(BaseWebhook):
                 "is_active": True,
                 "defaults": {"stripe_id": stripe_id},
             }
-            customer, _ = stripe_settings.CUSTOMER_MODEL.objects.get_or_create(**data)
+            customer, _ = StripeCustomer.objects.get_or_create(**data)
 
             # link customer to event
             self.event.customer = customer
             self.event.save()
 
             # sync customer
-            StripeCustomer.sync(customer, stripe_customer)
+            StripeCustomerAction().sync(customer, stripe_customer)
 
 
-class CustomerDeletedWebhook(BaseWebhook):
+class CustomerDeletedWebhook(StripeWebhook):
     name = "customer.deleted"
     description = "Occurs whenever a customer is deleted."
 
     def process_webhook(self):
         if self.event.customer:
-            StripeCustomer.soft_delete(self.event.customer)
+            StripeCustomerAction().soft_delete(self.event.customer)

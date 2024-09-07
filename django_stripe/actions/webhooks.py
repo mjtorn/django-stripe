@@ -7,8 +7,8 @@ from django.utils.encoding import smart_str
 from stripe.error import InvalidRequestError
 
 # Django Stripe Stuff
-from django_stripe.actions.events import StripeEvent
-from django_stripe.settings import stripe_settings
+from django_stripe.actions import StripeEventAction
+from django_stripe.models import StripeEvent
 
 logger = logging.getLogger(__name__)
 
@@ -16,9 +16,7 @@ logger = logging.getLogger(__name__)
 class StripeWebhook:
     @classmethod
     def process_webhook(cls, event_data):
-        event = stripe_settings.EVENT_MODEL.objects.filter(
-            stripe_id=event_data["id"]
-        ).first()
+        event = StripeEvent.objects.filter(stripe_id=event_data["id"]).first()
 
         if event:
             logger.info(
@@ -29,7 +27,7 @@ class StripeWebhook:
         if stripe.api_key:
             try:
                 # create an event and process webhook
-                StripeEvent.add(
+                StripeEventAction.add(
                     stripe_id=event_data["id"],
                     kind=event_data["type"],
                     livemode=event_data["livemode"],
@@ -47,5 +45,3 @@ class StripeWebhook:
             return
 
         logger.info("Stripe API key not set while creating event")
-
-        return

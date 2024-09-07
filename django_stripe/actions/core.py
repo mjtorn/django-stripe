@@ -1,7 +1,5 @@
 # Third Party Stuff
 import stripe
-from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
 
 # Django Stripe Stuff
 from django_stripe import utils
@@ -136,36 +134,3 @@ class StripeCustomerAction(StripeSoftDeleteActionMixin):
             StripeCard.sync_from_stripe_data(customer, source=stripe_source)
 
         return customer
-
-    def link_customer(self, event):
-        """
-        Links a customer referenced in a webhook event message to the event object
-        Args:
-            event: the django_stripe.stripe.models.Event object to link
-        """
-
-        if event.kind == "customer.created":
-            return
-
-        customer_crud_events = [
-            "customer.updated",
-            "customer.deleted",
-        ]
-        event_data_object = event.message["data"]["object"]
-        if event.kind in customer_crud_events:
-            stripe_customer_id = event_data_object["id"]
-        else:
-            stripe_customer_id = event_data_object.get("customer", None)
-
-        if stripe_customer_id is not None:
-            try:
-                customer = self.model_class.objects.get(stripe_id=stripe_customer_id)
-            except ObjectDoesNotExist:
-                raise Http404(
-                    f"Stripe customer does not exist for event={event.stripe_id}"
-                )
-
-            event.customer = customer
-            event.save()
-
-        return event
