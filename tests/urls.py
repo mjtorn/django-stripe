@@ -17,7 +17,16 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from rest_framework.routers import DefaultRouter
+
+from tests.views import StripeWebhookViewSet
+
+default_router = DefaultRouter(trailing_slash=False)
+
+default_router.register(
+    "stripe/webhook", StripeWebhookViewSet, basename="stripe-webhook"
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-]
+] + default_router.urls
