@@ -28,7 +28,7 @@ class TimeStampedUUIDModel(UUIDModel):
         abstract = True
 
 
-class AbstactStripeModel(TimeStampedUUIDModel):
+class AbstractStripeModel(TimeStampedUUIDModel):
     """
     An abstract base class model that provides stripe_id field
     with UUID as primary_key along with self-updating

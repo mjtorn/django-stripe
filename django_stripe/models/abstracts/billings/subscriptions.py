@@ -1,10 +1,9 @@
 # Third Party Stuff
-import stripe
 from django.db import models
 
 # Django Stripe Stuff
-from django_stripe.models.base.common import CURRENCY_CHOICES, DEFAULT_CURRENCY
-from django_stripe.models.base.mixins import AbstactStripeModel
+from django_stripe.models.abstracts.mixins import AbstractStripeModel
+from django_stripe.utils import Currency
 
 CHARGE_AUTOMATICALLY = "charge_automatically"
 SEND_INVOICE = "send_invoice"
@@ -15,7 +14,7 @@ INVOICE_COLLECTION_METHOD_TYPES = (
 )
 
 
-class AbstactStripeSubscription(AbstactStripeModel):
+class AbstractStripeSubscription(AbstractStripeModel):
     """
     Subscriptions allow us to charge a customer on a recurring basis.
     Stripe documentation: https://stripe.com/docs/api/subscriptions
@@ -254,18 +253,14 @@ class AbstactStripeSubscription(AbstactStripeModel):
         help_text="The most recent invoice this subscription has generated.",
     )
     currency = models.CharField(
-        choices=CURRENCY_CHOICES,
-        default=DEFAULT_CURRENCY,
+        choices=Currency.choices,
+        default=Currency.USD.value,
         max_length=3,
         help_text=(
             "The currency the customer can be charged "
             "in for recurring billing purposes"
         ),
     )
-
-    @property
-    def stripe_subscription(self):
-        return stripe.Subscription.retrieve(self.stripe_id)
 
     class Meta:
         abstract = True

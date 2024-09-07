@@ -5,17 +5,17 @@ This means that developers can inherit these models to incorporate Stripe functi
 
 ## Customer
 
-A customer represents an individual or entity that engages with your business. To create a customer model that incorporates all the fields found in a Stripe customer object, developers can inherit from `AbstactStripeCustomer` provided by the library.
+A customer represents an individual or entity that engages with your business. To create a customer model that incorporates all the fields found in a Stripe customer object, developers can inherit from `AbstractStripeCustomer` provided by the library.
 
 !!! Example
     ```python
     from django.db import models
 
-    from django_stripe.models import AbstactStripeCustomer
+    from django_stripe.models import AbstractStripeCustomer
     from users.models import User
 
 
-    class Customer(AbstactStripeCustomer):
+    class Customer(AbstractStripeCustomer):
         user = models.ForeignKey(
             User,
             on_delete=models.CASCADE,
@@ -25,7 +25,7 @@ A customer represents an individual or entity that engages with your business. T
 
 ### Fields
 
-The `AbstactStripeCustomer` abstract model provides the following fields:
+The `AbstractStripeCustomer` abstract model provides the following fields:
 
 | Parameter                                   | Description                                                                                                                                                                                                                                                                          |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -67,16 +67,16 @@ STRIPE_CONFIG = {
 
 ## Card
 
-In the context of payment processing, a card refers to the payment method that a customer will use to make a payment. To define a card model that includes all the fields found in a Stripe card object, developers can inherit from `AbstactStripeCard` provided by the library.
+In the context of payment processing, a card refers to the payment method that a customer will use to make a payment. To define a card model that includes all the fields found in a Stripe card object, developers can inherit from `AbstractStripeCard` provided by the library.
 
 !!! Example
     ```python
     from django.db import models
 
-    from django_stripe.models import AbstactStripeCard
+    from django_stripe.models import AbstractStripeCard
 
 
-    class Card(AbstactStripeCard):
+    class Card(AbstractStripeCard):
         customer = models.ForeignKey(
             Customer,
             on_delete=models.CASCADE,
@@ -86,7 +86,7 @@ In the context of payment processing, a card refers to the payment method that a
 
 ### Fields
 
-The `AbstactStripeCard` abstract model provides the following fields:
+The `AbstractStripeCard` abstract model provides the following fields:
 
 | Parameter                     | Description                                                                                                                                                                                                                                                                                                                                 |
 | ----------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -131,16 +131,16 @@ STRIPE_CONFIG = {
 
 ## Subscription
 
-Subscriptions enable businesses to charge customers on a recurring basis. To define a subscription model that incorporates all the fields found in a Stripe subscription object, developers can inherit from `AbstactStripeSubscription` provided by the library.
+Subscriptions enable businesses to charge customers on a recurring basis. To define a subscription model that incorporates all the fields found in a Stripe subscription object, developers can inherit from `AbstractStripeSubscription` provided by the library.
 
 !!! Example
     ```python
     from django.db import models
 
-    from django_stripe.models import AbstactStripeSubscription
+    from django_stripe.models import AbstractStripeSubscription
 
 
-    class Subscription(AbstactStripeSubscription):
+    class Subscription(AbstractStripeSubscription):
         customer = models.ForeignKey(
             Customer,
             on_delete=models.CASCADE,
@@ -151,7 +151,7 @@ Subscriptions enable businesses to charge customers on a recurring basis. To def
 
 ### Fields
 
-The `AbstactStripeSubscription` abstract model provides the following fields:
+The `AbstractStripeSubscription` abstract model provides the following fields:
 
 | Field                                        | Description                                                                                                                                                                                                                                                                                                                           |
 | -------------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -206,20 +206,20 @@ STRIPE_CONFIG = {
 
 ## Product
 
-In the context of payment processing, a product refers to a specific good or service offered to customers. For instance, a business might offer both a standard and premium version of a product, with each version being a distinct product. Products can be used with Prices to configure pricing in Payment Links, Checkout, and Subscriptions. To define a product model that incorporates all the fields found in a Stripe product object, developers can inherit from `AbstactStripeProduct` provided by the library.
+In the context of payment processing, a product refers to a specific good or service offered to customers. For instance, a business might offer both a standard and premium version of a product, with each version being a distinct product. Products can be used with Prices to configure pricing in Payment Links, Checkout, and Subscriptions. To define a product model that incorporates all the fields found in a Stripe product object, developers can inherit from `AbstractStripeProduct` provided by the library.
 
 !!! Example
     ```python
-    from django_stripe.models import AbstactStripeProduct
+    from django_stripe.models import AbstractStripeProduct
 
 
-    class Product(AbstactStripeProduct):
+    class Product(AbstractStripeProduct):
         pass
     ```
 
 ### Fields
 
-The `AbstactStripeProduct` abstract model provides the following fields:
+The `AbstractStripeProduct` abstract model provides the following fields:
 
 | Field                             | Description                                                                                                                                                                                                                                                                          |
 | --------------------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -256,14 +256,14 @@ STRIPE_CONFIG = {
 
 ## Price
 
-Prices define the cost per unit, currency, and billing cycle (if applicable) for both recurring and one-time purchases of products. Products are used to track inventory or provisioning, while prices are used to track payment terms. By representing different physical goods or levels of service as products and pricing options as prices, businesses can modify prices without changing their provisioning scheme. To define a price model that incorporates all the fields found in a Stripe price object, developers can inherit from `AbstactStripePrice` provided by the library.
+Prices define the cost per unit, currency, and billing cycle (if applicable) for both recurring and one-time purchases of products. Products are used to track inventory or provisioning, while prices are used to track payment terms. By representing different physical goods or levels of service as products and pricing options as prices, businesses can modify prices without changing their provisioning scheme. To define a price model that incorporates all the fields found in a Stripe price object, developers can inherit from `AbstractStripePrice` provided by the library.
 
 !!! Example
     ```python
-    from django_stripe.models import AbstactStripePrice
+    from django_stripe.models import AbstractStripePrice
 
 
-    class Price(AbstactStripePrice):
+    class Price(AbstractStripePrice):
         product = models.ForeignKey(
             Product,
             on_delete=models.CASCADE,
@@ -273,7 +273,7 @@ Prices define the cost per unit, currency, and billing cycle (if applicable) for
 
 ### Fields
 
-The `AbstactStripePrice` abstract model provides the following fields:
+The `AbstractStripePrice` abstract model provides the following fields:
 
 | Field                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | ----------------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -315,20 +315,20 @@ STRIPE_CONFIG = {
 
 ## Coupon
 
-Coupons contain information about discounts in the form of percentage or fixed amount that businesses can apply to a customer's purchase. These coupons can be used for various purposes, such as for subscriptions, invoices, checkout sessions, and quotes. However, they cannot be used with conventional one-off charges or payment intents. To define a coupon model that incorporates all the fields found in a Stripe coupon object, developers can inherit from `AbstactStripeCoupon` provided by the library.
+Coupons contain information about discounts in the form of percentage or fixed amount that businesses can apply to a customer's purchase. These coupons can be used for various purposes, such as for subscriptions, invoices, checkout sessions, and quotes. However, they cannot be used with conventional one-off charges or payment intents. To define a coupon model that incorporates all the fields found in a Stripe coupon object, developers can inherit from `AbstractStripeCoupon` provided by the library.
 
 !!! Example
     ```python
-    from django_stripe.models import AbstactStripeCoupon
+    from django_stripe.models import AbstractStripeCoupon
 
 
-    class Coupon(AbstactStripeCoupon):
+    class Coupon(AbstractStripeCoupon):
         pass
     ```
 
 ### Fields
 
-The `AbstactStripeCoupon` abstract model provides the following fields:
+The `AbstractStripeCoupon` abstract model provides the following fields:
 
 | Field                        | Description                                                                                                                                                                                                                                                                          |
 | ---------------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -364,20 +364,20 @@ STRIPE_CONFIG = {
 
 ## Event
 
-Events are updates from Stripe to a backend system that are triggered whenever changes occur on the Stripe side. To define an event model that includes all the fields found in a Stripe event object, developers can inherit from `AbstactStripeEvent` provided by the library.
+Events are updates from Stripe to a backend system that are triggered whenever changes occur on the Stripe side. To define an event model that includes all the fields found in a Stripe event object, developers can inherit from `AbstractStripeEvent` provided by the library.
 
 !!! Example
     ```python
-    from django_stripe.models import AbstactStripeEvent
+    from django_stripe.models import AbstractStripeEvent
 
 
-    class Event(AbstactStripeEvent):
+    class Event(AbstractStripeEvent):
         pass
     ```
 
 ### Fields
 
-The `AbstactStripeEvent` abstract model provides the following fields:
+The `AbstractStripeEvent` abstract model provides the following fields:
 
 | Field                      | Description                                                                                                                       |
 | -------------------------- |-----------------------------------------------------------------------------------------------------------------------------------|
