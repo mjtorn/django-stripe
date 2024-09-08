@@ -8,5 +8,8 @@ from django_stripe.models.abstracts.core import AbstractStripeCustomer
 
 class StripeCustomer(AbstractStripeCustomer):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="stripe_customers",
     )

@@ -51,7 +51,7 @@ class StripeWebhook(with_metaclass(Registerable, object)):
         )
         self.event.validated_message = json.loads(
             json.dumps(
-                evt.to_dict(),
+                dict(evt),
                 sort_keys=True,
             )
         )
