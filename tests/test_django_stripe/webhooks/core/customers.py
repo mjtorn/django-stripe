@@ -1,3 +1,6 @@
+# Standard Library Stuff
+from unittest.mock import patch
+
 # Third Party Stuff
 from django.contrib.auth.models import User
 from django.test import TestCase
@@ -90,7 +93,10 @@ class CustomerUpdatedWebhookTestCase(TestCase):
             "type": "customer.updated",
         }
 
-    def test_customer_updated_webhook(self):
+    @patch("stripe.Event.retrieve")
+    def test_customer_updated_webhook(self, mock_event):
+        mock_event.return_value = self.event_data.copy()
+
         # Simulate the webhook POST request for customer.updated
         response = self.client.post(
             reverse("stripe-webhook-list"), self.event_data, format="json"
@@ -173,7 +179,9 @@ class CustomerCreatedWebhookTestCase(TestCase):
             "type": "customer.created",
         }
 
-    def test_customer_created_webhook(self):
+    @patch("stripe.Event.retrieve")
+    def test_customer_created_webhook(self, mock_event):
+        mock_event.return_value = self.event_data.copy()
         # Simulate the webhook POST request for customer.updated
         response = self.client.post(
             reverse("stripe-webhook-list"), self.event_data, format="json"
@@ -269,7 +277,9 @@ class CustomerDeletedWebhookTestCase(TestCase):
             "type": "customer.deleted",
         }
 
-    def test_customer_created_webhook(self):
+    @patch("stripe.Event.retrieve")
+    def test_customer_deleted_webhook(self, mock_event):
+        mock_event.return_value = self.event_data.copy()
         # Simulate the webhook POST request for customer.updated
         response = self.client.post(
             reverse("stripe-webhook-list"), self.event_data, format="json"
