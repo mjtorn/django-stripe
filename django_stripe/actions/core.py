@@ -123,14 +123,11 @@ class StripeCustomerAction(StripeSoftDeleteActionMixin):
         # Sync customer details
         customer = self.sync_from_stripe_data(customer, stripe_customer)
 
-        # Django Stripe Stuff
-        from django_stripe.actions.payment_methods import StripeCard
-
         # Sync customer card details
-        if customer.default_source:
-            stripe_source = stripe.Customer.retrieve_source(
-                customer.stripe_id, customer.default_source
-            )
-            StripeCard.sync_from_stripe_data(customer, source=stripe_source)
+        # if customer.default_source:
+        #     stripe_source = stripe.Customer.retrieve_source(
+        #         customer.stripe_id, customer.default_source
+        #     )
+        #     StripeCard.sync_from_stripe_data(customer, source=stripe_source)
 
         return customer

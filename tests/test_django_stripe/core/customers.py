@@ -30,7 +30,7 @@ class StripeCustomerActionTestCase(TestCase):
             "currency": "usd",
             "default_source": None,
             "delinquent": False,
-            "description": None,
+            "description": "just description",
             "discount": None,
             "email": "jennyrosen@example.com",
             "invoice_prefix": "0759376C",
