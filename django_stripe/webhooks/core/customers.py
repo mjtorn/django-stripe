@@ -55,4 +55,5 @@ class CustomerDeletedWebhook(StripeWebhook):
 
     def process_webhook(self):
         if self.event.customer:
-            StripeCustomerAction().soft_delete(self.event.customer)
+            user = self.event.customer.user
+            StripeCustomerAction(user).soft_delete(self.event.customer.stripe_id)
