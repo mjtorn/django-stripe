@@ -6,8 +6,8 @@ import stripe
 from six import with_metaclass
 
 # Django Stripe Stuff
-from django_stripe.actions import StripeCustomer
-from django_stripe.base.webhooks import WebhookRegistry
+from django_stripe.actions import StripeEventAction
+from django_stripe.webhooks.webhooks import WebhookRegistry
 
 registry = WebhookRegistry()
 del WebhookRegistry
@@ -23,7 +23,7 @@ class Registerable(type):
         return new_class
 
 
-class BaseWebhook(with_metaclass(Registerable, object)):
+class StripeWebhook(with_metaclass(Registerable, object)):
     """
     REGISTRY: webhook registry
     name: webhook event name
@@ -51,7 +51,7 @@ class BaseWebhook(with_metaclass(Registerable, object)):
         )
         self.event.validated_message = json.loads(
             json.dumps(
-                evt.to_dict(),
+                dict(evt),
                 sort_keys=True,
             )
         )
@@ -82,7 +82,7 @@ class BaseWebhook(with_metaclass(Registerable, object)):
             return
 
         try:
-            StripeCustomer.link_customer(self.event)
+            StripeEventAction().link_customer(self.event)
             self.process_webhook()
             self.send_signal()
             self.event.processed = True

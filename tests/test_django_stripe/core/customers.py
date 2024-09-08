@@ -1,5 +1,5 @@
 # Standard Library Stuff
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 # Third Party Stuff
 from django.contrib.auth.models import User
@@ -30,7 +30,7 @@ class StripeCustomerActionTestCase(TestCase):
             "currency": "usd",
             "default_source": None,
             "delinquent": False,
-            "description": None,
+            "description": "just description",
             "discount": None,
             "email": "jennyrosen@example.com",
             "invoice_prefix": "0759376C",
@@ -207,21 +207,3 @@ class StripeCustomerActionTestCase(TestCase):
 
         # Assert that the customer has been soft deleted
         self.assertIsNotNone(customer.date_purged)
-
-    def test_link_customer(self):
-        # Mock the event and customer objects
-        event = MagicMock()
-        event.kind = "customer.updated"
-        event.message = {"data": {"object": {"id": "cus_test123"}}}
-
-        # Create a customer in the database
-        customer = StripeCustomer.objects.create(
-            user=self.user, stripe_id="cus_test123", is_active=True
-        )
-
-        # Link the customer to the event
-        linked_event = self.stripe_action.link_customer(event)
-
-        # Assert that the customer was linked to the event
-        self.assertEqual(linked_event.customer, customer)
-        self.assertEqual(linked_event.customer.stripe_id, "cus_test123")

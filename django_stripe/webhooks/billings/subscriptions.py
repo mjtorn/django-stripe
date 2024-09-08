@@ -1,33 +1,32 @@
 # Django Stripe Stuff
-from django_stripe.actions import StripeCustomer, StripeSubscription
-from django_stripe.webhooks.base import BaseWebhook
+from django_stripe.actions import StripeCustomerAction, StripeSubscriptionAction
+from django_stripe.webhooks.register import StripeWebhook
 
 
-class CustomerSubscriptionBaseWebhook(BaseWebhook):
+class CustomerSubscriptionStripeWebhook(StripeWebhook):
     def process_webhook(self):
         if self.event.validated_message:
-            StripeSubscription.sync_from_stripe_data(
-                self.event.customer,
+            StripeSubscriptionAction(self.event.customer.stripe_id).sync(
                 self.event.validated_message["data"]["object"],
             )
 
         if self.event.customer:
-            StripeCustomer.sync(self.event.customer)
+            StripeCustomerAction.sync(self.event.customer)
 
 
-class CustomerSubscriptionCreatedWebhook(CustomerSubscriptionBaseWebhook):
+class CustomerSubscriptionCreatedWebhook(CustomerSubscriptionStripeWebhook):
     name = "customer.subscription.created"
     description = (
         "Occurs whenever a customer with no subscription is signed up for a plan."
     )
 
 
-class CustomerSubscriptionDeletedWebhook(CustomerSubscriptionBaseWebhook):
+class CustomerSubscriptionDeletedWebhook(CustomerSubscriptionStripeWebhook):
     name = "customer.subscription.deleted"
     description = "Occurs whenever a customer ends their subscription."
 
 
-class CustomerSubscriptionTrialWillEndWebhook(CustomerSubscriptionBaseWebhook):
+class CustomerSubscriptionTrialWillEndWebhook(CustomerSubscriptionStripeWebhook):
     name = "customer.subscription.trial_will_end"
     description = (
         "Occurs three days before the trial "
@@ -35,7 +34,7 @@ class CustomerSubscriptionTrialWillEndWebhook(CustomerSubscriptionBaseWebhook):
     )
 
 
-class CustomerSubscriptionUpdatedWebhook(CustomerSubscriptionBaseWebhook):
+class CustomerSubscriptionUpdatedWebhook(CustomerSubscriptionStripeWebhook):
     name = "customer.subscription.updated"
     description = (
         "Occurs whenever a subscription changes. "
