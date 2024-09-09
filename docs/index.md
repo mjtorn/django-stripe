@@ -25,15 +25,6 @@ In your settings, update `STRIPE_CONFIG`:
 STRIPE_CONFIG = {
     "API_VERSION": "2022-11-15", # Stripe API Version
     "API_KEY": "api_key", # Stripe Secret Key
-    "CUSTOMER_MODEL": "project_name.app.models.Customer", # Path to import Stripe Customer model
-    "CARD_MODEL": "project_name.app.models.Card", # Path to import Stripe Card model
-    "PRODUCT_MODEL": "project_name.app.models.Product", # Path to import Stripe Product model
-    "PRICE_MODEL": "project_name.app.models.Price", # Path to import Stripe Price model
-    "COUPON_MODEL": "project_name.app.models.Coupon", # Path to import Stripe Coupon model
-    "EVENT_MODEL": "project_name.app.models.Event", # Path to import Stripe Event model
-    "SUBSCRIPTION_MODEL": "project_name.app.models.Subscription", # Path to import Stripe Subscription model
-    "CUSTOMER_FIELD_NAME": "customer", # Field name used to have foreign key relation with `Customer` model
-    "USER_FIELD_NAME": "user", # Field name that is used by `Customer` model to have foreign relation to `User` model
 }
 ```
 

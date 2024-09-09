@@ -1,6 +1,7 @@
 # Third Party Stuff
 import stripe
 
+# Django Stripe Stuff
 from django_stripe.actions.mixins import (
     StripeSoftDeleteActionMixin,
     StripeSyncActionMixin,

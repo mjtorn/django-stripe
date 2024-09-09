@@ -15,9 +15,7 @@ class CustomerUpdatedWebhook(StripeWebhook):
     def process_webhook(self):
         if self.event.customer:
             stripe_customer = self.event.message["data"]["object"]
-            User = apps.get_model(settings.AUTH_USER_MODEL)
-            user = User.objects.filter(email=stripe_customer["email"]).first()
-            StripeCustomerAction(user).sync(self.event.customer, stripe_customer)
+            StripeCustomerAction().sync(stripe_customer)
 
 
 class CustomerCreatedWebhook(StripeWebhook):
@@ -46,7 +44,7 @@ class CustomerCreatedWebhook(StripeWebhook):
             self.event.save()
 
             # sync customer
-            StripeCustomerAction(user).sync(customer, stripe_customer)
+            StripeCustomerAction().sync(stripe_customer)
 
 
 class CustomerDeletedWebhook(StripeWebhook):
@@ -55,5 +53,4 @@ class CustomerDeletedWebhook(StripeWebhook):
 
     def process_webhook(self):
         if self.event.customer:
-            user = self.event.customer.user
-            StripeCustomerAction(user).soft_delete(self.event.customer.stripe_id)
+            StripeCustomerAction().soft_delete(self.event.customer.stripe_id)
