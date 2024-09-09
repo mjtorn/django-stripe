@@ -89,7 +89,7 @@ class AbstractStripeCoupon(AbstractStripeModel):
         help_text="A positive integer specifying the number of times the coupon can "
         "be redeemed before it’s no longer valid",
     )
-    percent_off = models.PositiveIntegerField(
+    percent_off = models.FloatField(
         null=True,
         blank=True,
         help_text="Percent that will be taken off the subtotal of any invoices "
