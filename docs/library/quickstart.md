@@ -1,3 +1,5 @@
+from django_stripe.models import StripeCustomer
+
 # Quickstart
 
 ## Installation
@@ -17,68 +19,6 @@ INSTALLED_APPS = [
     ...,
     'django_stripe',
 ]
-```
-
-## Create Models
-
-Create models to manage Stripe data using the abstract base classes provided in `django_stripe.models`. For example:
-
-```python
-from django_stripe.models import AbstractStripeCustomer, AbstractStripeCard, AbstractStripeSubscription, AbstractStripeProduct,
-    AbstractStripePrice, AbstractStripeCoupon, AbstractStripeEvent
-from users.models import User
-
-
-class Customer(AbstractStripeCustomer):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="stripe_customers",
-    )
-    # Add custom fields as per project requirement
-
-
-class Card(AbstractStripeCard):
-    customer = models.ForeignKey(
-        Customer,
-        on_delete=models.CASCADE,
-        related_name="cards",
-    )
-    # Add custom fields as per project requirement
-
-
-class Subscription(AbstractStripeSubscription):
-    customer = models.ForeignKey(
-        Customer,
-        on_delete=models.CASCADE,
-        related_name="subscriptions",
-        help_text="The customer associated with this subscription",
-    )
-    # Add custom fields as per project requirement
-
-
-class Product(AbstractStripeProduct):
-    # Add custom fields as per project requirement
-    pass
-
-
-class Price(AbstractStripeProduct):
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-        related_name="prices",
-    )
-    # Add custom fields as per project requirement
-
-
-class Coupon(AbstractStripeCoupon):
-    # Add custom fields as per project requirement
-    pass
-
-
-class Event(AbstractStripeEvent):
-    # Add custom fields as per project requirement
-    pass
 ```
 
 ## Database migration
@@ -103,15 +43,6 @@ In your Django project's settings file, update the model paths in `STRIPE_CONFIG
 STRIPE_CONFIG = {
     "API_VERSION": "2022-11-15", # Stripe API Version
     "API_KEY": "api_key", # Stripe Secret Key
-    "CUSTOMER_MODEL": "project_name.app.models.Customer",
-    "CARD_MODEL": "project_name.app.models.Card",
-    "PRODUCT_MODEL": "project_name.app.models.Product",
-    "PRICE_MODEL": "project_name.app.models.Price",
-    "COUPON_MODEL": "project_name.app.models.Coupon",
-    "EVENT_MODEL": "project_name.app.models.Event",
-    "SUBSCRIPTION_MODEL": "project_name.app.models.Subscription",
-    "CUSTOMER_FIELD_NAME": "customer", # Field name used to have foreign key relation with `Customer` model
-    "USER_FIELD_NAME": "user", # Field name that is used by `Customer` model to have foreign relation to `User` model
 }
 ```
 
@@ -147,20 +78,33 @@ python manage.py sync_stripe_coupons
 
 You can use the appropriate actions to build payment APIs. Here are some examples:
 
-- Creating a customer
+### Creating a customer
 
 ```python
-from django_stripe.actions.core import StripeCustomer
+from django.contrib.auth.models import  User
+from django_stripe.actions import StripeCustomerAction
+
+user = User.objects.get(email="test@example.com")
+action = StripeCustomerAction(user)
 
 # Pass user model instance and email as argument
-customer = StripeCustomer.create(user, billing_email)
+customer = StripeCustomerAction(user).create(user.email)
 ```
 
-- Creating a subscription
+### Syncing a customer
 
 ```python
-from django_stripe.actions.billings import StripeSubscription
+from django.contrib.auth.models import  User
+from django_stripe.actions import StripeCustomerAction
+from django_stripe.models import StripeCustomer
+import stripe
 
-# Pass customer model instance and prices(List of stripe price ids) to subscribe as argument
-subscription = StripeSubscription.create(customer, prices)
+user = User.objects.get(email="test@example.com")
+action = StripeCustomerAction(user)
+stripe_customer = StripeCustomer.objects.get(user=user)
+
+stripe_customer_data = stripe.Customer.retrieve(stripe_customer.stripe_id)
+
+# Pass user model instance and email as argument
+customer = StripeCustomerAction(user).sync(customer=stripe_customer, stripe_customer=stripe_customer_data)
 ```
