@@ -35,7 +35,7 @@ class StripeSyncActionMixin:
         """
         pass
 
-    def post_set_default(self):
+    def post_set_default(self, defaults: dict):
         """
         Override this method to perform actions after setting the default.
         """
@@ -73,6 +73,7 @@ class StripeSyncActionMixin:
         self.pre_set_defualt(stripe_data)
         stripe_id = stripe_data.pop("id")
         defaults = self.set_default(stripe_data)
+        self.post_set_default(defaults)
 
         print("defaults", defaults)
 
@@ -109,6 +110,7 @@ class StripeSyncActionMixin:
 
             self.pre_set_defualt(data)
             defaults = self.set_default(data)
+            self.post_set_default(defaults)
 
             for key, value in defaults.items():
                 setattr(model_obj, key, value)
@@ -132,6 +134,7 @@ class StripeSyncActionMixin:
             self.pre_set_defualt(data)
             defaults = self.set_default(data)
             defaults["stripe_id"] = stripe_id
+            self.post_set_default(defaults)
 
             model_objs.append(self.model_class(**defaults))
 
