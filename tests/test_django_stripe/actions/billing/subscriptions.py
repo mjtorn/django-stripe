@@ -141,9 +141,7 @@ class StripeSubscriptionActionTestCase(TestCase):
         # Mock the Stripe API call
         mock_retrieve.return_value = self.subscription_data.copy()
 
-        action = StripeSubscriptionAction(
-            stripe_customer_id=self.stripe_customer.stripe_id
-        )
+        action = StripeSubscriptionAction()
         action.sync(self.subscription_data.copy())
 
         # Test if the subscription was created in the database
@@ -236,9 +234,7 @@ class StripeSubscriptionActionTestCase(TestCase):
         # Mock the Stripe API call
         mock_retrieve.return_value = self.subscription_data.copy()
 
-        action = StripeSubscriptionAction(
-            stripe_customer_id=self.stripe_customer.stripe_id
-        )
+        action = StripeSubscriptionAction()
         existing_subscription = action.sync(subscription_data.copy())
 
         # Update existing data
@@ -253,9 +249,7 @@ class StripeSubscriptionActionTestCase(TestCase):
         # Mock the Stripe API call
         mock_retrieve.return_value = self.subscription_data.copy()
 
-        action = StripeSubscriptionAction(
-            stripe_customer_id=self.stripe_customer.stripe_id
-        )
+        action = StripeSubscriptionAction()
         action.sync_batch([self.subscription_data.copy()])
 
         # Test if the subscription was created in the database
@@ -344,9 +338,7 @@ class StripeSubscriptionActionTestCase(TestCase):
         # Mock the Stripe API call
         mock_auto_paging_iter.return_value = [self.subscription_data.copy()]
 
-        action = StripeSubscriptionAction(
-            stripe_customer_id=self.stripe_customer.stripe_id
-        )
+        action = StripeSubscriptionAction()
         action.sync_all()
 
         # Test if the subscription was created in the database
