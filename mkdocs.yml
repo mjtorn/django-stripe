@@ -15,8 +15,8 @@ nav:
           - Products: library/actions/products/products.md
           - Prices: library/actions/products/prices.md
           - Coupons: library/actions/products/coupons.md
-      - Card: library/actions/cards.md
-      - Subscription: library/actions/subscriptions.md
+      - Billings:
+          - Subscriptions: library/actions/billings/subscriptions.md
       - Webhook: library/actions/webhooks.md
   - Management Commands: library/management_commands.md
   - Webhook: library/webhooks.md
