@@ -8,14 +8,16 @@ nav:
   - Quickstart: library/quickstart.md
   - Models: library/models.md
   - Actions:
-    - Customer: library/actions/customers.md
-    - Card: library/actions/cards.md
-    - Subscription: library/actions/subscriptions.md
-    - Product: library/actions/products.md
-    - Price: library/actions/prices.md
-    - Coupon: library/actions/coupons.md
-    - Event: library/actions/events.md
-    - Webhook: library/actions/webhooks.md
+      - Core:
+          - Customers: library/actions/core/customers.md
+          - Events: library/actions/core/events.md
+      - Products:
+          - Products: library/actions/products/products.md
+          - Prices: library/actions/products/prices.md
+          - Coupons: library/actions/products/coupons.md
+      - Card: library/actions/cards.md
+      - Subscription: library/actions/subscriptions.md
+      - Webhook: library/actions/webhooks.md
   - Management Commands: library/management_commands.md
   - Webhook: library/webhooks.md
   - Changelog: changelog.md
@@ -28,3 +30,4 @@ markdown_extensions:
       preserve_tabs: true
   - pymdownx.inlinehilite
   - admonition
+  - pymdownx.details

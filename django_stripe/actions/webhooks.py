@@ -13,6 +13,31 @@ logger = logging.getLogger(__name__)
 
 
 class StripeWebhook:
+    """
+    StripeWebhook is a class that processes stripe webhooks.
+
+    Stripe webhooks are real-time notifications that are sent to your application
+    when events happen in your stripe account. For example, when a subscription
+    is created, a webhook is sent to your application. You can then use this webhook
+    to run actions in your application.
+
+    StripeWebhook is designed to be used with django. It provides a simple way to
+    process webhook events in your application.
+
+    Example:
+        from django_stripe.actions import StripeWebhook
+        from django_stripe.webhooks import PaymentSucceededWebhook
+
+        webhook = StripeWebhook()
+        webhook.register(PaymentSucceededWebhook)
+
+        # process webhook events
+        webhook.process_webhook({"id": "evt_123456789", "type": "payment_succeeded"})
+
+        # process webhook events from stripe
+        webhook.process_webhook(stripe.Event.retrieve("evt_123456789"))
+    """
+
     @classmethod
     def process_webhook(cls, event_data):
         event = StripeEvent.objects.filter(stripe_id=event_data["id"]).first()
