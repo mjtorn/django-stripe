@@ -8,18 +8,25 @@ from django_stripe.models import StripeSubscription
 
 
 class StripeSubscriptionAction(StripeSyncActionMixin):
+    """
+    Synchronizes a local StripeSubscription data from the Stripe API
+
+    Syncing is done by retrieving a batch of subscriptions from the Stripe API
+    and then iterating over them and calling sync method on each of them.
+
+    Example:
+        from django_stripe.actions import StripeSubscriptionAction
+        stripe_action = StripeSubscriptionAction()
+        stripe_action.sync_all()
+    """
+
     model_class = StripeSubscription
     stripe_object_class = stripe.Subscription
-
-    def __init__(self, stripe_customer_id):
-        """
-        Args:
-            customer: the customer to create the subscription for
-        """
-        self.customer = StripeCustomer.objects.get(stripe_id=stripe_customer_id)
 
     def pre_set_defualt(self, stripe_data: dict):
         """
         Add customer data to stripe_data
         """
-        stripe_data["customer"] = self.customer
+        stripe_data["customer"] = StripeCustomer.objects.get(
+            stripe_id=stripe_data["customer"]
+        )

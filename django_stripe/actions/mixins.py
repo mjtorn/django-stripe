@@ -6,6 +6,22 @@ from django_stripe.utils import convert_epoch
 
 
 class StripeSoftDeleteActionMixin:
+    """
+    A mixin class that provides a soft_delete method which allows to soft delete
+    local stripe objects. This is useful when you want to mark a stripe object as
+    deleted without actually deleting it in the local database.
+
+    Example:
+        from django_stripe.actions import StripeSoftDeleteActionMixin
+        from django_stripe.models import StripeCustomer
+
+        class StripeCustomerAction(StripeSoftDeleteActionMixin):
+            model_class = StripeCustomer
+
+        stripe_action = StripeCustomerAction()
+        stripe_action.soft_delete("cus_123456789")
+    """
+
     model_class = None
 
     def soft_delete(self, stripe_id: str):
@@ -21,6 +37,24 @@ class StripeSoftDeleteActionMixin:
 
 
 class StripeSyncActionMixin:
+    """
+    A mixin class that provides a sync method that synchronizes a local
+    data from the Stripe API
+
+    Syncing is done by retrieving a batch of objects from the Stripe API
+    and then iterating over them and calling sync method on each of them.
+
+    Example:
+        from django_stripe.actions import StripeSyncActionMixin
+        from django_stripe.models import StripeCustomer
+
+        class StripeCustomerAction(StripeSyncActionMixin):
+            model_class = StripeCustomer
+
+        stripe_action = StripeCustomerAction()
+        stripe_action.sync_all()
+    """
+
     model_class = None
     stripe_object_class = None
     batch_size = 1000

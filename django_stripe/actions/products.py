@@ -10,6 +10,18 @@ from django_stripe.models import StripeCoupon, StripePrice, StripeProduct
 
 
 class StripeProductAction(StripeSyncActionMixin, StripeSoftDeleteActionMixin):
+    """
+    Actions related to products in Stripe that can be used for various purposes.
+
+    Syncing is done by retrieving a batch of products from the Stripe API
+    and then iterating over them and calling sync method on each of them.
+
+    Example:
+        from django_stripe.actions import StripeProductAction
+
+        StripeProductAction.sync_all()
+    """
+
     model_class = StripeProduct
     stripe_object_class = stripe.Product
 
