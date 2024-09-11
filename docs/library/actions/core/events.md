@@ -25,7 +25,7 @@ The `add` method is used to add a Stripe event to the system. It takes the follo
 | `request`       | The request object that triggered the event (optional).                           |
 | `pending_webhooks` | The number of pending webhooks (optional).                                    |
 
-> Example:
+!!! Example "Add Stripe event"
     ```python
     from django_stripe.actions import StripeEventAction
 

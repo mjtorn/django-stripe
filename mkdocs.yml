@@ -14,6 +14,12 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+  logo: assets/django_stripe_doc_header_logo.png
+  favicon: assets/django_stripe_doc_favicon.ico
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - search.suggest
 
 nav:
   - Overview: index.md
@@ -29,7 +35,6 @@ nav:
       - Billings:
           - Subscriptions: library/actions/billings/subscriptions.md
       - Webhook: library/actions/webhooks.md
-  - Management Commands: library/management_commands.md
   - Webhook: library/webhooks.md
   - Changelog: changelog.md
 
@@ -43,10 +48,15 @@ markdown_extensions:
   - admonition
   - pymdownx.details
 
+plugins:
+  - search
+
 extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/purnendukar
+    - icon: fontawesome/brands/medium
+      link: https://purnendukar.medium.com/
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/purnendu-kar/
     - icon: fontawesome/brands/x-twitter

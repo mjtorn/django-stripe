@@ -19,7 +19,7 @@ Overall, the `StripeCustomerAction` class provides a convenient and efficient wa
 
 This method is used to synchronize all local Stripe customer data with the Stripe API. It retrieves a batch of customers from the Stripe API and then iterates over them, calling the `sync` method on each one.
 
-??? example "Sync all customers"
+!!! Example "Sync all customers"
     ```python
     from django_stripe.actions import StripeCustomerAction
 
@@ -35,7 +35,7 @@ In this example, the `sync_all` method is called to synchronize all local Stripe
 
 This method is used to synchronize local Stripe customer data for a specific list of customer IDs. It retrieves the customers from the Stripe API and then iterates over them, calling the `sync` method on each one.
 
-??? example "Sync Customers for given IDs"
+!!! Example "Sync Customers for given IDs"
     ```python
     from django_stripe.actions import StripeCustomerAction
 
@@ -52,7 +52,7 @@ In this example, the `sync_by_ids` method is called with a list of customer IDs 
 
 This method is used to synchronize a batch of local Stripe customer data. It takes a list of customer data as an argument and iterates over it, calling the `sync` method on each one.
 
-??? example "Sync Batch of Customers"
+!!! Example "Sync Batch of Customers"
     ```python
     from django_stripe.actions import StripeCustomerAction
 
@@ -74,7 +74,7 @@ The `StripeCustomerAction` class also provides a soft delete method, which allow
 
 This method is used to soft delete a customer by its Stripe ID. It marks the customer as deleted in the local database.
 
-??? example "Soft Delete Customer"
+!!! Example "Soft Delete Customer"
     ```python
     from django_stripe.actions import StripeCustomerAction
 
