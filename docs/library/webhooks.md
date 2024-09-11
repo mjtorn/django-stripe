@@ -98,7 +98,7 @@ As an example, let's say you want to create a webhook event for the product.crea
         description = "Occurs whenever a new product is created."
 
         def process_webhook(self):
-            StripeProduct.sync(self.event.message["data"]["object"])
+            StripeProduct().sync(self.event.message["data"]["object"])
     ```
 
 Once you have implemented the webhook event, you should import the webhook file in the `__init__.py` file of the app. This is required for the webhook event class to be registered.
