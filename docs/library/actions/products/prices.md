@@ -19,7 +19,7 @@ Overall, the `StripePriceAction` class provides a convenient and efficient way t
 
 This method is used to synchronize all local Stripe prices data with the Stripe API. It retrieves a batch of prices from the Stripe API and then iterates over them, calling the `sync` method on each one.
 
-??? example "Sync all prices"
+!!! Example "Sync all prices"
     ```python
     from django_stripe.actions import StripePriceAction
 
@@ -35,7 +35,7 @@ In this example, the `sync_all` method is called to synchronize all local Stripe
 
 This method is used to synchronize local Stripe customer data for a specific list of customer IDs. It retrieves the prices from the Stripe API and then iterates over them, calling the `sync` method on each one.
 
-??? example "Sync Prices for given IDs"
+!!! Example "Sync Prices for given IDs"
     ```python
     from django_stripe.actions import StripePriceAction
 
@@ -52,7 +52,7 @@ In this example, the `sync_by_ids` method is called with a list of customer IDs 
 
 This method is used to synchronize a batch of local Stripe customer data. It takes a list of customer data as an argument and iterates over it, calling the `sync` method on each one.
 
-??? example "Sync Batch of Prices"
+!!! Example "Sync Batch of Prices"
     ```python
     from django_stripe.actions import StripePriceAction
 
@@ -126,7 +126,7 @@ The `StripePriceAction` class also provides a soft delete method, which allows y
 
 This method is used to soft delete a customer by its Stripe ID. It marks the customer as deleted in the local database.
 
-??? example "Soft Delete Price"
+!!! Example "Soft Delete Price"
     ```python
     from django_stripe.actions import StripePriceAction
 

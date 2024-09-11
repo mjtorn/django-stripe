@@ -19,7 +19,7 @@ Overall, the `StripeSubscriptionAction` class provides a convenient and efficien
 
 This method is used to synchronize all local Stripe subscriptions data with the Stripe API. It retrieves a batch of subscriptions from the Stripe API and then iterates over them, calling the `sync` method on each one.
 
-??? example "Sync all subscriptions"
+!!! Example "Sync all subscriptions"
     ```python
     from django_stripe.actions import StripeSubscriptionAction
 
@@ -35,7 +35,7 @@ In this example, the `sync_all` method is called to synchronize all local Stripe
 
 This method is used to synchronize local Stripe customer data for a specific list of customer IDs. It retrieves the subscriptions from the Stripe API and then iterates over them, calling the `sync` method on each one.
 
-??? example "Sync Subscriptions for given IDs"
+!!! Example "Sync Subscriptions for given IDs"
     ```python
     from django_stripe.actions import StripeSubscriptionAction
 
@@ -52,7 +52,7 @@ In this example, the `sync_by_ids` method is called with a list of customer IDs 
 
 This method is used to synchronize a batch of local Stripe customer data. It takes a list of customer data as an argument and iterates over it, calling the `sync` method on each one.
 
-??? example "Sync Batch of Subscriptions"
+!!! Example "Sync Batch of Subscriptions"
     ```python
     from django_stripe.actions import StripeSubscriptionAction
 
@@ -170,7 +170,7 @@ The `StripeSubscriptionAction` class also provides a soft delete method, which a
 
 This method is used to soft delete a customer by its Stripe ID. It marks the customer as deleted in the local database.
 
-??? example "Soft Delete Subscription"
+!!! Example "Soft Delete Subscription"
     ```python
     from django_stripe.actions import StripeSubscriptionAction
 
