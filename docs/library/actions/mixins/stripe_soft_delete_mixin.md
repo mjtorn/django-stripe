@@ -1,4 +1,4 @@
-StripeSoftDeleteMixin Documentation
+Stripe Soft Delete Action Mixin
 ======================================
 
 The `StripeSoftDeleteMixin` is a mixin class that provides a soft delete method for Stripe objects. This mixin is designed to be used with Django models and allows developers to mark Stripe objects as deleted without actually deleting them from the local database.

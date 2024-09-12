@@ -3,7 +3,7 @@ Stripe Webhook
 
 The `StripeWebhook` class is a powerful tool for processing Stripe webhooks in your Django application. It provides a simple and flexible way to handle incoming webhook requests, allowing you to focus on implementing your business logic.
 
-## Using the `StripeWebhook` Class
+## Using the `StripeWebhook`
 --------------------------------
 
 To use the `StripeWebhook` class, you'll need to create a new class that inherits from it. This new class will define the logic for processing incoming webhook requests.
@@ -22,15 +22,13 @@ Here's an example of how you might use the `StripeWebhook` class to implement a 
     ```
 In this example, the `MyWebhook` class inherits from `StripeWebhook` and defines a `process_webhook` method. This method will be called whenever an incoming webhook request is received.
 
-## Automatic Registration
--------------------------
+### Automatic Registration
 
 One of the benefits of using the `StripeWebhook` class is that you don't need to register the webhook manually. The class will automatically register the webhook with Stripe when it's instantiated.
 
 This means that you can focus on implementing your business logic, without worrying about the underlying registration process.
 
-## Example Use Case
---------------------
+### Example Use Case
 
 Here's an example of how you might use the `StripeWebhook` class to implement a webhook that updates a database record when a customer's subscription is updated:
 
@@ -48,8 +46,7 @@ Here's an example of how you might use the `StripeWebhook` class to implement a 
     ```
 In this example, the `SubscriptionUpdatedWebhook` class inherits from `StripeWebhook` and defines a `process_webhook` method. This method updates a `Customer` record in the database when a subscription is updated.
 
-## Tips and Best Practices
----------------------------
+### Tips and Best Practices
 
 * Make sure to handle any exceptions that might occur during the processing of incoming webhook requests.
 * Use the `process_webhook` method to perform any necessary business logic, such as updating database records or sending notifications.
@@ -59,7 +56,7 @@ In this example, the `SubscriptionUpdatedWebhook` class inherits from `StripeWeb
 By following these tips and best practices, you can use the `StripeWebhook` class to implement powerful and flexible webhooks in your Django application.
 
 ## Implementing Webhook API
-------------------------
+-------------------------------
 
 To implement a webhook API, you need to create a view that handles incoming webhook requests and processes the event data using the `StripeWebhook` class.
 
@@ -95,7 +92,7 @@ You can also use a library like Django Rest Framework to implement a webhook API
 This example creates a view that handles incoming webhook requests, processes the event data using the `StripeWebhook` class, and returns a success response.
 
 ## Registering Webhook API
------------------------
+-----------------------------
 
 To register the webhook API, you need to add a URL pattern to your Django project's URL configuration. Here is an example:
 !!! Example

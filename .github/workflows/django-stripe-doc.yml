@@ -24,8 +24,9 @@ jobs:
           pip install mkdocs
           pip install mkdocs-material
           pip install mkdocs-material-extensions
+          pip install mike
 
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
-        run: mkdocs gh-deploy --force
+        run: mike deploy

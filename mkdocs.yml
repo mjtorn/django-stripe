@@ -65,8 +65,20 @@ markdown_extensions:
 
 plugins:
   - search
+  - mike:
+      # These fields are all optional; the defaults are as below...
+      alias_type: symlink
+      redirect_template: null
+      deploy_prefix: ''
+      canonical_version: null
+      version_selector: true
+      css_dir: css
+      javascript_dir: js
 
 extra:
+  version:
+    provider: mike
+    alias: true
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/purnendukar
@@ -83,3 +95,5 @@ copyright: Copyright &copy; 2024 - 2030 Purnendu Kar
 
 repo_url: https://github.com/purnendukar/django-stripe
 repo_name: purnendukar/django-stripe
+
+site_url: 'https://purnendukar.github.io/django-stripe/'

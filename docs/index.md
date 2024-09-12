@@ -1,6 +1,5 @@
-# Django Stripe Integrations
-
-__Version:__ 0.1.0
+Django Stripe Integrations
+===========================
 
 `django-stripe` is an open source Python package that simplifies the integration of Stripe payments into your Django web application. Its key features include:
 
@@ -10,6 +9,7 @@ __Version:__ 0.1.0
 - A wide range of functions for creating and managing customers, subscriptions, and other Stripe-related operations within your Django web application.
 
 ## Installation
+---------------
 
 You can easily install or upgrade to the latest version of the package using pip:
 
@@ -18,6 +18,7 @@ pip install django-stripe
 ```
 
 ## Configuration
+----------------
 
 In your settings, update `STRIPE_CONFIG`:
 
@@ -29,5 +30,6 @@ STRIPE_CONFIG = {
 ```
 
 ## References
+-------------
 
 Stripe API Doc: [https://stripe.com/docs/api](https://stripe.com/docs/api)
