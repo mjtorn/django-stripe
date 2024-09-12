@@ -82,24 +82,25 @@ Create a view-set that will use [StripeWebhook](/library/actions/webhooks) actio
 
 ## Custom Webhook Event
 
-To create a custom webhook event for a specific Stripe webhook event, you can inherit `BaseWebhook` from `django_stripe.webhooks.base` and implement your own webhook event processing logic.
+To create a custom webhook event for a specific Stripe webhook event, you can inherit `StripeWebhook` from `django_stripe.webhooks.register` and implement your own webhook event processing logic.
 
 As an example, let's say you want to create a webhook event for the product.created event. You can create a new file`app/webhook/products.py` and define the webhook event class in it.
 
 !!! Example
-    ```
-    # Django Stripe Stuff
-    from django_stripe.actions import StripeProduct
-    from django_stripe.webhooks.base import BaseWebhook
+
+```
+# Django Stripe Stuff
+from django_stripe.actions import StripeProduct
+from django_stripe.webhooks.register import StripeWebhook
 
 
-    class ProductCreateWebhook(BaseWebhook):
-        name = "product.created"
-        description = "Occurs whenever a new product is created."
+class ProductCreateWebhook(StripeWebhook):
+    name = "product.created"
+    description = "Occurs whenever a new product is created."
 
-        def process_webhook(self):
-            StripeProduct().sync(self.event.message["data"]["object"])
-    ```
+    def process_webhook(self):
+        StripeProduct().sync(self.event.message["data"]["object"])
+```
 
 Once you have implemented the webhook event, you should import the webhook file in the `__init__.py` file of the app. This is required for the webhook event class to be registered.
 

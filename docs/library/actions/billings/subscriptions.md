@@ -1,5 +1,5 @@
-Stripe Subscription
-=====================
+Stripe Subscription Action
+===========================
 
 The `StripeSubscriptionAction` class is a part of the Django Stripe library, which provides a set of actions for synchronizing local Stripe subscription data with the Stripe API. This class is designed to handle the complexities of retrieving and updating subscription data, making it easier to integrate Stripe with your Django application.
 

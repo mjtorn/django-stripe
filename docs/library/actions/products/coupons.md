@@ -1,4 +1,4 @@
-Stripe Coupon
+Stripe Coupon Action
 =====================
 
 The `StripeCouponAction` class is a part of the Django Stripe library, which provides a set of actions for synchronizing local Stripe coupon data with the Stripe API. This class is designed to handle the complexities of retrieving and updating coupon data, making it easier to integrate Stripe with your Django application.

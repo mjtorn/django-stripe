@@ -1,17 +1,15 @@
-
-
-StripeEventAction
-================
+Stripe Event Action
+=======================
 
 The `StripeEventAction` class is a crucial component of the Django Stripe library, responsible for handling and processing Stripe events. This documentation provides a detailed explanation of the class, its methods, and examples of usage.
 
-### Class Overview
+## Class Overview
 
 The `StripeEventAction` class is defined in the `django_stripe.actions` module. It provides methods for adding and processing Stripe events, as well as linking customers to event objects.
 
-### Methods
+## Methods
 
-#### `add`
+### Add Stripe event
 
 The `add` method is used to add a Stripe event to the system. It takes the following arguments:
 
@@ -40,15 +38,18 @@ The `add` method is used to add a Stripe event to the system. It takes the follo
 
 This example adds a Stripe event for an invoice creation, with the specified `stripe_id`, `kind`, `livemode`, `api_version`, and `message`.
 
-#### `link_customer`
+### Link Customer
 
 The `link_customer` method is used to link a customer to a Stripe event object. It takes the following argument:
 
-| Argument        | Description                                                                         |
-|-----------------|-------------------------------------------------------------------------------------|
-| `event`         | The `django_stripe.stripe.models.Event` object to link the customer to.              |
+**Method:** `link_customer(self, event: Event, customer: Customer)`
 
-> Example:
+| Argument   | Description                                                             |
+|------------|-------------------------------------------------------------------------|
+| `event`    | The `django_stripe.stripe.models.Event` object to link the customer to. |
+| `customer` | The `django_stripe.stripe.models.Customer` object                       |
+
+!!! Example "Link Customer"
     ```python
     from django_stripe.actions import StripeEventAction
     from django_stripe.stripe.models import Event
@@ -61,14 +62,14 @@ The `link_customer` method is used to link a customer to a Stripe event object. 
 
 This example links a customer to a Stripe event object.
 
-### Usage
+## Usage
 
 The `StripeEventAction` class can be used in various scenarios, such as:
 
-* Processing Stripe webhooks: You can use the `add` method to add Stripe events to the system when a webhook is triggered.
-* Syncing Stripe data: You can use the `link_customer` method to link customers to Stripe event objects when syncing Stripe data.
+* **Processing Stripe webhooks:** You can use the `add` method to add Stripe events to the system when a webhook is triggered.
+* **Syncing Stripe data:** You can use the `link_customer` method to link customers to Stripe event objects when syncing Stripe data.
 
-### Best Practices
+## Best Practices
 
 * Always validate the `stripe_id` and `kind` arguments before calling the `add` method.
 * Use the `request` argument to pass the request object that triggered the event, if available.

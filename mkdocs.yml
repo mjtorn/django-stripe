@@ -3,28 +3,33 @@ site_name: Django Stripe
 theme:
   name: material
   palette:
-    # Palette toggle for light mode
-    - scheme: default
+    - media: "(prefers-color-scheme: dark)"
+      scheme: default
       toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-
-    # Palette toggle for dark mode
-    - scheme: slate
-      toggle:
-        icon: material/brightness-4
+        icon: material/lightbulb
         name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: slate
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
   logo: assets/django_stripe_doc_header_logo.png
   favicon: assets/django_stripe_doc_favicon.ico
   icon:
     repo: fontawesome/brands/github
   features:
     - search.suggest
+    - navigation.tabs
+    - navigation.tabs.sticky
 
 nav:
   - Overview: index.md
   - Quickstart: library/quickstart.md
   - Actions:
+      - library/actions/index.md
+      - Mixins:
+          - Stripe Sync Mixins: library/actions/mixins/stripe_sync_mixin.md
+          - Stripe Soft Delete Mixins: library/actions/mixins/stripe_soft_delete_mixin.md
       - Core:
           - Customers: library/actions/core/customers.md
           - Events: library/actions/core/events.md
@@ -34,9 +39,19 @@ nav:
           - Coupons: library/actions/products/coupons.md
       - Billings:
           - Subscriptions: library/actions/billings/subscriptions.md
-      - Webhook: library/actions/webhooks.md
-  - Webhook: library/webhooks.md
-  - Changelog: changelog.md
+      - Webhooks: library/actions/webhooks.md
+  - Webhooks:
+      - library/webhooks/index.md
+#      - Core:
+#          - Customers: library/webhooks/core/customers.md
+#          - Events: library/webhooks/core/events.md
+#      - Products:
+#          - Products: library/webhooks/products/products.md
+#          - Prices: library/webhooks/products/prices.md
+#          - Coupons: library/webhooks/products/coupons.md
+#      - Billings:
+#          - Subscriptions: library/webhooks/billings/subscriptions.md
+  - Changelogs: changelog.md
 
 markdown_extensions:
   - markdown.extensions.admonition

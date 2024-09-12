@@ -1,5 +1,5 @@
-Stripe Customer
-=====================
+Stripe Customer Action
+========================
 
 The `StripeCustomerAction` class is a part of the Django Stripe library, which provides a set of actions for synchronizing local Stripe customer data with the Stripe API. This class is designed to handle the complexities of retrieving and updating customer data, making it easier to integrate Stripe with your Django application.
 
