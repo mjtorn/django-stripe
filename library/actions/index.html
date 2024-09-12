@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://purnendukar.github.io/django-stripe/library/actions/products/products/">
+        <link rel="canonical" href="https://purnendukar.github.io/django-stripe/library/actions/">
       
       
-        <link rel="prev" href="../../core/events/">
+        <link rel="prev" href="../quickstart/">
       
       
-        <link rel="next" href="../prices/">
+        <link rel="next" href="mixins/stripe_sync_mixin/">
       
       
-      <link rel="icon" href="../../../../assets/django_stripe_doc_favicon.ico">
+      <link rel="icon" href="../../assets/django_stripe_doc_favicon.ico">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.34">
     
     
       
-        <title>Products - Django Stripe</title>
+        <title>Actions - Django Stripe</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.35f28582.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#stripe-product-action" class="md-skip">
+        <a href="#actions" class="md-skip">
           Skip to content
         </a>
       
@@ -94,9 +94,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="Django Stripe" class="md-header__button md-logo" aria-label="Django Stripe" data-md-component="logo">
+    <a href="../.." title="Django Stripe" class="md-header__button md-logo" aria-label="Django Stripe" data-md-component="logo">
       
-  <img src="../../../../assets/django_stripe_doc_header_logo.png" alt="logo">
+  <img src="../../assets/django_stripe_doc_header_logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Products
+              Actions
             
           </span>
         </div>
@@ -216,7 +216,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../.." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -233,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../quickstart/" class="md-tabs__link">
+      <a href="../quickstart/" class="md-tabs__link">
         
   
     
@@ -254,7 +254,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../" class="md-tabs__link">
+        <a href="./" class="md-tabs__link">
           
   
   Actions
@@ -272,7 +272,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../webhooks/" class="md-tabs__link">
+        <a href="../webhooks/" class="md-tabs__link">
           
   
   Webhooks
@@ -288,7 +288,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../changelog/" class="md-tabs__link">
+      <a href="../../changelog/" class="md-tabs__link">
         
   
     
@@ -328,9 +328,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Django Stripe" class="md-nav__button md-logo" aria-label="Django Stripe" data-md-component="logo">
+    <a href="../.." title="Django Stripe" class="md-nav__button md-logo" aria-label="Django Stripe" data-md-component="logo">
       
-  <img src="../../../../assets/django_stripe_doc_header_logo.png" alt="logo">
+  <img src="../../assets/django_stripe_doc_header_logo.png" alt="logo">
 
     </a>
     Django Stripe
@@ -357,7 +357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -377,7 +377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../quickstart/" class="md-nav__link">
+      <a href="../quickstart/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -437,10 +437,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Actions
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -449,6 +469,35 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Actions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -499,7 +548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mixins/stripe_sync_mixin/" class="md-nav__link">
+      <a href="mixins/stripe_sync_mixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -520,7 +569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mixins/stripe_soft_delete_mixin/" class="md-nav__link">
+      <a href="mixins/stripe_soft_delete_mixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -587,7 +636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/customers/" class="md-nav__link">
+      <a href="core/customers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -608,7 +657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/events/" class="md-nav__link">
+      <a href="core/events/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -634,8 +683,6 @@
                 
   
   
-    
-  
   
   
     
@@ -645,11 +692,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
           <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
@@ -663,7 +710,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             Products
@@ -674,30 +721,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Products
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="products/products/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -706,77 +733,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      Methods
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sync-all-products" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sync All Products
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sync-products-for-given-ids" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sync Products for given IDs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sync-batch-of-products" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sync Batch of Products
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#soft-delete-product" class="md-nav__link">
-    <span class="md-ellipsis">
-      Soft Delete Product
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -789,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../prices/" class="md-nav__link">
+      <a href="products/prices/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -810,7 +766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../coupons/" class="md-nav__link">
+      <a href="products/coupons/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -877,7 +833,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../billings/subscriptions/" class="md-nav__link">
+      <a href="billings/subscriptions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -906,7 +862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../webhooks/" class="md-nav__link">
+      <a href="webhooks/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -972,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../webhooks/" class="md-nav__link">
+      <a href="../webhooks/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1000,7 +956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../changelog/" class="md-nav__link">
+      <a href="../../changelog/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1040,53 +996,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
+  <a href="#using-actions" class="md-nav__link">
     <span class="md-ellipsis">
-      Methods
+      Using Actions
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sync-all-products" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sync All Products
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sync-products-for-given-ids" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sync Products for given IDs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sync-batch-of-products" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sync Batch of Products
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#soft-delete-product" class="md-nav__link">
-    <span class="md-ellipsis">
-      Soft Delete Product
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1108,71 +1022,21 @@
   
 
 
-<h1 id="stripe-product-action">Stripe Product Action</h1>
-<p>The <code>StripeProductAction</code> class is a part of the Django Stripe library, which provides a set of actions for synchronizing local Stripe product data with the Stripe API. This class is designed to handle the complexities of retrieving and updating product data, making it easier to integrate Stripe with your Django application.</p>
-<p>The <code>StripeProductAction</code> class is defined in the <code>django_stripe.actions</code> module and has the following key characteristics:</p>
-<ul>
-<li><strong>Model Class</strong>: The <code>StripeProductAction</code> class is associated with the <code>StripeProduct</code> model.</li>
-<li><strong>Stripe Object Class</strong>: The class uses the <code>stripe.Product</code> object to interact with the Stripe API.</li>
-<li><strong>Syncing Method</strong>: The class provides a <code>sync_all</code> method to synchronize all local Stripe product data with the Stripe API.</li>
-</ul>
-<p>Overall, the <code>StripeProductAction</code> class provides a convenient and efficient way to manage Stripe product data in your Django application.</p>
-<h2 id="methods">Methods</h2>
-<h3 id="sync-all-products">Sync All Products</h3>
-<p><strong>Method:</strong> <code>sync_all(self)</code></p>
-<p>This method is used to synchronize all local Stripe products data with the Stripe API. It retrieves a batch of products from the Stripe API and then iterates over them, calling the <code>sync</code> method on each one.</p>
+<h1 id="actions">Actions</h1>
+<p>The <code>django-stripe</code> package provides a set of actions which are used to sync data from Stripe to the local database. Actions are designed to be used in your application code to interact with Stripe.</p>
+<p>Actions are organized by the type of Stripe object they interact with. For example, the <code>StripeCustomerAction</code> is used to sync customer objects from Stripe to the local database.</p>
+<p>Each action provides a set of methods which are used to perform syncing operations on the Stripe object. For example, the <code>StripeCustomerAction</code> provides methods to sync all customer objects from Stripe to the local database and to soft delete a customer object in the local database.</p>
+<h2 id="using-actions">Using Actions</h2>
+<p>Actions are typically used in your application code to sync data from Stripe to the local database. To use an action, you must first create an instance of the action class.</p>
+<p>For example, to use the <code>StripeCustomerAction</code> to sync all customer objects from Stripe to the local database, you would create an instance of the action class and call the <code>sync_all</code> method:</p>
 <div class="admonition example">
-<p class="admonition-title">Sync all products</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django_stripe.actions</span> <span class="kn">import</span> <span class="n">StripeProductAction</span>
+<p class="admonition-title">Sync all customers</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django_stripe.actions</span> <span class="kn">import</span> <span class="n">StripeCustomerAction</span>
 
-<span class="n">stripe_action</span> <span class="o">=</span> <span class="n">StripeProductAction</span><span class="p">()</span>
+<span class="n">stripe_action</span> <span class="o">=</span> <span class="n">StripeCustomerAction</span><span class="p">()</span>
 <span class="n">stripe_action</span><span class="o">.</span><span class="n">sync_all</span><span class="p">()</span>
 </code></pre></div>
 </div>
-<p>In this example, the <code>sync_all</code> method is called to synchronize all local Stripe customer data with the Stripe API.</p>
-<h3 id="sync-products-for-given-ids">Sync Products for given IDs</h3>
-<p><strong>Method:</strong> <code>sync_by_ids(self, ids: list)</code></p>
-<p>This method is used to synchronize local Stripe customer data for a specific list of customer IDs. It retrieves the products from the Stripe API and then iterates over them, calling the <code>sync</code> method on each one.</p>
-<div class="admonition example">
-<p class="admonition-title">Sync Products for given IDs</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django_stripe.actions</span> <span class="kn">import</span> <span class="n">StripeProductAction</span>
-
-<span class="n">stripe_action</span> <span class="o">=</span> <span class="n">StripeProductAction</span><span class="p">()</span>
-<span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prod_123456789&#39;</span><span class="p">,</span> <span class="s1">&#39;prod_987654321&#39;</span><span class="p">]</span>
-<span class="n">stripe_action</span><span class="o">.</span><span class="n">sync_by_ids</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
-</code></pre></div>
-</div>
-<p>In this example, the <code>sync_by_ids</code> method is called with a list of customer IDs to synchronize.</p>
-<h3 id="sync-batch-of-products">Sync Batch of Products</h3>
-<p><strong>Methods:</strong> <code>sync_batch(self, batch:list[dict])</code></p>
-<p>This method is used to synchronize a batch of local Stripe customer data. It takes a list of customer data as an argument and iterates over it, calling the <code>sync</code> method on each one.</p>
-<div class="admonition example">
-<p class="admonition-title">Sync Batch of Products</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django_stripe.actions</span> <span class="kn">import</span> <span class="n">StripeProductAction</span>
-
-<span class="n">stripe_action</span> <span class="o">=</span> <span class="n">StripeProductAction</span><span class="p">()</span>
-<span class="n">batch</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;prod_123456789&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Product 1&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;test product&#39;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;prod_987654321&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Product 2&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;test product&#39;</span><span class="p">}</span>
-<span class="p">]</span>
-<span class="n">stripe_action</span><span class="o">.</span><span class="n">sync_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
-</code></pre></div>
-</div>
-<p>In this example, the <code>sync_batch</code> method is called with a list of customer data to synchronize.</p>
-<h3 id="soft-delete-product">Soft Delete Product</h3>
-<p>The <code>StripeProductAction</code> class also provides a soft delete method, which allows you to mark a customer as deleted without actually deleting it from the local database.</p>
-<p><strong>Methods:</strong> <code>soft_delete(self, stripe_id: str)</code></p>
-<p>This method is used to soft delete a customer by its Stripe ID. It marks the customer as deleted in the local database.</p>
-<div class="admonition example">
-<p class="admonition-title">Soft Delete Product</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django_stripe.actions</span> <span class="kn">import</span> <span class="n">StripeProductAction</span>
-
-<span class="n">stripe_action</span> <span class="o">=</span> <span class="n">StripeProductAction</span><span class="p">()</span>
-<span class="n">stripe_id</span> <span class="o">=</span> <span class="s1">&#39;prod_123456789&#39;</span>
-<span class="n">stripe_action</span><span class="o">.</span><span class="n">soft_delete</span><span class="p">(</span><span class="n">stripe_id</span><span class="p">)</span>
-</code></pre></div>
-</div>
-<p>In this example, the <code>soft_delete</code> method is called with a Stripe ID to soft delete the customer.</p>
 
 
 
@@ -1279,10 +1143,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["search.suggest", "navigation.tabs", "navigation.tabs.sticky"], "search": "../../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
       
     
   </body>
