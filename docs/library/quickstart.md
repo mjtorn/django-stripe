@@ -1,8 +1,8 @@
-from django_stripe.models import StripeCustomer
-
-# Quickstart
+Quickstart
+==========
 
 ## Installation
+---------------
 
 Install the package using pip:
 
@@ -46,50 +46,9 @@ STRIPE_CONFIG = {
 }
 ```
 
-## Sync Stripe Data
-
-You can use the following management commands to sync data from Stripe:
-
-- Sync Customers and their Subscriptions
-
-```commandline
-python manage.py sync_stripe_customers
-```
-
-- Sync Products
-
-```commandline
-python manage.py sync_stripe_products
-```
-
-- Sync Prices
-
-```commandline
-python manage.py sync_stripe_prices
-```
-
-- Sync Coupons
-
-```commandline
-python manage.py sync_stripe_coupons
-```
-
 ## Implement APIs
 
 You can use the appropriate actions to build payment APIs. Here are some examples:
-
-### Creating a customer
-
-```python
-from django.contrib.auth.models import  User
-from django_stripe.actions import StripeCustomerAction
-
-user = User.objects.get(email="test@example.com")
-action = StripeCustomerAction(user)
-
-# Pass user model instance and email as argument
-customer = StripeCustomerAction(user).create(user.email)
-```
 
 ### Syncing a customer
 
@@ -100,11 +59,11 @@ from django_stripe.models import StripeCustomer
 import stripe
 
 user = User.objects.get(email="test@example.com")
-action = StripeCustomerAction(user)
+action = StripeCustomerAction()
 stripe_customer = StripeCustomer.objects.get(user=user)
 
 stripe_customer_data = stripe.Customer.retrieve(stripe_customer.stripe_id)
 
 # Pass user model instance and email as argument
-customer = StripeCustomerAction(user).sync(customer=stripe_customer, stripe_customer=stripe_customer_data)
+customer = StripeCustomerAction().sync(stripe_data=stripe_customer_data)
 ```
