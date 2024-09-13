@@ -118,3 +118,29 @@ You can also use a library like Django Rest Framework to register the webhook AP
     urlpatterns = router.urls
     ```
 This example registers the `StripeWebhookView` view using the `DefaultRouter` class.
+
+## Included Webhook Events
+-------------------------
+
+The `django-stripe` library provides a set of built-in webhook events that it listens for by default. All these webhook events are located in the `django_stripe.webhooks` module.
+
+The following table lists all the webhook events that are included in `django-stripe` library by default.
+
+| Webhook Event | Class | Description |
+| --- | --- | --- |
+| customer.created | `CustomerCreatedWebhook` | Occurs whenever a customer is created |
+| customer.updated | `CustomerUpdatedWebhook` | Occurs whenever any property of a customer changes |
+| customer.deleted | `CustomerDeletedWebhook` | Occurs whenever a customer is deleted |
+| customer.subscription.created | `SubscriptionCreatedWebhook` | Occurs whenever a customer with no subscription is signed up for a plan. |
+| customer.subscription.updated | `SubscriptionUpdatedWebhook` | Occurs whenever a subscription changes. Examples would include switching from one plan to another, or switching status from trial to active. |
+| customer.subscription.deleted | `SubscriptionDeletedWebhook` | Occurs whenever a customer ends their subscription. |
+| customer.subscription.trial_will_end | `SubscriptionTrialWillEndWebhook` | Occurs whenever a customer's trial period is about to end. |
+| product.created | `ProductCreatedWebhook` | Occurs whenever a product is created. |
+| product.updated | `ProductUpdatedWebhook` | Occurs whenever any property of a product changes. |
+| product.deleted | `ProductDeletedWebhook` | Occurs whenever a product is deleted. |
+| price.created | `PriceCreatedWebhook` | Occurs whenever a price is created. |
+| price.updated | `PriceUpdatedWebhook` | Occurs whenever any property of a price changes. |
+| price.deleted | `PriceDeletedWebhook` | Occurs whenever a price is deleted. |
+| coupon.created | `CouponCreatedWebhook` | Occurs whenever a coupon is created. |
+| coupon.updated | `CouponUpdatedWebhook` | Occurs whenever any property of a coupon changes. |
+| coupon.deleted | `CouponDeletedWebhook` | Occurs whenever a coupon is deleted. |
