@@ -39,18 +39,8 @@ nav:
           - Coupons: library/actions/products/coupons.md
       - Billings:
           - Subscriptions: library/actions/billings/subscriptions.md
-      - Webhooks: library/actions/webhooks.md
   - Webhooks:
       - library/webhooks/index.md
-#      - Core:
-#          - Customers: library/webhooks/core/customers.md
-#          - Events: library/webhooks/core/events.md
-#      - Products:
-#          - Products: library/webhooks/products/products.md
-#          - Prices: library/webhooks/products/prices.md
-#          - Coupons: library/webhooks/products/coupons.md
-#      - Billings:
-#          - Subscriptions: library/webhooks/billings/subscriptions.md
   - Changelogs: changelog.md
 
 markdown_extensions:
@@ -91,7 +81,7 @@ extra:
     - icon: fontawesome/solid/paper-plane
       link: mailto:purnendu.kar8@gmail.com
 
-copyright: Copyright &copy; 2024 - 2030 Purnendu Kar
+copyright: Copyright &copy; 2024  Purnendu Kar
 
 repo_url: https://github.com/purnendukar/django-stripe
 repo_name: purnendukar/django-stripe

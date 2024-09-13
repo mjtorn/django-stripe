@@ -6,7 +6,7 @@ from django_stripe.webhooks.register import StripeWebhook
 class CustomerSubscriptionStripeWebhook(StripeWebhook):
     def process_webhook(self):
         if self.event.validated_message:
-            StripeSubscriptionAction(self.event.customer.stripe_id).sync(
+            StripeSubscriptionAction().sync(
                 self.event.validated_message["data"]["object"],
             )
 

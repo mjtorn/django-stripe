@@ -34,4 +34,6 @@ jobs:
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
-        run: mike deploy --update-aliases 0.1 latest  # Deploy to GitHub Pages
+        run: |
+          mike deploy --update-aliases 0.1 latest --allow-empty  # Deploy to GitHub Pages
+          mike set-default latest --allow-empty
