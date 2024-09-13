@@ -81,7 +81,7 @@ extra:
     - icon: fontawesome/solid/paper-plane
       link: mailto:purnendu.kar8@gmail.com
 
-copyright: Copyright &copy; 2024 - 2030 Purnendu Kar
+copyright: Copyright &copy; 2024  Purnendu Kar
 
 repo_url: https://github.com/purnendukar/django-stripe
 repo_name: purnendukar/django-stripe
