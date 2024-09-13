@@ -2,26 +2,6 @@
 import decimal
 from datetime import datetime
 
-
-def convert_epoch(epoch):
-    """
-    Convert epoch to datetime
-    """
-    return str(datetime.utcfromtimestamp(epoch))
-
-
-def convert_amount_for_db(amount, currency="usd"):
-    # @@@ not sure if this is right;
-    # find out what we should do when API returns null for currency
-    if currency is None:
-        currency = "usd"
-    return (
-        (amount / decimal.Decimal("100"))
-        if currency.lower() not in ZERO_DECIMAL_CURRENCIES
-        else decimal.Decimal(amount)
-    )
-
-
 CURRENCY_SYMBOLS = {
     "aud": "\u0024",
     "cad": "\u0024",
@@ -53,3 +33,18 @@ ZERO_DECIMAL_CURRENCIES = [
     "xof",
     "xpf",
 ]
+
+
+def convert_epoch(epoch):
+    """
+    Convert epoch to datetime
+    """
+    return str(datetime.utcfromtimestamp(epoch))
+
+
+def convert_amount_for_db(amount, currency="usd"):
+    return (
+        (amount / decimal.Decimal("100"))
+        if currency.lower() not in ZERO_DECIMAL_CURRENCIES
+        else decimal.Decimal(amount)
+    )
