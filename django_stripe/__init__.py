@@ -1,6 +1,6 @@
 __author__ = "Purnendu Kar"
 # -*- coding: utf-8 -*-
-VERSION = (0, 1, 0, "DEV")
+VERSION = (0, 1, 0)
 
 
 def get_version(version):
