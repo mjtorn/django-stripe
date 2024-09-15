@@ -47,5 +47,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
         run: |
-          mike deploy --update-aliases ${{ env.NEW_VERSION }} latest --allow-empty
+          mike deploy --update-aliases ${{ env.NEW_VERSION }} latest --allow-empty --push
           mike set-default latest --allow-empty
