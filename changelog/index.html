@@ -799,27 +799,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/actions/webhooks/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Webhooks
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -946,17 +925,41 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#010-2024-09-12" class="md-nav__link">
+  <a href="#unreleased" class="md-nav__link">
     <span class="md-ellipsis">
-      [0.1.0] - 2024-09-12
+      [Unreleased]
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="[0.1.0] - 2024-09-12">
+    <nav class="md-nav" aria-label="[Unreleased]">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#010-2024-09-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      [0.1.0] - 2024-09-20
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[0.1.0] - 2024-09-20">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
     <span class="md-ellipsis">
       Added
     </span>
@@ -1004,17 +1007,41 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#010-2024-09-12" class="md-nav__link">
+  <a href="#unreleased" class="md-nav__link">
     <span class="md-ellipsis">
-      [0.1.0] - 2024-09-12
+      [Unreleased]
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="[0.1.0] - 2024-09-12">
+    <nav class="md-nav" aria-label="[Unreleased]">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#010-2024-09-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      [0.1.0] - 2024-09-20
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[0.1.0] - 2024-09-20">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
     <span class="md-ellipsis">
       Added
     </span>
@@ -1049,10 +1076,44 @@
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2 id="010-2024-09-12">[0.1.0] - 2024-09-12</h2>
+<h2 id="unreleased">[Unreleased]</h2>
+<hr />
 <h3 id="added">Added</h3>
 <ul>
-<li>Initial Release</li>
+<li><code>StripeAbstractCard</code> abstract model that simplifies the integration with Stripe Card.</li>
+<li><code>StripeCard</code> model that will store stripe card data.</li>
+<li><code>StripeCardAction</code> action that will sync card data from stripe.</li>
+</ul>
+<h2 id="010-2024-09-20">[0.1.0] - 2024-09-20</h2>
+<hr />
+<h3 id="added_1">Added</h3>
+<ul>
+<li>Stripe Abstract Model: <code>StripeAbstractCustomer</code>,
+  <code>StripeAbstractEvent</code>, <code>StripeAbstractProduct</code>,
+  <code>StripeAbstractPrice</code>, and <code>StripeAbstractSubscription</code>
+  abstract models that simplify the integration with Stripe.</li>
+<li>Stripe Models: <code>StripeCustomer</code>, <code>StripeEvent</code>, <code>StripeCard</code>,
+  <code>StripeProduct</code>, <code>StripePrice</code>, and <code>StripeSubscription</code>
+  models that simplify the integration with Stripe.</li>
+<li>Stripe Action Mixin: <code>StripeSyncActionMixin</code>,
+  <code>StripeSoftDeleteMixin</code> mixins that simplify the integration
+  with Stripe.</li>
+<li>Stripe Actions: <code>StripeCustomerAction</code>,
+  <code>StripeSubscriptionAction</code>, <code>StripeEventAction</code>,
+  <code>StripeCouponAction</code>, <code>StripePriceAction</code> and
+  <code>StripeProductAction</code> actions that simplify the integration
+  with Stripe.</li>
+<li>Stripe Abstract Webhook: <code>StripeWebhook</code> class that provides a
+  simple and flexible way to process incoming webhook requests.</li>
+<li>Stripe Webhooks: <code>CustomerCreatedWebhook</code>,
+  <code>CustomerUpdatedWebhook</code>, <code>CustomerDeletedWebhook</code>,
+  <code>SubscriptionCreatedWebhook</code>, <code>SubscriptionUpdatedWebhook</code>,
+  <code>SubscriptionDeletedWebhook</code>, <code>SubscriptionTrialWillEndWebhook</code>,
+  <code>ProductCreatedWebhook</code>, <code>ProductUpdatedWebhook</code>, <code>ProductDeletedWebhook</code>
+  <code>PriceCreatedWebhook</code>, <code>PriceUpdatedWebhook</code>, <code>PriceDeletedWebhook</code>,
+  <code>CouponCreatedWebhook</code>, <code>CouponUpdatedWebhook</code>, <code>CouponDeletedWebhook</code>,
+  webhooks that simplify the
+  integration with Stripe.</li>
 </ul>
 
 
@@ -1083,7 +1144,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2024 - 2030 Purnendu Kar
+      Copyright &copy; 2024  Purnendu Kar
     </div>
   
   

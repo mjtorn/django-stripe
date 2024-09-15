@@ -8,24 +8,24 @@
       
       
       
-        <link rel="canonical" href="https://purnendukar.github.io/django-stripe/library/webhooks/core/events/">
+        <link rel="canonical" href="https://purnendukar.github.io/django-stripe/library/webhooks/webhook/">
       
       
       
       
-      <link rel="icon" href="../../../../assets/django_stripe_doc_favicon.ico">
+      <link rel="icon" href="../../../assets/django_stripe_doc_favicon.ico">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.34">
     
     
       
-        <title>Stripe Event Action - Django Stripe</title>
+        <title>Webhook - Django Stripe</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.35f28582.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,7 +44,7 @@
       
     
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#stripe-event-action" class="md-skip">
+        <a href="#webhook" class="md-skip">
           Skip to content
         </a>
       
@@ -90,9 +90,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="Django Stripe" class="md-header__button md-logo" aria-label="Django Stripe" data-md-component="logo">
+    <a href="../../.." title="Django Stripe" class="md-header__button md-logo" aria-label="Django Stripe" data-md-component="logo">
       
-  <img src="../../../../assets/django_stripe_doc_header_logo.png" alt="logo">
+  <img src="../../../assets/django_stripe_doc_header_logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Stripe Event Action
+              Webhook
             
           </span>
         </div>
@@ -212,7 +212,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -229,7 +229,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../quickstart/" class="md-tabs__link">
+      <a href="../../quickstart/" class="md-tabs__link">
         
   
     
@@ -248,7 +248,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../actions/" class="md-tabs__link">
+        <a href="../../actions/" class="md-tabs__link">
           
   
   Actions
@@ -266,7 +266,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../" class="md-tabs__link">
+        <a href="../" class="md-tabs__link">
           
   
   Webhooks
@@ -282,7 +282,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../changelog/" class="md-tabs__link">
+      <a href="../../../changelog/" class="md-tabs__link">
         
   
     
@@ -322,9 +322,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Django Stripe" class="md-nav__button md-logo" aria-label="Django Stripe" data-md-component="logo">
+    <a href="../../.." title="Django Stripe" class="md-nav__button md-logo" aria-label="Django Stripe" data-md-component="logo">
       
-  <img src="../../../../assets/django_stripe_doc_header_logo.png" alt="logo">
+  <img src="../../../assets/django_stripe_doc_header_logo.png" alt="logo">
 
     </a>
     Django Stripe
@@ -351,7 +351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -371,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../quickstart/" class="md-nav__link">
+      <a href="../../quickstart/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -429,7 +429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../actions/" class="md-nav__link">
+      <a href="../../actions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -488,7 +488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../actions/mixins/stripe_sync_mixin/" class="md-nav__link">
+      <a href="../../actions/mixins/stripe_sync_mixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -509,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../actions/mixins/stripe_soft_delete_mixin/" class="md-nav__link">
+      <a href="../../actions/mixins/stripe_soft_delete_mixin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -576,7 +576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../actions/core/customers/" class="md-nav__link">
+      <a href="../../actions/core/customers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -597,7 +597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../actions/core/events/" class="md-nav__link">
+      <a href="../../actions/core/events/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -664,7 +664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../actions/products/products/" class="md-nav__link">
+      <a href="../../actions/products/products/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -685,7 +685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../actions/products/prices/" class="md-nav__link">
+      <a href="../../actions/products/prices/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -706,7 +706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../actions/products/coupons/" class="md-nav__link">
+      <a href="../../actions/products/coupons/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -773,7 +773,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../actions/billings/subscriptions/" class="md-nav__link">
+      <a href="../../actions/billings/subscriptions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -790,27 +790,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../actions/webhooks/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Webhooks
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -868,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -896,7 +875,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../changelog/" class="md-nav__link">
+      <a href="../../../changelog/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -936,60 +915,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#class-overview" class="md-nav__link">
+  <a href="#webhook-events" class="md-nav__link">
     <span class="md-ellipsis">
-      Class Overview
+      Webhook events
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
+  <a href="#configure-webhook" class="md-nav__link">
     <span class="md-ellipsis">
-      Methods
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#add-stripe-event" class="md-nav__link">
-    <span class="md-ellipsis">
-      Add Stripe event
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#link-customer" class="md-nav__link">
-    <span class="md-ellipsis">
-      Link Customer
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
+      Configure Webhook
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#best-practices" class="md-nav__link">
+  <a href="#custom-webhook-event" class="md-nav__link">
     <span class="md-ellipsis">
-      Best Practices
+      Custom Webhook Event
     </span>
   </a>
   
@@ -1013,111 +959,123 @@
   
 
 
-<h1 id="stripe-event-action">Stripe Event Action</h1>
-<p>The <code>StripeEventAction</code> class is a crucial component of the Django Stripe library, responsible for handling and processing Stripe events. This documentation provides a detailed explanation of the class, its methods, and examples of usage.</p>
-<h2 id="class-overview">Class Overview</h2>
-<p>The <code>StripeEventAction</code> class is defined in the <code>django_stripe.actions</code> module. It provides methods for adding and processing Stripe events, as well as linking customers to event objects.</p>
-<h2 id="methods">Methods</h2>
-<h3 id="add-stripe-event">Add Stripe event</h3>
-<p>The <code>add</code> method is used to add a Stripe event to the system. It takes the following arguments:</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>stripe_id</code></td>
-<td>The ID of the Stripe event.</td>
-</tr>
-<tr>
-<td><code>kind</code></td>
-<td>The type of Stripe event (e.g., <code>invoice.created</code>, <code>customer.updated</code>, etc.).</td>
-</tr>
-<tr>
-<td><code>livemode</code></td>
-<td>A boolean indicating whether the event was triggered in live mode or not.</td>
-</tr>
-<tr>
-<td><code>api_version</code></td>
-<td>The version of the Stripe API used to trigger the event.</td>
-</tr>
-<tr>
-<td><code>message</code></td>
-<td>The data associated with the event.</td>
-</tr>
-<tr>
-<td><code>request</code></td>
-<td>The request object that triggered the event (optional).</td>
-</tr>
-<tr>
-<td><code>pending_webhooks</code></td>
-<td>The number of pending webhooks (optional).</td>
-</tr>
-</tbody>
-</table>
+<h1 id="webhook">Webhook</h1>
+<p>Listen for events on your Stripe account so your integration can automatically trigger reactions.</p>
+<p>Stripe uses webhooks to notify your application when an event happens in your account. Webhooks are particularly useful for asynchronous events like when a customer’s bank confirms a payment, a customer disputes a charge, a recurring payment succeeds, or when collecting subscription payments.</p>
+<p>A webhook enables Stripe to push real-time notifications to your app. Stripe uses HTTPS to send these notifications to your app as a JSON payload. You can then use these notifications to execute actions in your backend systems.</p>
+<h2 id="webhook-events">Webhook events</h2>
+<p>Following are the supported webhook events:</p>
+<ul>
+<li><strong>Customer:</strong> <code>django_stripe.webhooks.customers</code> contains all the customer related webhook event<ul>
+<li>Create customer: <code>CustomerCreatedWebhook</code> will process the <code>customer.created</code> webhook event.</li>
+<li>Update customer: <code>CustomerUpdatedWebhook</code> will process the <code>customer.updated</code> webhook event.</li>
+<li>Delete customer: <code>CustomerDeletedWebhook</code> will process the <code>customer.deleted</code> webhook event.</li>
+</ul>
+</li>
+<li><strong>Card:</strong> <code>django_stripe.webhooks.sources</code> contains all the card related webhook event<ul>
+<li>Create card: <code>CustomerCardCreatedWebhook</code> will process the <code>customer.source.created</code> webhook event.</li>
+<li>Update card: <code>CustomerCardUpdatedWebhook</code> will process the <code>customer.source.updated</code> webhook event.</li>
+<li>Delete card: <code>CustomerCardDeletedWebhook</code> will process the <code>customer.source.deleted</code> webhook event.</li>
+</ul>
+</li>
+<li><strong>Subscription:</strong> <code>django_stripe.webhooks.subscriptions</code> contains all the subscriptions related webhook event<ul>
+<li>Create subscription: <code>CustomerSubscriptionCreatedWebhook</code> will process the <code>customer.subscription.created"</code> webhook event.</li>
+<li>Update subscription: <code>CustomerSubscriptionUpdatedWebhook</code> will process the <code>customer.subscription.updated"</code> webhook event.</li>
+<li>Subscription trial will end: <code>CustomerSubscriptionTrialWillEndWebhook</code> will process the <code>customer.subscription.trial_will_end"</code> webhook event.</li>
+<li>Delete subscription: <code>CustomerSubscriptionDeletedWebhook</code> will process the <code>customer.subscription.deleted"</code> webhook event.</li>
+</ul>
+</li>
+<li><strong>Product:</strong> <code>django_stripe.webhooks.products</code> contains all the product related webhook event<ul>
+<li>Create product: <code>ProductCreatedWebhook</code> will process the <code>product.created</code> webhook event.</li>
+<li>Update product: <code>ProductUpdatedWebhook</code> will process the <code>product.updated</code> webhook event.</li>
+<li>Delete product: <code>ProductDeletedWebhook</code> will process the <code>product.deleted</code> webhook event.</li>
+</ul>
+</li>
+<li><strong>Price:</strong> <code>django_stripe.webhooks.prices</code> contains all the price related webhook event<ul>
+<li>Create price: <code>PriceCreatedWebhook</code> will process the <code>price.created</code> webhook event.</li>
+<li>Update price: <code>PriceUpdatedWebhook</code> will process the <code>price.updated</code> webhook event.</li>
+<li>Delete price: <code>PriceDeletedWebhook</code> will process the <code>price.deleted</code> webhook event.</li>
+</ul>
+</li>
+<li><strong>Coupon:</strong> <code>django_stripe.webhooks.coupons</code> contains all the coupon related webhook event<ul>
+<li>Create coupon: <code>CouponCreatedWebhook</code> will process the <code>coupon.created</code> webhook event.</li>
+<li>Update coupon: <code>CouponUpdatedWebhook</code> will process the <code>coupon.updated</code> webhook event.</li>
+<li>Delete coupon: <code>CouponDeletedWebhook</code> will process the <code>coupon.deleted</code> webhook event.</li>
+</ul>
+</li>
+</ul>
+<h2 id="configure-webhook">Configure Webhook</h2>
+<p>Create a view-set that will use <a href="/library/actions/webhooks">StripeWebhook</a> action to process the webhook event.</p>
 <div class="admonition example">
-<p class="admonition-title">Add Stripe event</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django_stripe.actions</span> <span class="kn">import</span> <span class="n">StripeEventAction</span>
+<p class="admonition-title">Create webhook viewset</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">Http404</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">viewsets</span>
+<span class="kn">from</span> <span class="nn">rest_framework.permissions</span> <span class="kn">import</span> <span class="n">AllowAny</span>
 
-<span class="n">stripe_id</span> <span class="o">=</span> <span class="s2">&quot;evt_123456789&quot;</span>
-<span class="n">kind</span> <span class="o">=</span> <span class="s2">&quot;invoice.created&quot;</span>
-<span class="n">livemode</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">api_version</span> <span class="o">=</span> <span class="s2">&quot;2022-11-15&quot;</span>
-<span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;in_123456789&quot;</span><span class="p">,</span> <span class="s2">&quot;object&quot;</span><span class="p">:</span> <span class="s2">&quot;invoice&quot;</span><span class="p">,</span> <span class="s2">&quot;amount_paid&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>
+<span class="kn">from</span> <span class="nn">django_stripe.actions</span> <span class="kn">import</span> <span class="n">StripeWebhook</span>
+<span class="kn">from</span> <span class="nn">project.base</span> <span class="kn">import</span> <span class="n">response</span>
+<span class="kn">from</span> <span class="nn">payment.models</span> <span class="kn">import</span> <span class="n">Event</span>
 
-<span class="n">StripeEventAction</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">stripe_id</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">livemode</span><span class="p">,</span> <span class="n">api_version</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">StripeWebhookViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">GenericViewSet</span><span class="p">):</span>
+    <span class="n">EVENT_MODEL</span> <span class="o">=</span> <span class="n">Event</span>
+
+    <span class="c1"># Check the webhook signatures</span>
+    <span class="c1"># Ref: https://stripe.com/docs/webhooks/signatures</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">event_data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span>
+            <span class="n">StripeWebhook</span><span class="o">.</span><span class="n">process_webhook</span><span class="p">(</span><span class="n">event_data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">Http404</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">Ok</span><span class="p">({</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
 </code></pre></div>
 </div>
-<p>This example adds a Stripe event for an invoice creation, with the specified <code>stripe_id</code>, <code>kind</code>, <code>livemode</code>, <code>api_version</code>, and <code>message</code>.</p>
-<h3 id="link-customer">Link Customer</h3>
-<p>The <code>link_customer</code> method is used to link a customer to a Stripe event object. It takes the following argument:</p>
-<p><strong>Method:</strong> <code>link_customer(self, event: Event, customer: Customer)</code></p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>event</code></td>
-<td>The <code>django_stripe.stripe.models.Event</code> object to link the customer to.</td>
-</tr>
-<tr>
-<td><code>customer</code></td>
-<td>The <code>django_stripe.stripe.models.Customer</code> object</td>
-</tr>
-</tbody>
-</table>
 <div class="admonition example">
-<p class="admonition-title">Link Customer</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django_stripe.actions</span> <span class="kn">import</span> <span class="n">StripeEventAction</span>
-<span class="kn">from</span> <span class="nn">django_stripe.stripe.models</span> <span class="kn">import</span> <span class="n">Event</span>
+<p class="admonition-title">Register webhook view-set to an endpoint</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">rest_framework.routers</span> <span class="kn">import</span> <span class="n">DefaultRouter</span>
 
-<span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;evt_123456789&quot;</span><span class="p">)</span>
-<span class="n">customer</span> <span class="o">=</span> <span class="n">Customer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;cu_123456789&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">payments.apis</span> <span class="kn">import</span> <span class="n">StripeWebhookViewSet</span>
 
-<span class="n">StripeEventAction</span><span class="o">.</span><span class="n">link_customer</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">customer</span><span class="p">)</span>
+
+<span class="n">default_router</span> <span class="o">=</span> <span class="n">DefaultRouter</span><span class="p">(</span><span class="n">trailing_slash</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">default_router</span><span class="o">.</span><span class="n">register</span><span class="p">(</span>
+    <span class="s2">&quot;stripe/webhook&quot;</span><span class="p">,</span> <span class="n">StripeWebhookViewSet</span><span class="p">,</span> <span class="n">basename</span><span class="o">=</span><span class="s2">&quot;stripe-webhook&quot;</span>
+<span class="p">)</span>
 </code></pre></div>
 </div>
-<p>This example links a customer to a Stripe event object.</p>
-<h2 id="usage">Usage</h2>
-<p>The <code>StripeEventAction</code> class can be used in various scenarios, such as:</p>
-<ul>
-<li><strong>Processing Stripe webhooks:</strong> You can use the <code>add</code> method to add Stripe events to the system when a webhook is triggered.</li>
-<li><strong>Syncing Stripe data:</strong> You can use the <code>link_customer</code> method to link customers to Stripe event objects when syncing Stripe data.</li>
-</ul>
-<h2 id="best-practices">Best Practices</h2>
-<ul>
-<li>Always validate the <code>stripe_id</code> and <code>kind</code> arguments before calling the <code>add</code> method.</li>
-<li>Use the <code>request</code> argument to pass the request object that triggered the event, if available.</li>
-<li>Use the <code>pending_webhooks</code> argument to pass the number of pending webhooks, if available.</li>
-<li>Always check the <code>livemode</code> argument to determine whether the event was triggered in live mode or not.</li>
-</ul>
+<h2 id="custom-webhook-event">Custom Webhook Event</h2>
+<p>To create a custom webhook event for a specific Stripe webhook event, you can inherit <code>StripeWebhook</code> from <code>django_stripe.webhooks.register</code> and implement your own webhook event processing logic.</p>
+<p>As an example, let's say you want to create a webhook event for the product.created event. You can create a new file<code>app/webhook/products.py</code> and define the webhook event class in it.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<div class="highlight"><pre><span></span><code># Django Stripe Stuff
+from django_stripe.actions import StripeProduct
+from django_stripe.webhooks.register import StripeWebhook
+
+
+class ProductCreateWebhook(StripeWebhook):
+    name = &quot;product.created&quot;
+    description = &quot;Occurs whenever a new product is created.&quot;
+
+    def process_webhook(self):
+        StripeProduct().sync(self.event.message[&quot;data&quot;][&quot;object&quot;])
+</code></pre></div>
+<p>Once you have implemented the webhook event, you should import the webhook file in the <code>__init__.py</code> file of the app. This is required for the webhook event class to be registered.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code>import importlib
+
+importlib.import_module(&quot;app.webhooks.products&quot;)
+</code></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the class is not registered, then the webhook event won't be processed.</p>
+</div>
 
 
 
@@ -1147,7 +1105,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2024 - 2030 Purnendu Kar
+      Copyright &copy; 2024  Purnendu Kar
     </div>
   
   
@@ -1224,10 +1182,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["search.suggest", "navigation.tabs", "navigation.tabs.sticky"], "search": "../../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["search.suggest", "navigation.tabs", "navigation.tabs.sticky"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>
       
     
   </body>

@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://purnendukar.github.io/django-stripe/library/webhooks/">
       
       
-        <link rel="prev" href="../actions/webhooks/">
+        <link rel="prev" href="../actions/billings/subscriptions/">
       
       
         <link rel="next" href="../../changelog/">
@@ -801,27 +801,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../actions/webhooks/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Webhooks
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -984,6 +963,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#included-webhook-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Included Webhook Events
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1101,6 +1089,15 @@
   <a href="#registering-webhook-api" class="md-nav__link">
     <span class="md-ellipsis">
       Registering Webhook API
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#included-webhook-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Included Webhook Events
     </span>
   </a>
   
@@ -1229,6 +1226,101 @@
 </code></pre></div>
 </div>
 <p>This example registers the <code>StripeWebhookView</code> view using the <code>DefaultRouter</code> class.</p>
+<h2 id="included-webhook-events">Included Webhook Events</h2>
+<hr />
+<p>The <code>django-stripe</code> library provides a set of built-in webhook events that it listens for by default. All these webhook events are located in the <code>django_stripe.webhooks</code> module.</p>
+<p>The following table lists all the webhook events that are included in <code>django-stripe</code> library by default.</p>
+<table>
+<thead>
+<tr>
+<th>Webhook Event</th>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>customer.created</td>
+<td><code>CustomerCreatedWebhook</code></td>
+<td>Occurs whenever a customer is created</td>
+</tr>
+<tr>
+<td>customer.updated</td>
+<td><code>CustomerUpdatedWebhook</code></td>
+<td>Occurs whenever any property of a customer changes</td>
+</tr>
+<tr>
+<td>customer.deleted</td>
+<td><code>CustomerDeletedWebhook</code></td>
+<td>Occurs whenever a customer is deleted</td>
+</tr>
+<tr>
+<td>customer.subscription.created</td>
+<td><code>SubscriptionCreatedWebhook</code></td>
+<td>Occurs whenever a customer with no subscription is signed up for a plan.</td>
+</tr>
+<tr>
+<td>customer.subscription.updated</td>
+<td><code>SubscriptionUpdatedWebhook</code></td>
+<td>Occurs whenever a subscription changes. Examples would include switching from one plan to another, or switching status from trial to active.</td>
+</tr>
+<tr>
+<td>customer.subscription.deleted</td>
+<td><code>SubscriptionDeletedWebhook</code></td>
+<td>Occurs whenever a customer ends their subscription.</td>
+</tr>
+<tr>
+<td>customer.subscription.trial_will_end</td>
+<td><code>SubscriptionTrialWillEndWebhook</code></td>
+<td>Occurs whenever a customer's trial period is about to end.</td>
+</tr>
+<tr>
+<td>product.created</td>
+<td><code>ProductCreatedWebhook</code></td>
+<td>Occurs whenever a product is created.</td>
+</tr>
+<tr>
+<td>product.updated</td>
+<td><code>ProductUpdatedWebhook</code></td>
+<td>Occurs whenever any property of a product changes.</td>
+</tr>
+<tr>
+<td>product.deleted</td>
+<td><code>ProductDeletedWebhook</code></td>
+<td>Occurs whenever a product is deleted.</td>
+</tr>
+<tr>
+<td>price.created</td>
+<td><code>PriceCreatedWebhook</code></td>
+<td>Occurs whenever a price is created.</td>
+</tr>
+<tr>
+<td>price.updated</td>
+<td><code>PriceUpdatedWebhook</code></td>
+<td>Occurs whenever any property of a price changes.</td>
+</tr>
+<tr>
+<td>price.deleted</td>
+<td><code>PriceDeletedWebhook</code></td>
+<td>Occurs whenever a price is deleted.</td>
+</tr>
+<tr>
+<td>coupon.created</td>
+<td><code>CouponCreatedWebhook</code></td>
+<td>Occurs whenever a coupon is created.</td>
+</tr>
+<tr>
+<td>coupon.updated</td>
+<td><code>CouponUpdatedWebhook</code></td>
+<td>Occurs whenever any property of a coupon changes.</td>
+</tr>
+<tr>
+<td>coupon.deleted</td>
+<td><code>CouponDeletedWebhook</code></td>
+<td>Occurs whenever a coupon is deleted.</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1258,7 +1350,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2024 - 2030 Purnendu Kar
+      Copyright &copy; 2024  Purnendu Kar
     </div>
   
   
