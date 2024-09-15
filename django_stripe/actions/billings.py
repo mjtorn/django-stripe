@@ -3,11 +3,14 @@ import stripe
 
 # Django Stripe Stuff
 from django_stripe.actions.core import StripeCustomer
-from django_stripe.actions.mixins import StripeSyncActionMixin
+from django_stripe.actions.mixins import (
+    StripeSoftDeleteActionMixin,
+    StripeSyncActionMixin,
+)
 from django_stripe.models import StripeSubscription
 
 
-class StripeSubscriptionAction(StripeSyncActionMixin):
+class StripeSubscriptionAction(StripeSyncActionMixin, StripeSoftDeleteActionMixin):
     """
     Synchronizes a local StripeSubscription data from the Stripe API
 

@@ -1,12 +1,16 @@
+# Standard Library Stuff
 from unittest.mock import patch
 
+# Third Party Stuff
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from django_stripe.models import StripeCustomer
+# Django Stripe Stuff
+from django_stripe.actions import StripeSubscriptionAction
+from django_stripe.models import StripeCustomer, StripeSubscription
 
 
 class StripeSubscriptionWebhookTestCase(TestCase):
@@ -274,6 +278,8 @@ class StripeSubscriptionWebhookTestCase(TestCase):
     def test_subscription_deleted_webhook(self, mock_stripe_event_retrieve):
         # Mock Stripe's Event.retrieve to return the subscription_deleted_data
         mock_stripe_event_retrieve.return_value = self.subscription_deleted_data.copy()
+        subscription = StripeSubscriptionAction().sync(self.subscription_data)
+        self.assertIsNone(subscription.date_purged)
 
         response = self.client.post(
             self.url,
@@ -282,12 +288,19 @@ class StripeSubscriptionWebhookTestCase(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["success"], True)
+        subscription.refresh_from_db()
+        self.assertIsNotNone(subscription.date_purged)
 
     @patch("stripe.Event.retrieve")
     def test_subscription_updated_webhook(self, mock_stripe_event_retrieve):
         # Mock Stripe's Event.retrieve to return the subscription_updated_data
         mock_stripe_event_retrieve.return_value = self.subscription_updated_data.copy()
+        subscription = StripeSubscriptionAction().sync(self.subscription_data)
+        self.subscription_updated_data["data"]["object"][
+            "status"
+        ] = StripeSubscription.UNPAID
 
+        self.assertEqual(subscription.status, StripeSubscription.ACTIVE)
         response = self.client.post(
             self.url,
             self.subscription_updated_data,
@@ -295,6 +308,8 @@ class StripeSubscriptionWebhookTestCase(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["success"], True)
+        subscription.refresh_from_db()
+        self.assertEqual(subscription.status, StripeSubscription.UNPAID)
 
     @patch("stripe.Event.retrieve")
     def test_subscription_trial_will_end_webhook(self, mock_stripe_event_retrieve):

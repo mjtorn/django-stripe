@@ -22,6 +22,12 @@ class CustomerSubscriptionDeletedWebhook(CustomerSubscriptionStripeWebhook):
     name = "customer.subscription.deleted"
     description = "Occurs whenever a customer ends their subscription."
 
+    def process_webhook(self):
+        if self.event.validated_message:
+            StripeSubscriptionAction().soft_delete(
+                self.event.validated_message["data"]["object"]["id"]
+            )
+
 
 class CustomerSubscriptionTrialWillEndWebhook(CustomerSubscriptionStripeWebhook):
     name = "customer.subscription.trial_will_end"
