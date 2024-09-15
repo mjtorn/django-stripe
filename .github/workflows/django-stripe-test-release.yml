@@ -26,6 +26,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          poetry lock --no-update
           poetry install
 
       - name: Build package
@@ -38,7 +39,7 @@ jobs:
           POETRY_PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}  # Token for PyPI stored in GitHub secrets
         run: |
           poetry config pypi-token.pypi $POETRY_PYPI_TOKEN
-          poetry publish --build --username $POETRY_PYPI_USERNAME --password $POETRY_PYPI_TOKEN
+          poetry publish --build --username $POETRY_TEST_PYPI_USERNAME --password $POETRY_TEST_PYPI_TOKEN
 
       - name: Get new version from tag
         id: get_version
