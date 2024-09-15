@@ -29,9 +29,15 @@ jobs:
           git config user.name ci-bot
           git config user.email ci-bot@example.com
 
+      - name: Pull latest changes from gh-pages
+        run: |
+          git fetch origin gh-pages
+          git checkout gh-pages || git checkout -b gh-pages
+          git reset --hard origin/gh-pages
+
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
         run: |
-          mike deploy --update-aliases $(python -c "import importlib.metadata; print(importlib.metadata.version('django-stripe'))") latest --allow-empty --push
+          mike deploy --update-aliases $(python -c "from importlib.metadata import version; print(version('django-stripe'))") latest --allow-empty --push
           mike set-default latest --allow-empty

@@ -23,7 +23,7 @@ In your settings, update `STRIPE_CONFIG`:
 
 ```python
 STRIPE_CONFIG = {
-    "API_VERSION": "2022-11-15", # Stripe API Version
+    "API_VERSION": "2024-06-20", # Stripe API Version
     "API_KEY": "api_key", # Stripe Secret Key
 }
 ```
