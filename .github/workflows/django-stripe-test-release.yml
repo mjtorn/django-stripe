@@ -35,8 +35,7 @@ jobs:
 
       - name: Publish package to PyPI
         env:
-          POETRY_PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}  # Token for PyPI stored in GitHub secrets
-          POETRY_PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}  # Token for PyPI stored in GitHub secrets
+          POETRY_TEST_PYPI_TOKEN: ${{ secrets.POETRY_TEST_PYPI_TOKEN }}
         run: |
           poetry config pypi-token.testpypi $POETRY_TEST_PYPI_TOKEN
           poetry build
