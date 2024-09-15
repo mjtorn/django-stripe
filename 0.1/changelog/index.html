@@ -1093,9 +1093,15 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
   models that simplify the integration with Stripe.</p>
 </li>
 <li>
-<p><strong>Stripe Action Mixin:</strong> <code>StripeSyncActionMixin</code>,
-  <code>StripeSoftDeleteMixin</code> mixins that simplify the integration
-  with Stripe.</p>
+<p><strong>Stripe Action Mixin:</strong> <code>StripeSyncActionMixin</code> and
+    <code>StripeSoftDeleteMixin</code> mixins that simplify the integration
+    with Stripe.</p>
+<ul>
+<li><strong>StripeSyncActionMixin:</strong> Mixin that provides a sync method
+  that will sync the local database with the stripe data.</li>
+<li><strong>StripeSoftDeleteMixin:</strong> Mixin that provides soft delete
+  method that will soft delete the stripe object.</li>
+</ul>
 </li>
 <li>
 <p><strong>Stripe Actions:</strong> The following actions are provided to help
