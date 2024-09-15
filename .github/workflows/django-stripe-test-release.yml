@@ -18,18 +18,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Set Git config
-        run: |
-          git config user.name ci-bot
-          git config user.email ci-bot@example.com
-
-      - name: Pull latest changes from gh-pages
-        run: |
-          git fetch origin gh-pages
-          git checkout gh-pages || git checkout -b gh-pages
-          git reset --hard origin/gh-pages
-          git checkout main
-
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
@@ -54,15 +42,3 @@ jobs:
           poetry build
           poetry publish --repository testpypi
 
-      - name: Get new version from tag
-        id: get_version
-        run: |
-          NEW_VERSION=$(echo "${GITHUB_REF#refs/tags/}")
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-
-      - name: Build and deploy documentation
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
-        run: |
-          poetry run mike deploy --update-aliases ${{ env.NEW_VERSION }} latest --allow-empty --push
-          poetry run mike set-default latest --allow-empty --push
