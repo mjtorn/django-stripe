@@ -1098,11 +1098,22 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
   with Stripe.</p>
 </li>
 <li>
-<p><strong>Stripe Actions:</strong> <code>StripeCustomerAction</code>,
-  <code>StripeSubscriptionAction</code>, <code>StripeEventAction</code>,
-  <code>StripeCouponAction</code>, <code>StripePriceAction</code> and
-  <code>StripeProductAction</code> actions that simplify the integration
-  with Stripe.</p>
+<p><strong>Stripe Actions:</strong> The following actions are provided to help
+  with syncing local database with stripe data.</p>
+</li>
+<li><code>StripeCustomerAction</code> action that syncs the local
+    database with the stripe customer data.</li>
+<li><code>StripeSubscriptionAction</code> action that syncs the local
+    database with the stripe subscription data.</li>
+<li><code>StripeEventAction</code> action that syncs the local
+    database with the stripe event data.</li>
+<li><code>StripeCouponAction</code> action that syncs the local
+    database with the stripe coupon data.</li>
+<li><code>StripePriceAction</code> action that syncs the local
+    database with the stripe price data.</li>
+<li>
+<p><code>StripeProductAction</code> action that syncs the local
+    database with the stripe product data.</p>
 </li>
 <li>
 <p><strong>Stripe Abstract Webhook:</strong> <code>StripeWebhook</code> class that provides a
