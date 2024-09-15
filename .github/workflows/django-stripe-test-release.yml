@@ -53,6 +53,13 @@ jobs:
           git config user.name ci-bot
           git config user.email ci-bot@example.com
 
+      - name: Pull latest changes from gh-pages
+        run: |
+          git fetch origin gh-pages
+          git checkout gh-pages || git checkout -b gh-pages
+          git reset --hard origin/gh-pages
+          git checkout main
+
       - name: Build and deploy documentation
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
