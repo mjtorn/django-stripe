@@ -41,7 +41,7 @@ In your Django project's settings file, update the model paths in `STRIPE_CONFIG
 
 ```python
 STRIPE_CONFIG = {
-    "API_VERSION": "2022-11-15", # Stripe API Version
+    "API_VERSION": "2024-06-20", # Stripe API Version
     "API_KEY": "api_key", # Stripe Secret Key
 }
 ```
@@ -64,6 +64,5 @@ stripe_customer = StripeCustomer.objects.get(user=user)
 
 stripe_customer_data = stripe.Customer.retrieve(stripe_customer.stripe_id)
 
-# Pass user model instance and email as argument
 customer = StripeCustomerAction().sync(stripe_data=stripe_customer_data)
 ```

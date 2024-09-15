@@ -31,4 +31,4 @@ STRIPE_CONFIG = {
 ## References
 -------------
 
-Stripe API Doc: [https://stripe.com/docs/api](https://stripe.com/docs/api)
+**Stripe API Doc:** [https://stripe.com/docs/api](https://stripe.com/docs/api)

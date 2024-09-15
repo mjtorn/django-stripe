@@ -85,3 +85,5 @@ copyright: Copyright &copy; 2024  Purnendu Kar
 
 repo_url: https://github.com/purnendukar/django-stripe
 repo_name: purnendukar/django-stripe
+
+site_url: https://purnendukar.github.io/django-stripe/

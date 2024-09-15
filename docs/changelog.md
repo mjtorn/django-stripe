@@ -10,8 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 -------------------
 ### Added
-
-* `StripeAbstractCard` abstract model that simplifies the integration with Stripe Card.
 * `StripeCard` model that will store stripe card data.
 * `StripeCardAction` action that will sync card data from stripe.
 
@@ -19,29 +17,60 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2024-09-20
 -----------------------
 ### Added
-* Stripe Abstract Model: `StripeAbstractCustomer`,
-  `StripeAbstractEvent`, `StripeAbstractProduct`,
-  `StripeAbstractPrice`, and `StripeAbstractSubscription`
-  abstract models that simplify the integration with Stripe.
-* Stripe Models: `StripeCustomer`, `StripeEvent`, `StripeCard`,
-  `StripeProduct`, `StripePrice`, and `StripeSubscription`
-  models that simplify the integration with Stripe.
-* Stripe Action Mixin: `StripeSyncActionMixin`,
-  `StripeSoftDeleteMixin` mixins that simplify the integration
-  with Stripe.
-* Stripe Actions: `StripeCustomerAction`,
-  `StripeSubscriptionAction`, `StripeEventAction`,
-  `StripeCouponAction`, `StripePriceAction` and
-  `StripeProductAction` actions that simplify the integration
-  with Stripe.
-* Stripe Abstract Webhook: `StripeWebhook` class that provides a
-  simple and flexible way to process incoming webhook requests.
-* Stripe Webhooks: `CustomerCreatedWebhook`,
-  `CustomerUpdatedWebhook`, `CustomerDeletedWebhook`,
-  `SubscriptionCreatedWebhook`, `SubscriptionUpdatedWebhook`,
-  `SubscriptionDeletedWebhook`, `SubscriptionTrialWillEndWebhook`,
-  `ProductCreatedWebhook`, `ProductUpdatedWebhook`, `ProductDeletedWebhook`
-  `PriceCreatedWebhook`, `PriceUpdatedWebhook`, `PriceDeletedWebhook`,
-  `CouponCreatedWebhook`, `CouponUpdatedWebhook`, `CouponDeletedWebhook`,
-  webhooks that simplify the
-  integration with Stripe.
+
+  - **Stripe Models:** The following models have been added to simplify
+    the integration with Stripe.
+    - `StripeCustomer` model that will store stripe customer data.
+    - `StripeEvent` model that will store stripe event data.
+    - `StripeProduct` model that will store stripe product data.
+    - `StripePrice` model that will store stripe price data.
+    - `StripeSubscription` model that will store stripe subscription data.
+
+  - **Stripe Action Mixin:** `StripeSyncActionMixin` and
+    `StripeSoftDeleteMixin` mixins that simplify the integration
+    with Stripe.
+    - `StripeSyncActionMixin` mixin that provides a sync method
+      that will sync the local database with the stripe data.
+    - `StripeSoftDeleteMixin` mixin that provides soft delete
+      method that will soft delete the stripe object in local database.
+
+  - **Stripe Actions:** The following actions are provided to help
+    with syncing local database with stripe data.
+    - `StripeCustomerAction` action that syncs the local
+      database with the stripe customer data.
+    - `StripeSubscriptionAction` action that syncs the local
+      database with the stripe subscription data.
+    - `StripeEventAction` action that syncs the local
+      database with the stripe event data.
+    - `StripeCouponAction` action that syncs the local
+      database with the stripe coupon data.
+    - `StripePriceAction` action that syncs the local
+      database with the stripe price data.
+    - `StripeProductAction` action that syncs the local
+      database with the stripe product data.
+
+  - **Stripe Abstract Webhook:** `StripeWebhook` class that provides a
+    simple and flexible way to process incoming webhook requests.
+
+  - **Stripe Webhooks:**
+    - Customer Webhook
+        - `CustomerCreatedWebhook` to process customer created event.
+        - `CustomerUpdatedWebhook` to process customer updated event.
+        - `CustomerDeletedWebhook` to process customer deleted event.
+    - Subscription Webhook
+        - `SubscriptionCreatedWebhook` to process subscription created event.
+        - `SubscriptionUpdatedWebhook` to process subscription updated event.
+        - `SubscriptionDeletedWebhook` to process subscription deleted event.
+        - `SubscriptionTrialWillEndWebhook` to process subscription trial will end event.
+    - Product Webhook
+        - `ProductCreatedWebhook` to process product created event.
+        - `ProductUpdatedWebhook` to process product updated event.
+        - `ProductDeletedWebhook` to process product deleted event.
+    - Price Webhook
+        - `PriceCreatedWebhook` to process price created event.
+        - `PriceUpdatedWebhook` to process price updated event.
+        - `PriceDeletedWebhook` to process price deleted event.
+    - Coupon Webhook
+        - `CouponCreatedWebhook` to process coupon created event.
+        - `CouponUpdatedWebhook` to process coupon updated event.
+        - `CouponDeletedWebhook` to process coupon deleted event.
