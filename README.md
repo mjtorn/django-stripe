@@ -1,5 +1,8 @@
 # Django Stripe
 
+[![Build Status](https://github.com/purnendukar/django-stripe/actions/workflows/django-package.yml/badge.svg)](https://github.com/purnendukar/django-stripe/actions/workflows/django-package.yml)
+[![codecov](https://codecov.io/github/purnendukar/django-stripe/graph/badge.svg?token=DCKZTJ86YG)](https://codecov.io/github/purnendukar/django-stripe)
+
 `django-stripe` is an open source Python package that simplifies the integration of Stripe payments into your Django web application. Its key features include:
 
 - Full support for Stripe's B2C Subscription.
@@ -58,7 +61,7 @@ python manage.py migrate
 
 ```python
 STRIPE_CONFIG = {
-    "API_VERSION": "2022-11-15", # Stripe API Version
+    "API_VERSION": "2024-06-20", # Stripe API Version
     "API_KEY": "api_key", # Stripe Secret Key
 }
 ```
@@ -66,23 +69,23 @@ STRIPE_CONFIG = {
 5. Implement APIs
 
 You can use the appropriate actions to build payment APIs. Here are some examples:
+You can use the appropriate actions to build payment APIs. Here are some examples:
 
-- Creating a customer
-
-```python
-from django_stripe.actions.core import StripeCustomerAction
-
-# Pass user model instance and email as argument
-customer = StripeCustomerAction(user).create(billing_email)
-```
-
-- Creating a subscription
+- Syncing a customer
 
 ```python
-from django_stripe.actions.billings import StripeSubscriptionAction
+from django.contrib.auth.models import  User
+from django_stripe.actions import StripeCustomerAction
+from django_stripe.models import StripeCustomer
+import stripe
 
-# Pass customer model instance and prices(List of stripe price ids) to subscribe as argument
-subscription = StripeSubscriptionAction.create(customer, prices)
+user = User.objects.get(email="test@example.com")
+action = StripeCustomerAction()
+stripe_customer = StripeCustomer.objects.get(user=user)
+
+stripe_customer_data = stripe.Customer.retrieve(stripe_customer.stripe_id)
+
+customer = StripeCustomerAction().sync(stripe_data=stripe_customer_data)
 ```
 
 ## Code of Conduct
