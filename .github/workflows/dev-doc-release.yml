@@ -32,7 +32,7 @@ jobs:
 
       - name: Pull latest changes from gh-pages
         run: |
-          git fetch origin gh-pages
+          git fetch
           git checkout gh-pages || git checkout -b gh-pages
           git reset --hard origin/gh-pages
           TAG_NAME=$(echo "${GITHUB_REF#refs/tags/}")
