@@ -20,7 +20,7 @@
 You can easily install or upgrade to the latest version of the package using pip:
 
 ```
-pip install django-stripe
+pip install django-stripe-plus
 ```
 
 ## 🚀 Quickstart
@@ -30,7 +30,7 @@ To get started quickly, follow these steps:
 1. Install the package using pip:
 
 ```commandline
-pip install django-stripe
+pip install django-stripe-plus
 ```
 
 2. Add `django_stripe` to your INSTALLED_APPS setting:

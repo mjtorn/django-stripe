@@ -1,0 +1,55 @@
+name: Publish Package to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*.*.*-dev'  # Triggers on tags like 'v1.0.0-dev', 'v2.1.3-dev', etc.
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          export PATH="$HOME/.local/bin:$PATH"
+          poetry --version  # Ensure Poetry is installed
+
+      - name: Install dependencies
+        run: |
+          poetry install
+
+      - name: Build package
+        run: |
+          poetry build
+
+      - name: Publish package to PyPI
+        env:
+          POETRY_PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}  # Token for PyPI stored in GitHub secrets
+          POETRY_PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}  # Token for PyPI stored in GitHub secrets
+        run: |
+          poetry config pypi-token.pypi $POETRY_PYPI_TOKEN
+          poetry publish --build --username $POETRY_PYPI_USERNAME --password $POETRY_PYPI_TOKEN
+
+      - name: Get new version from tag
+        id: get_version
+        run: |
+          NEW_VERSION=$(echo "${GITHUB_REF#refs/tags/}")
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Build and deploy documentation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+        run: |
+          mkdocs build
+          mike deploy --update-aliases ${{ env.NEW_VERSION }} latest --allow-empty --push
+          mike set-default latest --allow-empty --push

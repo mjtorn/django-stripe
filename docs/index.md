@@ -15,7 +15,7 @@ __Version:__ 0.1.2
 You can easily install or upgrade to the latest version of the package using pip:
 
 ```
-pip install django-stripe
+pip install django-stripe-plus
 ```
 
 ## Configuration
