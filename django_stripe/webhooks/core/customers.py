@@ -14,7 +14,7 @@ class CustomerUpdatedWebhook(StripeWebhook):
 
     def process_webhook(self):
         if self.event.customer:
-            stripe_customer = self.event.message["data"]["object"]
+            stripe_customer = self.event.message["data"]["object"].copy()
             StripeCustomerAction().sync(stripe_customer)
 
 

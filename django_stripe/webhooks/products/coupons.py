@@ -5,7 +5,10 @@ from django_stripe.webhooks.register import StripeWebhook
 
 class CouponStripeWebhook(StripeWebhook):
     def process_webhook(self):
-        StripeCouponAction().sync(self.event.message["data"]["object"])
+        if self.event.validated_message:
+            StripeCouponAction().sync(
+                self.event.validated_message["data"]["object"].copy()
+            )
 
 
 class CouponCreatedWebhook(CouponStripeWebhook):
