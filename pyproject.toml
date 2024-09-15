@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-stripe-plus"
-version = "version = "0.1.2""  # Placeholder version, will be dynamically managed
+version = "version = "0.1.3""  # Placeholder version, will be dynamically managed
 description = "Django + Stripe made easy"
 authors = ["Purnendu Kar <purnendu.kar8@gmail.com>"]
 maintainers = [
