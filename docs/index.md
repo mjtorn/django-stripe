@@ -1,6 +1,8 @@
 Django Stripe
 ===========================
 
+__Version:__ 0.1.1
+
 `django-stripe` is an open source Python package that simplifies the integration of Stripe payments into your Django web application. Its key features include:
 
 - Full support for Stripe's B2C Subscription.
