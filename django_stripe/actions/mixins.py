@@ -109,8 +109,6 @@ class StripeSyncActionMixin:
         defaults = self.set_default(stripe_data)
         self.post_set_default(defaults)
 
-        print("defaults", defaults)
-
         model_obj, _ = self.model_class.objects.update_or_create(
             stripe_id=stripe_id, defaults=defaults
         )

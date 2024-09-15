@@ -1,5 +1,5 @@
 # Django Stripe Stuff
-from django_stripe.actions import StripeCustomerAction, StripeSubscriptionAction
+from django_stripe.actions import StripeSubscriptionAction
 from django_stripe.webhooks.register import StripeWebhook
 
 
@@ -7,11 +7,8 @@ class CustomerSubscriptionStripeWebhook(StripeWebhook):
     def process_webhook(self):
         if self.event.validated_message:
             StripeSubscriptionAction().sync(
-                self.event.validated_message["data"]["object"],
+                self.event.validated_message["data"]["object"].copy(),
             )
-
-        if self.event.customer:
-            StripeCustomerAction.sync(self.event.customer)
 
 
 class CustomerSubscriptionCreatedWebhook(CustomerSubscriptionStripeWebhook):
