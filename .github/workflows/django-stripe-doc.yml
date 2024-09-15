@@ -1,10 +1,8 @@
-name: Django-Stripe Doc
+name: Django-Stripe Doc Deployment
 
 on:
   push:
     branches: [ "main"]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   deploy:
@@ -35,5 +33,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
         run: |
-          mike deploy --update-aliases 0.1 latest --allow-empty  # Deploy to GitHub Pages
+          mike deploy --update-aliases $(python -c "import importlib.metadata; print(importlib.metadata.version('django-stripe'))") latest --allow-empty --push  # Deploy to GitHub Pages
           mike set-default latest --allow-empty
