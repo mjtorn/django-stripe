@@ -38,8 +38,9 @@ jobs:
           POETRY_PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}  # Token for PyPI stored in GitHub secrets
           POETRY_PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}  # Token for PyPI stored in GitHub secrets
         run: |
-          poetry config pypi-token.pypi $POETRY_PYPI_TOKEN
-          poetry publish --build --username $POETRY_TEST_PYPI_USERNAME --password $POETRY_TEST_PYPI_TOKEN
+          poetry config pypi-token.testpypi $POETRY_TEST_PYPI_TOKEN
+          poetry build
+          poetry publish --repository testpypi
 
       - name: Get new version from tag
         id: get_version
