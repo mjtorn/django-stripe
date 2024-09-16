@@ -33,7 +33,7 @@ jobs:
       - name: Get tag name
         run: |
           echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-          echo "The tag name is ${{ env.TAG_NAME }} ${GITHUB_REF#refs/tags/}"
+          echo "The tag name is ${{ env.TAG_NAME }} ${GITHUB_REF#refs/tags/} dev"
 
       - name: Pull latest changes from gh-pages
         run: |
