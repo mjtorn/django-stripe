@@ -31,10 +31,9 @@ jobs:
           git config user.email ci-bot@example.com
 
       - name: Get tag name
-        id: get_tag_name
         run: |
-          echo "TAG_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
-          echo "The tag name is ${{ env.TAG_NAME }}"
+          echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          echo "The tag name is ${{ env.TAG_NAME }} ${GITHUB_REF#refs/tags/}"
 
       - name: Pull latest changes from gh-pages
         run: |
