@@ -3,7 +3,7 @@ name: Django-Stripe Dev Doc Deployment
 on:
   push:
     tags:
-      - 'v*.*.*-dev'  # Triggers on tags like 'v1.0.0-dev', 'v2.1.3-dev', etc.
+      - 'v*.*.*'  # Triggers on tags like 'v1.0.0', 'v2.1.3', etc.
 
 jobs:
   deploy:
@@ -30,11 +30,6 @@ jobs:
           git config user.name ci-bot
           git config user.email ci-bot@example.com
 
-      - name: Get tag name
-        run: |
-          echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-          echo "The tag name is ${{ env.TAG_NAME }} |  ${GITHUB_REF#refs/tags/} dev"
-
       - name: Pull latest changes from gh-pages
         run: |
           git fetch
@@ -46,6 +41,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
         run: |
-          echo "The tag name is ${{ env.NEW_VERSION }} |  ${GITHUB_REF#refs/tags/} dev"
           mike deploy --update-aliases ${GITHUB_REF#refs/tags/} latest --allow-empty --push
-          mike set-default latest --allow-empty
+          mike set-default latest --allow-empty --push
