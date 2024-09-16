@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `StripeCardAction` action that will sync card data from stripe.
 
 
-## [0.1.0] - 2024-09-20
+## [0.1.1] - 2024-09-16
 -----------------------
 ### Added
 
