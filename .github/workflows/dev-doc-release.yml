@@ -40,20 +40,12 @@ jobs:
           git fetch
           git checkout gh-pages || git checkout -b gh-pages
           git reset --hard origin/gh-pages
-          TAG_NAME=$(echo "${GITHUB_REF#refs/tags/}")
           git checkout tags/${GITHUB_REF#refs/tags/}
-
-      - name: Get new version
-        id: get_version
-        run: |
-          # Extract the new version from a version file (e.g., __init__.py)
-          NEW_VERSION=$(grep '__version__ =' django_stripe/__init__.py | awk -F"'" '{print $2}')
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
         run: |
           echo "The tag name is ${{ env.NEW_VERSION }} |  ${GITHUB_REF#refs/tags/} dev"
-          mike deploy --update-aliases ${{ env.NEW_VERSION }} latest --allow-empty --push
+          mike deploy --update-aliases ${GITHUB_REF#refs/tags/} latest --allow-empty --push
           mike set-default latest --allow-empty
