@@ -1,7 +1,11 @@
 # Django Stripe
 
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-stripe-plus)
+![PyPI version](https://img.shields.io/pypi/v/django-stripe-plus?color=00bcd4&label=version)
 [![Build Status](https://github.com/purnendukar/django-stripe/actions/workflows/django-package.yml/badge.svg)](https://github.com/purnendukar/django-stripe/actions/workflows/django-package.yml)
 [![codecov](https://codecov.io/github/purnendukar/django-stripe/graph/badge.svg?token=DCKZTJ86YG)](https://codecov.io/github/purnendukar/django-stripe)
+![License](https://img.shields.io/pypi/l/django-stripe-plus?color=orange)
+
 
 `django-stripe` is an open source Python package that simplifies the integration of Stripe payments into your Django web application. Its key features include:
 
@@ -20,7 +24,7 @@
 You can easily install or upgrade to the latest version of the package using pip:
 
 ```
-pip install django-stripe
+pip install django-stripe-plus
 ```
 
 ## 🚀 Quickstart
@@ -30,7 +34,7 @@ To get started quickly, follow these steps:
 1. Install the package using pip:
 
 ```commandline
-pip install django-stripe
+pip install django-stripe-plus
 ```
 
 2. Add `django_stripe` to your INSTALLED_APPS setting:

@@ -7,7 +7,7 @@ Quickstart
 Install the package using pip:
 
 ```commandline
-pip install django-stripe
+pip install django-stripe-plus
 ```
 
 ## Update Installed Apps
