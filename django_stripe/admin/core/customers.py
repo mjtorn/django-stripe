@@ -1,8 +1,18 @@
+# Third Party Stuff
 from django.contrib import admin
-from django_stripe.models import StripeCustomer
+
+# Django Stripe Stuff
+from django_stripe.admin.abstracts import AbstractStripeModelAdmin
+from django_stripe.models import StripeCustomer, StripeSubscription
+
+
+class StripeSubscriptionInlineAdmin(admin.StackedInline):
+    model = StripeSubscription
+    extra = 0
 
 
 @admin.register(StripeCustomer)
-class StripeCustomerAdmin(admin.ModelAdmin):
+class StripeCustomerAdmin(AbstractStripeModelAdmin):
     list_display = ("stripe_id", "email", "name", "description")
     search_fields = ("stripe_id", "email", "name", "description")
+    inlines = [StripeSubscriptionInlineAdmin]
