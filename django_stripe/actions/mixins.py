@@ -115,14 +115,15 @@ class StripeSyncActionMixin:
 
         return model_obj
 
-    def sync_by_ids(self, ids):
+    def sync_by_ids(self, stripe_ids):
         """
         Synchronizes a local data from the Stripe API
         Args:
-            ids: list of ids
+            stripe_ids: list of stripe ids
         """
-        stripe_data = self.stripe_object_class.retrieve(ids)
-        self.sync(stripe_data)
+        for stripe_id in stripe_ids:
+            stripe_data = self.stripe_object_class.retrieve(stripe_id)
+            self.sync(stripe_data)
 
     def _update_model_objs(
         self, model_objs: list[object], stripe_id_obj_map: dict[str, dict]
