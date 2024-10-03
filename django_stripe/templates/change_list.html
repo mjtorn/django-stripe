@@ -1,0 +1,12 @@
+{% extends "admin/change_list.html" %}
+
+{% block object-tools-items %}
+    {{ block.super }}
+    {% if action_buttons %}
+      {% for button in action_buttons %}
+        <li>
+          <a href="{{ button.url }}" class="button">{{ button.label }}</a>
+        </li>
+      {% endfor %}
+    {% endif %}
+{% endblock %}

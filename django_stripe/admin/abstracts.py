@@ -1,13 +1,16 @@
 # Third Party Stuff
-from django.contrib import admin
-from django.urls import path, reverse
+from django.contrib import admin, messages
+from django.urls import path, reverse, reverse_lazy
 from django.http import HttpResponseRedirect
-from django.template.loader import render_to_string
 
 
 class AbstractStripeModelAdmin(admin.ModelAdmin):
     stripe_model_action = None
-    actions = ["sync_all"]
+    actions = ["sync"]
+    change_list_template = "change_list.html"
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
 
     def has_change_permission(self, request, obj=None):
         return False
@@ -22,8 +25,15 @@ class AbstractStripeModelAdmin(admin.ModelAdmin):
         """
         Return a list of button configurations. Each button has a 'label' and 'url'.
         """
+        change_list_link = reverse(
+            "admin:%s_%s_changelist"
+            % (self.model._meta.app_label, self.model._meta.model_name)
+        )
         return [
-            {"label": "Sync all from stripe", "url": reverse("admin:sync_all")},
+            {
+                "label": "Sync all objects from stripe",
+                "url": f"{change_list_link}sync_all/",
+            },
         ]
 
     @admin.action(description="Sync from stripe")
@@ -33,29 +43,27 @@ class AbstractStripeModelAdmin(admin.ModelAdmin):
         )
 
     def sync_all(self, request):
-        self.stripe_model_action.sync_all()
-        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+        if self.stripe_model_action is not None:
+            self.stripe_model_action.sync_all()
+            messages.success(request, "Synced all objects from stripe")
+        else:
+            messages.error(request, "Stripe model action not defined.")
+        change_list_link = reverse_lazy(
+            "admin:%s_%s_changelist"
+            % (self.model._meta.app_label, self.model._meta.model_name)
+        )
+        return HttpResponseRedirect(change_list_link)
 
     def get_urls(self):
         urls = super().get_urls()
         action_urls = [
-            path(
-                "sync_all",
-                self.admin_site.admin_view(self.sync_all),
-                name="sync_all",
-            ),
+            path("sync_all/", self.sync_all),
         ]
-        return urls + action_urls
+        return action_urls + urls
 
-    def change_list_view(self, request, extra_context=None, *args, **kwargs):
+    def changelist_view(self, request, extra_context=None, *args, **kwargs):
         extra_context = extra_context or {}
         extra_context["action_buttons"] = self.get_action_buttons()
-
-        # Optionally render the buttons from your app-specific template
-        button_html = render_to_string(
-            "admin/includes/change_list_buttons.html", extra_context
-        )
-        extra_context["button_html"] = button_html
 
         return super().changelist_view(
             request, extra_context=extra_context, *args, **kwargs
