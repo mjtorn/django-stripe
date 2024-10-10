@@ -68,7 +68,7 @@ class StripeCustomerActionTest(TestCase):
         mock_retrieve.return_value = stripe_data
 
         # Execute sync_by_ids method
-        self.action.sync_by_ids(stripe_data["id"])
+        self.action.sync_by_ids([stripe_data["id"]])
 
         # Assertions
         customer = StripeCustomer.objects.get(stripe_id=self.stripe_data["id"])

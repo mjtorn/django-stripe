@@ -70,7 +70,7 @@ class StripeCouponActionTest(TestCase):
         mock_retrieve.return_value = stripe_data
 
         # Execute sync_by_ids method
-        self.action.sync_by_ids("jMT0WJUD")
+        self.action.sync_by_ids(["jMT0WJUD"])
 
         # Assertions
         coupon = StripeCoupon.objects.get(stripe_id="jMT0WJUD")
