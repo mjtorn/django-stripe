@@ -1,4 +1,4 @@
-from django_stripe.admin.core import StripeCustomerAdmin
+from django_stripe.admin.core import StripeCustomerAdmin, StripeEventAdmin
 from django_stripe.admin.products import (
     StripeProductAdmin,
     StripePriceAdmin,
@@ -7,6 +7,7 @@ from django_stripe.admin.products import (
 
 __all__ = (
     "StripeCustomerAdmin",
+    "StripeEventAdmin",
     "StripeProductAdmin",
     "StripePriceAdmin",
     "StripeCouponAdmin",
