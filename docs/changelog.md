@@ -18,9 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -------------------
 ### Added
 * `StripeCustomerAdmin` admin class that will display stripe customer data.
+* `StripeEventAdmin` admin class that will display stripe event data.
 * `StripeProductAdmin` admin class that will display stripe product data.
-* `StripePriceAdmin` admin class that will display stripe coupons data.
+* `StripePriceAdmin` admin class that will display stripe price data.
 * `StripeCouponAdmin` admin class that will display stripe coupons data.
+
 ### Fixed
 * Sync for `StripePriceAction` failing.
 
@@ -28,7 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.1] - 2024-09-16
 -----------------------
 ### Added
-
   - **Stripe Models:** The following models have been added to simplify
     the integration with Stripe.
     - `StripeCustomer` model that will store stripe customer data.
