@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * `StripeCustomerAdmin` admin class that will display stripe customer data.
 * `StripeProductAdmin` admin class that will display stripe product data.
+* `StripeCouponAdmin` admin class that will display stripe coupons data.
 
 
 ## [0.1.1] - 2024-09-16
