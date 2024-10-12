@@ -30,7 +30,7 @@ class StripePriceAction(StripeSyncActionMixin, StripeSoftDeleteActionMixin):
     product_model_class = StripeProduct
     stripe_product_class = stripe.Product
     model_class = StripePrice
-    stripe_object_class = stripe.Product
+    stripe_object_class = stripe.Price
 
     def pre_set_defualt(self, stripe_data: dict):
         """
