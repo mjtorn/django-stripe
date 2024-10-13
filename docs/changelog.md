@@ -24,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `StripeCouponAdmin` admin class that will display stripe coupons data.
 * `StripeSubscriptionAdmin` admin class that will display stripe subscription data.
 
+### Changed
+* renamed `date_purged` to `deleted_at` for stripe models.
+
 ### Fixed
 * Sync for `StripePriceAction` failing.
 
