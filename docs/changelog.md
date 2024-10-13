@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `StripeCardAction` action that will sync card data from stripe.
 
 
-## [0.2.0] - 2024-09-13
+## [0.2.0] - 2024-10-13
 -------------------
 ### Added
 * `StripeCustomerAdmin` admin class that will display stripe customer data.
