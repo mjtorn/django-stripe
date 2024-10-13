@@ -2,6 +2,7 @@
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-stripe-plus)
 ![PyPI version](https://img.shields.io/pypi/v/django-stripe-plus?color=00bcd4&label=version)
+[![Downloads](https://pepy.tech/badge/django-stripe-plus)](https://pepy.tech/project/django-stripe-plus)
 [![Build Status](https://github.com/purnendukar/django-stripe/actions/workflows/django-package.yml/badge.svg)](https://github.com/purnendukar/django-stripe/actions/workflows/django-package.yml)
 [![codecov](https://codecov.io/github/purnendukar/django-stripe/graph/badge.svg?token=DCKZTJ86YG)](https://codecov.io/github/purnendukar/django-stripe)
 ![License](https://img.shields.io/pypi/l/django-stripe-plus?color=orange)
