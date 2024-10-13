@@ -26,7 +26,7 @@ To extend the `StripeSoftDeleteMixin` and build your own action, you need to cre
 
 ### Soft Delete Stripe Object
 
-This method is used to soft delete a Stripe object by its Stripe ID. It marks the object as deleted in the local database by setting the `date_purged` field to the current timestamp.
+This method is used to soft delete a Stripe object by its Stripe ID. It marks the object as deleted in the local database by setting the `deleted_at` field to the current timestamp.
 
 **Method:** `soft_delete(self, stripe_id: str)`
 

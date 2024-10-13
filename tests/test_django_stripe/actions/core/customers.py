@@ -68,7 +68,7 @@ class StripeCustomerActionTest(TestCase):
         mock_retrieve.return_value = stripe_data
 
         # Execute sync_by_ids method
-        self.action.sync_by_ids(stripe_data["id"])
+        self.action.sync_by_ids([stripe_data["id"]])
 
         # Assertions
         customer = StripeCustomer.objects.get(stripe_id=self.stripe_data["id"])
@@ -144,11 +144,11 @@ class StripeCustomerActionTest(TestCase):
         self.action.sync_all()
 
         # Assertions
-        customers = StripeCustomer.objects.filter(date_purged__isnull=False)
+        customers = StripeCustomer.objects.filter(deleted_at__isnull=False)
         self.assertEqual(customers.count(), 1)
         self.assertTrue(
             StripeCustomer.objects.filter(
-                stripe_id="cus_test2", date_purged__isnull=False
+                stripe_id="cus_test2", deleted_at__isnull=False
             ).exists()
         )
 
@@ -190,4 +190,4 @@ class StripeCustomerActionTest(TestCase):
 
         # Assertions
         customer.refresh_from_db()
-        self.assertIsNotNone(customer.date_purged)
+        self.assertIsNotNone(customer.deleted_at)

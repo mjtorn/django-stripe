@@ -70,7 +70,7 @@ class StripeCouponActionTest(TestCase):
         mock_retrieve.return_value = stripe_data
 
         # Execute sync_by_ids method
-        self.action.sync_by_ids("jMT0WJUD")
+        self.action.sync_by_ids(["jMT0WJUD"])
 
         # Assertions
         coupon = StripeCoupon.objects.get(stripe_id="jMT0WJUD")
@@ -168,7 +168,6 @@ class StripeCouponActionTest(TestCase):
         StripeCoupon.objects.create(
             stripe_id="jMT0WJUD2",
             amount_off=None,
-            # created=timezone.now(),
             duration="forever",
             duration_in_months=None,
             percent_off=10.0,
@@ -179,11 +178,11 @@ class StripeCouponActionTest(TestCase):
         self.action.sync_all()
 
         # Assertions
-        coupons = StripeCoupon.objects.filter(date_purged__isnull=True)
+        coupons = StripeCoupon.objects.filter(deleted_at__isnull=True)
         self.assertEqual(coupons.count(), 1)
         self.assertTrue(
             StripeCoupon.objects.filter(
-                stripe_id="jMT0WJUD2", date_purged__isnull=False
+                stripe_id="jMT0WJUD2", deleted_at__isnull=False
             ).exists()
         )
 
@@ -224,7 +223,6 @@ class StripeCouponActionTest(TestCase):
         coupon = StripeCoupon.objects.create(
             stripe_id="jMT0WJUD",
             amount_off=None,
-            # created=timezone.now(),
             duration="repeating",
             duration_in_months=3,
             percent_off=25.5,
@@ -236,4 +234,4 @@ class StripeCouponActionTest(TestCase):
 
         # Assertions
         coupon.refresh_from_db()
-        self.assertIsNotNone(coupon.date_purged)
+        self.assertIsNotNone(coupon.deleted_at)
