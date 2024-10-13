@@ -14,7 +14,15 @@ class StripePriceInlineAdmin(admin.StackedInline):
 
 @admin.register(StripeProduct)
 class StripeProductAdmin(AbstractStripeModelAdmin):
-    list_display = ("stripe_id", "name", "description")
+    list_display = (
+        "stripe_id",
+        "name",
+        "description",
+        "active",
+        "livemode",
+        "deleted_at",
+    )
     search_fields = ("stripe_id", "name", "description")
+    list_filter = ("active",)
     inlines = [StripePriceInlineAdmin]
     stripe_model_action = StripeProductAction()

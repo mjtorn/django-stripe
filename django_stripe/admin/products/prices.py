@@ -9,6 +9,7 @@ from django_stripe.actions import StripePriceAction
 
 @admin.register(StripePrice)
 class StripePriceAdmin(AbstractStripeModelAdmin):
-    list_display = ("stripe_id", "nickname", "type")
+    list_display = ("stripe_id", "nickname", "type", "active", "livemode", "deleted_at")
     search_fields = ("stripe_id", "nickname", "type")
+    list_filter = ("type", "active")
     stripe_model_action = StripePriceAction()

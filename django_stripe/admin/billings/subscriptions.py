@@ -9,7 +9,7 @@ from django_stripe.actions import StripeSubscriptionAction
 
 @admin.register(StripeSubscription)
 class StripeSubscriptionAdmin(AbstractStripeModelAdmin):
-    list_display = ("stripe_id", "start_date", "status")
+    list_display = ("stripe_id", "start_date", "status", "livemode", "deleted_at")
     search_fields = ("stripe_id",)
     list_filter = ("status", "start_date")
     stripe_model_action = StripeSubscriptionAction()

@@ -9,6 +9,15 @@ from django_stripe.actions import StripeEventAction
 
 @admin.register(StripeEvent)
 class StripeEventAdmin(AbstractStripeModelAdmin):
-    list_display = ("stripe_id", "api_version", "kind", "valid", "processed")
-    search_fields = ("stripe_id", "kind")
+    list_display = (
+        "stripe_id",
+        "api_version",
+        "kind",
+        "valid",
+        "processed",
+        "livemode",
+        "deleted_at",
+    )
+    search_fields = ("stripe_id",)
+    list_filter = ("kind", "valid", "processed", "api_version")
     stripe_model_action = StripeEventAction()

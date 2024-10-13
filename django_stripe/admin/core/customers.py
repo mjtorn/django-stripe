@@ -24,5 +24,6 @@ class StripeCustomerAdmin(AbstractStripeModelAdmin):
         "deleted_at",
     )
     search_fields = ("stripe_id", "email", "name")
+    list_filter = ("is_active",)
     inlines = [StripeSubscriptionInlineAdmin]
     stripe_model_action = StripeCustomerAction()
