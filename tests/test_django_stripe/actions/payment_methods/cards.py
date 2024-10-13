@@ -151,5 +151,5 @@
 #
 #         # Assertions
 #         stripe_card.refresh_from_db()
-#         self.assertIsNotNone(stripe_card.date_purged)
-#         self.assertTrue(stripe_card.date_purged <= timezone.now())
+#         self.assertIsNotNone(stripe_card.deleted_at)
+#         self.assertTrue(stripe_card.deleted_at <= timezone.now())

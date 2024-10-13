@@ -279,7 +279,7 @@ class StripeSubscriptionWebhookTestCase(TestCase):
         # Mock Stripe's Event.retrieve to return the subscription_deleted_data
         mock_stripe_event_retrieve.return_value = self.subscription_deleted_data.copy()
         subscription = StripeSubscriptionAction().sync(self.subscription_data)
-        self.assertIsNone(subscription.date_purged)
+        self.assertIsNone(subscription.deleted_at)
 
         response = self.client.post(
             self.url,
@@ -289,7 +289,7 @@ class StripeSubscriptionWebhookTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["success"], True)
         subscription.refresh_from_db()
-        self.assertIsNotNone(subscription.date_purged)
+        self.assertIsNotNone(subscription.deleted_at)
 
     @patch("stripe.Event.retrieve")
     def test_subscription_updated_webhook(self, mock_stripe_event_retrieve):

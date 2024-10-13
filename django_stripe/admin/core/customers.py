@@ -14,7 +14,15 @@ class StripeSubscriptionInlineAdmin(admin.StackedInline):
 
 @admin.register(StripeCustomer)
 class StripeCustomerAdmin(AbstractStripeModelAdmin):
-    list_display = ("stripe_id", "email", "name", "description")
-    search_fields = ("stripe_id", "email", "name", "description")
+    list_display = (
+        "stripe_id",
+        "email",
+        "name",
+        "description",
+        "is_active",
+        "livemode",
+        "deleted_at",
+    )
+    search_fields = ("stripe_id", "email", "name")
     inlines = [StripeSubscriptionInlineAdmin]
     stripe_model_action = StripeCustomerAction()

@@ -32,7 +32,7 @@ class StripeSoftDeleteActionMixin:
         """
         obj = self.model_class.objects.filter(stripe_id=stripe_id).first()
         if obj:
-            obj.date_purged = timezone.now()
+            obj.deleted_at = timezone.now()
             obj.save()
 
 
@@ -209,5 +209,5 @@ class StripeSyncActionMixin:
 
         # sync deleted objects
         self.model_class.objects.exclude(stripe_id__in=stripe_ids).update(
-            date_purged=timezone.now()
+            deleted_at=timezone.now()
         )

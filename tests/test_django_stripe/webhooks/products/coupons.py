@@ -108,7 +108,7 @@ class StripeCouponWebhookTestCase(TestCase):
         # Mock Stripe's Event.retrieve to return the coupon_deleted_data
         mock_stripe_event_retrieve.return_value = self.coupon_deleted_data.copy()
         coupon = StripeCouponAction().sync(self.coupon_data)
-        self.assertIsNone(coupon.date_purged)
+        self.assertIsNone(coupon.deleted_at)
 
         response = self.client.post(
             self.url,
@@ -118,7 +118,7 @@ class StripeCouponWebhookTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["success"], True)
         coupon.refresh_from_db()
-        self.assertIsNotNone(coupon.date_purged)
+        self.assertIsNotNone(coupon.deleted_at)
 
     @patch("stripe.Event.retrieve")
     def test_coupon_updated_webhook(self, mock_stripe_event_retrieve):

@@ -55,7 +55,7 @@ class AbstractStripeModel(TimeStampedUUIDModel):
     )
 
     # Soft delete product in DB on deletion from stripe
-    date_purged = models.DateTimeField(null=True, editable=False)
+    deleted_at = models.DateTimeField(null=True, editable=False)
 
     class Meta:
         abstract = True

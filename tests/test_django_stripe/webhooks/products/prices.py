@@ -143,7 +143,7 @@ class StripePriceWebhookTestCase(TestCase):
         # Mock Stripe's Event.retrieve to return the price_deleted_data
         mock_stripe_event_retrieve.return_value = self.price_deleted_data.copy()
         price = StripePriceAction().sync(self.price_data)
-        self.assertIsNone(price.date_purged)
+        self.assertIsNone(price.deleted_at)
 
         response = self.client.post(
             self.url,
@@ -153,7 +153,7 @@ class StripePriceWebhookTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["success"], True)
         price.refresh_from_db()
-        self.assertIsNotNone(price.date_purged)
+        self.assertIsNotNone(price.deleted_at)
 
     @patch("stripe.Event.retrieve")
     def test_price_updated_webhook(self, mock_stripe_event_retrieve):
